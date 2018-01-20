@@ -33,6 +33,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.textBox_exhalationThreshold = new System.Windows.Forms.TextBox();
@@ -227,7 +228,6 @@
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.软件版本ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.label23 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -288,6 +288,15 @@
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Comm Parameter";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(93, 59);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(47, 12);
+            this.label23.TabIndex = 10;
+            this.label23.Text = "[0-255]";
             // 
             // label15
             // 
@@ -2281,6 +2290,7 @@
             this.comboBox_modeSelect.TabIndex = 6;
             this.comboBox_modeSelect.SelectedIndexChanged += new System.EventHandler(this.comboBox_modeSelect_SelectedIndexChanged);
             this.comboBox_modeSelect.SelectionChangeCommitted += new System.EventHandler(this.comboBox_modeSelect_SelectionChangeCommitted);
+            
             // 
             // label14
             // 
@@ -2337,15 +2347,6 @@
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(93, 59);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(47, 12);
-            this.label23.TabIndex = 10;
-            this.label23.Text = "[0-255]";
             // 
             // Form1
             // 

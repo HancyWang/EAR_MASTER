@@ -29,6 +29,8 @@ namespace EAR
         private COMM_PARA m_commPara = new COMM_PARA();
         private List<byte> m_buffer = new List<byte>();
 
+        private Int32 m_combox_prev_selectIndex = 0;
+
         private const int HEAD = 0;
         private const int LEN = 1;
         private const int CMDTYPE = 2;
@@ -2298,6 +2300,10 @@ namespace EAR
 
         private void comboBox_modeSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!TextBoxsAreNotEmpty())
+            {
+                return;
+            }
             #region
             if (this.comboBox_modeSelect.SelectedIndex==0)
             {
@@ -6234,7 +6240,15 @@ namespace EAR
 
         private void comboBox_modeSelect_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            if (!TextBoxsAreNotEmpty())
+            {
+                ((ComboBox)sender).SelectedIndex = m_combox_prev_selectIndex;
+                MessageBox.Show("Not allow empty data!");
+                return;
+            }
+            m_combox_prev_selectIndex = ((ComboBox)sender).SelectedIndex;
             ////MessageBox.Show("改变之前的值:" + ((ComboBox)sender).SelectedIndex.ToString() + "  " + ((ComboBox)sender).Text);
+            
             if (m_mode1_list.Count != 0 && m_mode2_list.Count != 0 && m_mode3_list.Count != 0)
             {
                 GetCurrentPWMParameter2List();
@@ -6309,6 +6323,8 @@ namespace EAR
                 e.Handled = true;
             } 
         }
+
+      
             
 
         
