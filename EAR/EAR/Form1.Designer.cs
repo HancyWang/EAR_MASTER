@@ -2290,7 +2290,6 @@
             this.comboBox_modeSelect.TabIndex = 6;
             this.comboBox_modeSelect.SelectedIndexChanged += new System.EventHandler(this.comboBox_modeSelect_SelectedIndexChanged);
             this.comboBox_modeSelect.SelectionChangeCommitted += new System.EventHandler(this.comboBox_modeSelect_SelectionChangeCommitted);
-            
             // 
             // label14
             // 

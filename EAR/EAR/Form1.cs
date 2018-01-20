@@ -29,7 +29,7 @@ namespace EAR
         private COMM_PARA m_commPara = new COMM_PARA();
         private List<byte> m_buffer = new List<byte>();
 
-        private Int32 m_combox_prev_selectIndex = 0;
+        private Int32 m_combox_prev_selectIndex = 0; //用来记录模式选择的前一个index
 
         private const int HEAD = 0;
         private const int LEN = 1;
@@ -299,7 +299,8 @@ namespace EAR
             string[] ports = SerialPort.GetPortNames();
             if (ports.Length != 0)
             {
-                Array.Sort(ports);
+                //Array.Sort(ports);
+                Array.Sort(ports, (a, b) => Convert.ToInt32(((string)a).Substring(3)).CompareTo(Convert.ToInt32(((string)b).Substring(3))));
                 m_old_serialPortNames = ports;
                 this.comboBox_portName.Items.AddRange(ports);
                 this.comboBox_portName.SelectedIndex = 0;
@@ -1172,6 +1173,7 @@ namespace EAR
         private void timer1_Tick(object sender, EventArgs e)
         {
             string[] names = SerialPort.GetPortNames();
+
             if (names.Length == 0)
             {
                 return;
@@ -1180,7 +1182,8 @@ namespace EAR
             {
                 return;
             }
-            Array.Sort(names);
+            //Array.Sort(names);
+            Array.Sort(names, (a, b) => Convert.ToInt32(((string)a).Substring(3)).CompareTo(Convert.ToInt32(((string)b).Substring(3))));
             int nCount = 0;
             if (names.Length == m_old_serialPortNames.Length)
             {
@@ -1206,7 +1209,9 @@ namespace EAR
             }
 
             this.comboBox_portName.Items.Clear();
-            Array.Sort(names);
+
+            Array.Sort(names, (a, b) => Convert.ToInt32(((string)a).Substring(3)).CompareTo(Convert.ToInt32(((string)b).Substring(3))));
+
             this.comboBox_portName.Items.AddRange(names);
             this.comboBox_portName.SelectedIndex = 0; 
         }
@@ -2300,7 +2305,7 @@ namespace EAR
 
         private void comboBox_modeSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!TextBoxsAreNotEmpty())
+            if (CheckTextBox() == 1 || CheckTextBox() == 2)
             {
                 return;
             }
@@ -2521,7 +2526,8 @@ namespace EAR
             #endregion
         }
 
-        bool TextBoxsAreNotEmpty()
+        //返回0：ok， 1-存在空数据，2-duty cycle数据长度小于1
+        int CheckTextBox()
         {
             if (
                 //freq
@@ -2671,9 +2677,37 @@ namespace EAR
                 this.textBox_exhalationThreshold.Text==""||this.textBox_waitBeforeStart.Text=="")
 
             {
-                return false;
+                return 1;
             }
-            return true;
+            if(//duty cycle
+                #region
+                this.textBox_dutyCycle_PWM1_serial1.Text.Length != 2 ||
+                this.textBox_dutyCycle_PWM1_serial2.Text.Length != 2 ||
+                this.textBox_dutyCycle_PWM1_serial3.Text.Length != 2 ||
+                this.textBox_dutyCycle_PWM1_serial4.Text.Length != 2 ||
+                this.textBox_dutyCycle_PWM1_serial5.Text.Length != 2 ||
+                this.textBox_dutyCycle_PWM1_serial6.Text.Length != 2 ||
+
+                this.textBox_dutyCycle_PWM2_serial1.Text.Length != 2 ||
+                this.textBox_dutyCycle_PWM2_serial2.Text.Length != 2 || 
+                this.textBox_dutyCycle_PWM2_serial3.Text.Length != 2 ||
+                this.textBox_dutyCycle_PWM2_serial4.Text.Length != 2 || 
+                this.textBox_dutyCycle_PWM2_serial5.Text.Length != 2 ||
+                this.textBox_dutyCycle_PWM2_serial6.Text.Length != 2 ||
+
+                this.textBox_dutyCycle_PWM3_serial1.Text.Length != 2 ||
+                this.textBox_dutyCycle_PWM3_serial2.Text.Length != 2 ||
+                this.textBox_dutyCycle_PWM3_serial3.Text.Length != 2 ||
+                this.textBox_dutyCycle_PWM3_serial4.Text.Length != 2 || 
+                this.textBox_dutyCycle_PWM3_serial5.Text.Length != 2 || 
+                this.textBox_dutyCycle_PWM3_serial6.Text.Length != 2 
+                #endregion
+                )
+            {
+                //MessageBox.Show("\"duty cycle\" are not allow below 10%");
+                return 2;
+            }
+            return 0;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -2684,12 +2718,18 @@ namespace EAR
                 return;
             }
 
-            if (!TextBoxsAreNotEmpty())
+            int res = CheckTextBox();
+            if (res == 1)
             {
                 MessageBox.Show("Not allow emtpy data!");
                 return;
             }
-            
+            if (res == 2)
+            {
+                MessageBox.Show("\"duty cycle\" are not allow below 10%");
+                return;
+            }
+           
             //MessageBox.Show(this.serialPort1.PortName);
             //this.button_Write.Enabled = false;
 
@@ -3006,9 +3046,15 @@ namespace EAR
 
         private void button_export_Click(object sender, EventArgs e)
         {
-            if (!TextBoxsAreNotEmpty())
+            int res = CheckTextBox();
+            if (res == 1)
             {
                 MessageBox.Show("Not allow emtpy data!");
+                return;
+            }
+            if (res == 2)
+            {
+                MessageBox.Show("\"duty cycle\" are not allow below 10%");
                 return;
             }
 
@@ -6240,10 +6286,16 @@ namespace EAR
 
         private void comboBox_modeSelect_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (!TextBoxsAreNotEmpty())
+            if (CheckTextBox() == 1)
             {
                 ((ComboBox)sender).SelectedIndex = m_combox_prev_selectIndex;
                 MessageBox.Show("Not allow empty data!");
+                return;
+            }
+            if (CheckTextBox() == 2)
+            {
+                ((ComboBox)sender).SelectedIndex = m_combox_prev_selectIndex;
+                MessageBox.Show("\"duty cycle\" are not allow below 10%");
                 return;
             }
             m_combox_prev_selectIndex = ((ComboBox)sender).SelectedIndex;
@@ -6258,15 +6310,20 @@ namespace EAR
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (TextBoxsAreNotEmpty())
+            if (CheckTextBox() == 0)
             {
                 GetCurrentPWMParameter2List();
                 SaveAllParameter2Files();
                 //MessageBox.Show("save all parameters to files ok");
             }
-            else
+            if (CheckTextBox() == 1)
             {
                 MessageBox.Show("Not allow empty data!");
+                e.Cancel = true;
+            }
+            if(CheckTextBox() == 2)
+            {
+                MessageBox.Show("\"duty cycle\" are not allow below 10%");
                 e.Cancel = true;
             }
             
@@ -6305,7 +6362,7 @@ namespace EAR
                 return;
             }
 
-            if (Convert.ToInt32(((TextBox)sender).Text) < 1 || Convert.ToInt32(((TextBox)sender).Text) > 255)
+            if (Convert.ToInt32(((TextBox)sender).Text) < 0 || Convert.ToInt32(((TextBox)sender).Text) > 255)
             {
                 MessageBox.Show("Out of range,please input again!");
                 ((TextBox)sender).Text = "";
