@@ -1,0 +1,9 @@
+D:\VS_Practice\EAR\EAR\bin\Debug\EAR.exe.config
+D:\VS_Practice\EAR\EAR\bin\Debug\EAR.exe
+D:\VS_Practice\EAR\EAR\bin\Debug\EAR.pdb
+D:\VS_Practice\EAR\EAR\obj\Debug\EAR.Form1.resources
+D:\VS_Practice\EAR\EAR\obj\Debug\EAR.Form_aboutUs_english.resources
+D:\VS_Practice\EAR\EAR\obj\Debug\EAR.Properties.Resources.resources
+D:\VS_Practice\EAR\EAR\obj\Debug\EAR.csproj.GenerateResource.Cache
+D:\VS_Practice\EAR\EAR\obj\Debug\EAR.exe
+D:\VS_Practice\EAR\EAR\obj\Debug\EAR.pdb
