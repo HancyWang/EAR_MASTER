@@ -53,6 +53,10 @@
             this.comboBox_portName = new System.Windows.Forms.ComboBox();
             this.label_portName = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button_load = new System.Windows.Forms.Button();
+            this.button_save = new System.Windows.Forms.Button();
+            this.textBox_paraCfgFilePath = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.textBox_waitAfter_PWM3_serial6 = new System.Windows.Forms.TextBox();
             this.textBox_waitBetween_PWM3_serial6 = new System.Windows.Forms.TextBox();
@@ -228,12 +232,17 @@
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.软件版本ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox12.SuspendLayout();
@@ -255,7 +264,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1302, 495);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1292, 593);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // tableLayoutPanel3
@@ -270,7 +279,7 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 59.04385F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.95615F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(179, 489);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(179, 587);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // groupBox3
@@ -282,9 +291,9 @@
             this.groupBox3.Controls.Add(this.textBox_waitBeforeStart);
             this.groupBox3.Controls.Add(this.label21);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(3, 291);
+            this.groupBox3.Location = new System.Drawing.Point(3, 349);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(173, 195);
+            this.groupBox3.Size = new System.Drawing.Size(173, 235);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Comm Parameter";
@@ -294,9 +303,9 @@
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(93, 59);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(47, 12);
+            this.label23.Size = new System.Drawing.Size(71, 12);
             this.label23.TabIndex = 10;
-            this.label23.Text = "[0-255]";
+            this.label23.Text = "[1-50 mmgH]";
             // 
             // label15
             // 
@@ -319,7 +328,7 @@
             // textBox_exhalationThreshold
             // 
             this.textBox_exhalationThreshold.Location = new System.Drawing.Point(8, 55);
-            this.textBox_exhalationThreshold.MaxLength = 3;
+            this.textBox_exhalationThreshold.MaxLength = 2;
             this.textBox_exhalationThreshold.Name = "textBox_exhalationThreshold";
             this.textBox_exhalationThreshold.Size = new System.Drawing.Size(69, 21);
             this.textBox_exhalationThreshold.TabIndex = 5;
@@ -362,7 +371,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(173, 282);
+            this.groupBox1.Size = new System.Drawing.Size(173, 340);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Serial Port";
@@ -475,6 +484,7 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.groupBox4);
             this.panel1.Controls.Add(this.groupBox7);
             this.panel1.Controls.Add(this.groupBox6);
             this.panel1.Controls.Add(this.groupBox12);
@@ -483,8 +493,49 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(188, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1111, 489);
+            this.panel1.Size = new System.Drawing.Size(1101, 587);
             this.panel1.TabIndex = 3;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.button_load);
+            this.groupBox4.Controls.Add(this.button_save);
+            this.groupBox4.Controls.Add(this.textBox_paraCfgFilePath);
+            this.groupBox4.Location = new System.Drawing.Point(0, 55);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(1101, 82);
+            this.groupBox4.TabIndex = 56;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Files";
+            // 
+            // button_load
+            // 
+            this.button_load.Location = new System.Drawing.Point(136, 43);
+            this.button_load.Name = "button_load";
+            this.button_load.Size = new System.Drawing.Size(75, 23);
+            this.button_load.TabIndex = 2;
+            this.button_load.Text = "Load";
+            this.button_load.UseVisualStyleBackColor = true;
+            this.button_load.Click += new System.EventHandler(this.button_load_Click);
+            // 
+            // button_save
+            // 
+            this.button_save.Location = new System.Drawing.Point(11, 43);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(75, 23);
+            this.button_save.TabIndex = 1;
+            this.button_save.Text = "Save";
+            this.button_save.UseVisualStyleBackColor = true;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click);
+            // 
+            // textBox_paraCfgFilePath
+            // 
+            this.textBox_paraCfgFilePath.Location = new System.Drawing.Point(6, 15);
+            this.textBox_paraCfgFilePath.Name = "textBox_paraCfgFilePath";
+            this.textBox_paraCfgFilePath.Size = new System.Drawing.Size(805, 21);
+            this.textBox_paraCfgFilePath.TabIndex = 0;
             // 
             // groupBox7
             // 
@@ -536,7 +587,7 @@
             this.groupBox7.Controls.Add(this.label13);
             this.groupBox7.Controls.Add(this.textBox_dutyCycle_PWM3_serial1);
             this.groupBox7.Controls.Add(this.textBox_freq_PWM3_serial1);
-            this.groupBox7.Location = new System.Drawing.Point(782, 53);
+            this.groupBox7.Location = new System.Drawing.Point(782, 139);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(318, 419);
             this.groupBox7.TabIndex = 55;
@@ -1067,7 +1118,7 @@
             this.groupBox6.Controls.Add(this.label6);
             this.groupBox6.Controls.Add(this.textBox_dutyCycle_PWM2_serial1);
             this.groupBox6.Controls.Add(this.textBox_freq_PWM2_serial1);
-            this.groupBox6.Location = new System.Drawing.Point(459, 53);
+            this.groupBox6.Location = new System.Drawing.Point(459, 139);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(318, 419);
             this.groupBox6.TabIndex = 54;
@@ -1599,7 +1650,7 @@
             this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial1);
             this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial1);
             this.groupBox12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox12.Location = new System.Drawing.Point(140, 53);
+            this.groupBox12.Location = new System.Drawing.Point(140, 139);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(314, 419);
             this.groupBox12.TabIndex = 39;
@@ -2095,7 +2146,7 @@
             this.panel5.Controls.Add(this.label62);
             this.panel5.Controls.Add(this.label63);
             this.panel5.Controls.Add(this.label64);
-            this.panel5.Location = new System.Drawing.Point(2, 58);
+            this.panel5.Location = new System.Drawing.Point(2, 144);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(138, 419);
             this.panel5.TabIndex = 40;
@@ -2236,7 +2287,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox5.Location = new System.Drawing.Point(0, 0);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(1111, 52);
+            this.groupBox5.Size = new System.Drawing.Size(1101, 54);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Operation";
@@ -2253,7 +2304,7 @@
             // 
             // button_saveParameter
             // 
-            this.button_saveParameter.Location = new System.Drawing.Point(984, 17);
+            this.button_saveParameter.Location = new System.Drawing.Point(867, 17);
             this.button_saveParameter.Name = "button_saveParameter";
             this.button_saveParameter.Size = new System.Drawing.Size(121, 20);
             this.button_saveParameter.TabIndex = 13;
@@ -2306,7 +2357,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 25);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1308, 515);
+            this.groupBox2.Size = new System.Drawing.Size(1298, 613);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             // 
@@ -2339,19 +2390,44 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.loadToolStripMenuItem,
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1308, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1298, 25);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(111, 21);
+            this.saveToolStripMenuItem.Text = "Save Parameter";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(113, 21);
+            this.loadToolStripMenuItem.Text = "Load Parameter";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "Parameter File(*.cfg)|*.cfg|All Files(*.*)|*.*";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Parameter File(*.cfg)|*.cfg|All Files(*.*)|*.*";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1308, 540);
+            this.ClientSize = new System.Drawing.Size(1298, 638);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -2370,6 +2446,8 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -2588,6 +2666,14 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 软件版本ToolStripMenuItem;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button_load;
+        private System.Windows.Forms.Button button_save;
+        private System.Windows.Forms.TextBox textBox_paraCfgFilePath;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

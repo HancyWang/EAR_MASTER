@@ -1039,8 +1039,8 @@ namespace EAR
         private void ReadCfgFile2List(string path)
         {
             #region
-            List<PARAMETER> list = null;
-            if (path==m_mode1_cfgFilePath)
+            List<PARAMETER> list = new List<PARAMETER>();
+            if (path == m_mode1_cfgFilePath)
             {
                 m_mode1_list.Clear();
                 list = m_mode1_list;
@@ -1055,6 +1055,7 @@ namespace EAR
                 m_mode3_list.Clear();
                 list = m_mode3_list;
             }
+
             #endregion
 
             #region
@@ -1153,6 +1154,8 @@ namespace EAR
         {
             //不需要save current page,隐藏该button
             this.button_saveParameter.Visible = false;
+            this.saveToolStripMenuItem.Visible = false;
+            this.loadToolStripMenuItem.Visible = false;
 
             //初始化参数设置
             InitModeSelect();
@@ -2045,12 +2048,12 @@ namespace EAR
                 m_mode1_list.Clear();
             }
             //if (this.comboBox_modeSelect.SelectedIndex == 1 && m_mode2_list.Count != 0)
-            if (this.comboBox_modeSelect.Text == "Mode2" && m_mode1_list.Count != 0)
+            if (this.comboBox_modeSelect.Text == "Mode2" && m_mode2_list.Count != 0)
             {
                 m_mode2_list.Clear();
             }
             //if (this.comboBox_modeSelect.SelectedIndex == 2 && m_mode3_list.Count != 0)
-            if (this.comboBox_modeSelect.Text == "Mode3" && m_mode1_list.Count != 0)
+            if (this.comboBox_modeSelect.Text == "Mode3" && m_mode3_list.Count != 0)
             {
                 m_mode3_list.Clear();
             }
@@ -2300,7 +2303,7 @@ namespace EAR
 
         private void button_saveParameter_Click(object sender, EventArgs e)
         {
-            SaveParameter2File();
+            //SaveParameter2File();
         }
 
         private void comboBox_modeSelect_SelectedIndexChanged(object sender, EventArgs e)
@@ -2359,6 +2362,24 @@ namespace EAR
             #endregion
         }
 
+        private void SendIsPCBRcvFinshed()
+        {
+            byte[] buffer = new byte[6];
+            buffer[HEAD] = 0xFF;  
+            buffer[LEN] = 0x04;
+            buffer[CMDTYPE] = 0x01;
+            buffer[FRAME_ID] = 0x07;
+
+            int sum = 0;
+            for (int i = 1; i < Convert.ToInt32(buffer[LEN]); i++)
+            {
+                sum += buffer[i];
+            }
+            buffer[Convert.ToInt32(buffer[LEN])] = Convert.ToByte(sum / 256);   //checksum1
+            buffer[Convert.ToInt32(buffer[LEN]) + 1] = Convert.ToByte(sum % 256); //checksum2
+            this.serialPort1.Write(buffer, 0, Convert.ToInt32(buffer[LEN]) + 2); 
+        }
+
         private void SendCommPara2SerialPort()
         {
             m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
@@ -2378,8 +2399,7 @@ namespace EAR
             }
             buffer[Convert.ToInt32(buffer[LEN])] = Convert.ToByte(sum / 256);   //checksum1
             buffer[Convert.ToInt32(buffer[LEN]) + 1] = Convert.ToByte(sum % 256); //checksum2
-            this.serialPort1.Write(buffer, 0, Convert.ToInt32(buffer[LEN]) + 2);
-            
+            this.serialPort1.Write(buffer, 0, Convert.ToInt32(buffer[LEN]) + 2); 
         }
 
         private void  SendMode1ParaByPWM(int PWM)
@@ -2738,7 +2758,7 @@ namespace EAR
 
             //发送公共信息到串口
             SendCommPara2SerialPort();
-            System.Threading.Thread.Sleep(150);  //阻塞线程150ms，留时间给下位机读取数据
+            System.Threading.Thread.Sleep(120);  //阻塞线程150ms，留时间给下位机读取数据
 
             //根据MODE-PWM发送，一帧一帧的发送
             for (int i = 1; i <= 3;i++ )
@@ -2746,10 +2766,13 @@ namespace EAR
                 for(int j=1;j<=3;j++)
                 {
                     SendModePWMPara2SerialPort(i, j);
-                    System.Threading.Thread.Sleep(150);
+                    System.Threading.Thread.Sleep(120);
                 }
             }
-            MessageBox.Show("Write completed!");
+            //发送询问帧，下位机是否接收完数据
+            SendIsPCBRcvFinshed();
+
+            //MessageBox.Show("Write completed!");
             //this.button_Write.Enabled = true;
   
         }
@@ -2887,6 +2910,11 @@ namespace EAR
                 m_mode2_list.Add(para);
             }
 
+            if (m_mode3_list.Count != 0)
+            {
+                m_mode3_list.Clear();
+            }
+
             for (int i = 0; i < 18; i++)  // Mode3-PWM1,Mode3-PWM2,Mode3-PWM3
             {
                 PARAMETER para = new PARAMETER();
@@ -2978,6 +3006,17 @@ namespace EAR
             //根据帧类型来判断
              switch (m_buffer[FRAME_ID])
              {
+                 //新增了一个功能，下位机发送回来的“是否接收参数完成”，在此进行判断
+                 case 0x08:
+                     if (m_buffer[m_buffer[LEN] - 1] == 0x01)
+                     {
+                         MessageBox.Show("Write to equipment successful!");
+                     }
+                     else
+                     {
+                         MessageBox.Show("Write to equipment failed!");
+                     }
+                     break;
                  case 0x09:  //如果是参数数据帧1
                      ParseFrame1();
                      break;
@@ -3069,6 +3108,8 @@ namespace EAR
                 FileStream fs = new FileStream(path + @"\" + "Parameters.csv",FileMode.Create);
                 StreamWriter sw = new StreamWriter(fs, Encoding.Default);
 
+                m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
+                m_commPara.WAIT_BEFORE_START = Convert.ToByte(this.textBox_waitBeforeStart.Text);
                 sw.WriteLine("Exhalation threshold:" + "," + Convert.ToString(m_commPara.EXHALATION_THRESHOLD));
                 sw.WriteLine("Wait before start:" + "," + Convert.ToString(m_commPara.WAIT_BEFORE_START));
 
@@ -6362,7 +6403,7 @@ namespace EAR
                 return;
             }
 
-            if (Convert.ToInt32(((TextBox)sender).Text) < 0 || Convert.ToInt32(((TextBox)sender).Text) > 255)
+            if (Convert.ToInt32(((TextBox)sender).Text) < 1 || Convert.ToInt32(((TextBox)sender).Text) > 50)
             {
                 MessageBox.Show("Out of range,please input again!");
                 ((TextBox)sender).Text = "";
@@ -6379,6 +6420,164 @@ namespace EAR
             {
                 e.Handled = true;
             } 
+        }
+
+        void SaveAllParameter2ConfigFile()
+        {
+            if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                #region
+                this.textBox_paraCfgFilePath.Text = this.saveFileDialog1.FileName;
+                FileStream fs = new FileStream(this.saveFileDialog1.FileName, FileMode.Create);
+                BinaryWriter bw = new BinaryWriter(fs, Encoding.ASCII);
+
+                m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
+                m_commPara.WAIT_BEFORE_START = Convert.ToByte(this.textBox_waitBeforeStart.Text);
+                bw.Write(m_commPara.EXHALATION_THRESHOLD);
+                bw.Write(m_commPara.WAIT_BEFORE_START);
+
+                foreach (var parameter in m_mode1_list)
+                {
+                    bw.Write(parameter.PWM_SERIAL_SELECTED);
+                    bw.Write(parameter.ENABLE);
+                    bw.Write(parameter.FREQUENCE);
+                    bw.Write(parameter.DUTY_CYCLE);
+                    bw.Write(parameter.PERIOD);
+                    bw.Write(parameter.NUM_OF_CYCLES);
+                    bw.Write(parameter.WAIT_BETWEEN);
+                    bw.Write(parameter.WAIT_AFTER);
+                }
+
+                foreach (var parameter in m_mode2_list)
+                {
+                    bw.Write(parameter.PWM_SERIAL_SELECTED);
+                    bw.Write(parameter.ENABLE);
+                    bw.Write(parameter.FREQUENCE);
+                    bw.Write(parameter.DUTY_CYCLE);
+                    bw.Write(parameter.PERIOD);
+                    bw.Write(parameter.NUM_OF_CYCLES);
+                    bw.Write(parameter.WAIT_BETWEEN);
+                    bw.Write(parameter.WAIT_AFTER);
+                }
+
+                foreach (var parameter in m_mode3_list)
+                {
+                    bw.Write(parameter.PWM_SERIAL_SELECTED);
+                    bw.Write(parameter.ENABLE);
+                    bw.Write(parameter.FREQUENCE);
+                    bw.Write(parameter.DUTY_CYCLE);
+                    bw.Write(parameter.PERIOD);
+                    bw.Write(parameter.NUM_OF_CYCLES);
+                    bw.Write(parameter.WAIT_BETWEEN);
+                    bw.Write(parameter.WAIT_AFTER);
+                }
+
+                bw.Close();
+                fs.Close();
+                #endregion
+            }
+           
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button_save_Click(object sender, EventArgs e)
+        {
+            if (CheckTextBox() == 0)
+            {
+                GetCurrentPWMParameter2List();
+                //SaveAllParameter2Files();
+                SaveAllParameter2ConfigFile();
+                //MessageBox.Show("save all parameters to files ok");
+            }
+            if (CheckTextBox() == 1)
+            {
+                MessageBox.Show("Not allow empty data!");
+                //e.Cancel = true;
+                return;
+            }
+            if (CheckTextBox() == 2)
+            {
+                MessageBox.Show("\"duty cycle\" are not allow below 10%");
+                //e.Cancel = true;
+                return;
+            }
+        }
+
+        private void button_load_Click(object sender, EventArgs e)
+        {
+            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                #region
+                this.textBox_paraCfgFilePath.Text = this.openFileDialog1.FileName;
+                FileStream fs = new FileStream(this.openFileDialog1.FileName, FileMode.Open);
+                BinaryReader br = new BinaryReader(fs, Encoding.ASCII);
+
+                byte[] buffer=new byte[434];
+                int len=br.Read(buffer, 0, 434);
+                if (len < 434)
+                {
+                    MessageBox.Show("The file corrupt!");
+                    return;
+                }
+
+                m_commPara.EXHALATION_THRESHOLD = buffer[0];
+                m_commPara.WAIT_BEFORE_START = buffer[1];
+                this.textBox_exhalationThreshold.Text = Convert.ToString(m_commPara.EXHALATION_THRESHOLD);
+                this.textBox_waitBeforeStart.Text = Convert.ToString(m_commPara.WAIT_BEFORE_START);
+
+                if (m_mode1_list.Count != 0 && m_mode2_list.Count != 0 && m_mode3_list.Count != 0)
+                {
+                    m_mode1_list.Clear();
+                    m_mode2_list.Clear();
+                    m_mode3_list.Clear();
+                    #region
+                    int j = 0;
+                    for (int i = 0; i < 18*3; i++)
+                    {
+                        PARAMETER parameter = new PARAMETER();
+
+                        parameter.PWM_SERIAL_SELECTED = buffer[2 + j++];
+                        parameter.ENABLE = buffer[2 + j++];
+                        parameter.FREQUENCE = buffer[2 + j++];
+                        parameter.DUTY_CYCLE = buffer[2 + j++];
+                        parameter.PERIOD = buffer[2 + j++];
+                        parameter.NUM_OF_CYCLES = buffer[2 + j++];
+                        parameter.WAIT_BETWEEN = buffer[2 + j++];
+                        parameter.WAIT_AFTER = buffer[2 + j++];
+
+                        if (i < 18)
+                        {
+                            m_mode1_list.Add(parameter);
+                        }
+                        if (i < 36)
+                        {
+                            m_mode2_list.Add(parameter);
+                        }
+                        if (i < 54)
+                        {
+                            m_mode3_list.Add(parameter);
+                        }
+
+                    }
+                    #endregion
+
+                    SetPWMParameterFromList(this.comboBox_modeSelect.SelectedIndex+1);
+                }
+
+                br.Close();
+                fs.Close();
+                #endregion
+            }
+           
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
       
