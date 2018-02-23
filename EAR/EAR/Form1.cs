@@ -2699,32 +2699,31 @@ namespace EAR
             {
                 return 1;
             }
-            if(//duty cycle
+            if (//duty cycle
                 #region
-                this.textBox_dutyCycle_PWM1_serial1.Text.Length != 2 ||
-                this.textBox_dutyCycle_PWM1_serial2.Text.Length != 2 ||
-                this.textBox_dutyCycle_PWM1_serial3.Text.Length != 2 ||
-                this.textBox_dutyCycle_PWM1_serial4.Text.Length != 2 ||
-                this.textBox_dutyCycle_PWM1_serial5.Text.Length != 2 ||
-                this.textBox_dutyCycle_PWM1_serial6.Text.Length != 2 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM1_serial1.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM1_serial2.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM1_serial3.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM1_serial4.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM1_serial5.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM1_serial6.Text) < 5 ||
 
-                this.textBox_dutyCycle_PWM2_serial1.Text.Length != 2 ||
-                this.textBox_dutyCycle_PWM2_serial2.Text.Length != 2 || 
-                this.textBox_dutyCycle_PWM2_serial3.Text.Length != 2 ||
-                this.textBox_dutyCycle_PWM2_serial4.Text.Length != 2 || 
-                this.textBox_dutyCycle_PWM2_serial5.Text.Length != 2 ||
-                this.textBox_dutyCycle_PWM2_serial6.Text.Length != 2 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM2_serial1.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM2_serial2.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM2_serial3.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM2_serial4.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM2_serial5.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM2_serial6.Text) < 5 ||
 
-                this.textBox_dutyCycle_PWM3_serial1.Text.Length != 2 ||
-                this.textBox_dutyCycle_PWM3_serial2.Text.Length != 2 ||
-                this.textBox_dutyCycle_PWM3_serial3.Text.Length != 2 ||
-                this.textBox_dutyCycle_PWM3_serial4.Text.Length != 2 || 
-                this.textBox_dutyCycle_PWM3_serial5.Text.Length != 2 || 
-                this.textBox_dutyCycle_PWM3_serial6.Text.Length != 2 
+                Convert.ToInt32(this.textBox_dutyCycle_PWM3_serial1.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM3_serial2.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM3_serial3.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM3_serial4.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM3_serial5.Text) < 5 ||
+                Convert.ToInt32(this.textBox_dutyCycle_PWM3_serial6.Text) < 5 
                 #endregion
                 )
             {
-                //MessageBox.Show("\"duty cycle\" are not allow below 10%");
                 return 2;
             }
             return 0;
@@ -2746,7 +2745,7 @@ namespace EAR
             }
             if (res == 2)
             {
-                MessageBox.Show("\"duty cycle\" are not allow below 10%");
+                MessageBox.Show("\"duty cycle\" are not allow below 5%");
                 return;
             }
            
@@ -3093,7 +3092,7 @@ namespace EAR
             }
             if (res == 2)
             {
-                MessageBox.Show("\"duty cycle\" are not allow below 10%");
+                MessageBox.Show("\"duty cycle\" are not allow below 5%");
                 return;
             }
 
@@ -3110,8 +3109,8 @@ namespace EAR
 
                 m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
                 m_commPara.WAIT_BEFORE_START = Convert.ToByte(this.textBox_waitBeforeStart.Text);
-                sw.WriteLine("Exhalation threshold:" + "," + Convert.ToString(m_commPara.EXHALATION_THRESHOLD));
-                sw.WriteLine("Wait before start:" + "," + Convert.ToString(m_commPara.WAIT_BEFORE_START));
+                sw.WriteLine("Exhalation threshold(mmgH):" + "," + Convert.ToString(m_commPara.EXHALATION_THRESHOLD));
+                sw.WriteLine("Wait before start(Sec):" + "," + Convert.ToString(m_commPara.WAIT_BEFORE_START));
 
                 List<PARAMETER> list=null;
                 for (int i = 0; i < 3;i++ )
@@ -3225,7 +3224,7 @@ namespace EAR
                     {
                         if (j == -1)
                         {
-                            tmpStr = "Duty cycle (10%-90%)" + ",";
+                            tmpStr = "Duty cycle (5%-99%)" + ",";
                             continue;
                         }
                         if (j == 6 || j == 13)
@@ -3326,7 +3325,7 @@ namespace EAR
 
                 sw.Close();
                 fs.Close();
-
+                MessageBox.Show("Export \"Parameter.csv\" sucessfully!");
             }
             else
             {
@@ -4040,7 +4039,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -4931,15 +4930,15 @@ namespace EAR
                 return;
             }
 
-            if (((TextBox)sender).Text.Length==2)
+            if (((TextBox)sender).Text.Length == 2)
             {
-                for(int i=0;i<2;i++)
+                for (int i = 0; i < 2; i++)
                 {
                     if (((TextBox)sender).Text[i] <= '0' && ((TextBox)sender).Text[i] >= '9')
-                        return;     
+                        return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num<10||num>90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -4963,7 +4962,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -4986,7 +4985,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5009,7 +5008,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5032,7 +5031,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5055,7 +5054,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5078,7 +5077,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5101,7 +5100,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5124,7 +5123,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5147,7 +5146,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5170,7 +5169,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5193,7 +5192,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5216,7 +5215,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5239,7 +5238,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5262,7 +5261,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5285,7 +5284,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5308,7 +5307,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 10 || num > 90)
+                if (num < 5 || num > 99)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -6336,7 +6335,7 @@ namespace EAR
             if (CheckTextBox() == 2)
             {
                 ((ComboBox)sender).SelectedIndex = m_combox_prev_selectIndex;
-                MessageBox.Show("\"duty cycle\" are not allow below 10%");
+                MessageBox.Show("\"duty cycle\" are not allow below 5%");
                 return;
             }
             m_combox_prev_selectIndex = ((ComboBox)sender).SelectedIndex;
@@ -6364,7 +6363,7 @@ namespace EAR
             }
             if(CheckTextBox() == 2)
             {
-                MessageBox.Show("\"duty cycle\" are not allow below 10%");
+                MessageBox.Show("\"duty cycle\" are not allow below 5%");
                 e.Cancel = true;
             }
             
@@ -6501,7 +6500,7 @@ namespace EAR
             }
             if (CheckTextBox() == 2)
             {
-                MessageBox.Show("\"duty cycle\" are not allow below 10%");
+                MessageBox.Show("\"duty cycle\" are not allow below 5%");
                 //e.Cancel = true;
                 return;
             }

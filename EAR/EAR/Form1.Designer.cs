@@ -2192,9 +2192,9 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(11, 199);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(59, 12);
+            this.label16.Size = new System.Drawing.Size(53, 12);
             this.label16.TabIndex = 8;
-            this.label16.Text = "[10%-90%]";
+            this.label16.Text = "[5%-99%]";
             // 
             // label8
             // 
