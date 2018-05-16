@@ -6552,11 +6552,13 @@ namespace EAR
                         {
                             m_mode1_list.Add(parameter);
                         }
-                        if (i < 36)
+                        if (i < 36 && i>=18)
+                        //if (i < 36)
                         {
                             m_mode2_list.Add(parameter);
                         }
-                        if (i < 54)
+                        if (i < 54 && i>=36)
+                        //if (i < 54)
                         {
                             m_mode3_list.Add(parameter);
                         }
@@ -6577,6 +6579,146 @@ namespace EAR
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        string ConBverInt2Hex(byte bt)
+        {
+            string tmp = null;
+            Int32 a=Convert.ToInt32(bt) / 16;
+            Int32 b = Convert.ToInt32(bt) % 16;
+            tmp += Convert.ToString(a);
+            if (b == 10)
+            {
+                tmp += "A";
+            }
+            else if (b == 11)
+            {
+                tmp += "B";
+            }
+            else if (b == 12)
+            {
+                tmp += "C";
+            }
+            else if (b == 13)
+            {
+                tmp += "D";
+            }
+            else if (b == 14)
+            {
+                tmp += "E";
+            }
+            else if (b == 15)
+            {
+                tmp += "F";
+            }
+            else
+            {
+                tmp += Convert.ToString(b);
+            }
+            return tmp;
+        }
+
+        private void exportTxtFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int res = CheckTextBox();
+            if (res == 1)
+            {
+                MessageBox.Show("Not allow emtpy data!");
+                return;
+            }
+            if (res == 2)
+            {
+                MessageBox.Show("\"duty cycle\" are not allow below 5%");
+                return;
+            }
+
+            if (m_mode1_list.Count == 0 || m_mode2_list.Count == 0 || m_mode3_list.Count == 0)
+            {
+                MessageBox.Show("No data");
+            }
+            if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                var path = this.folderBrowserDialog1.SelectedPath;
+                //写配置文件1
+                FileStream fs = new FileStream(path + @"\" + "Parameters.txt", FileMode.Create);
+                StreamWriter sw = new StreamWriter(fs, Encoding.Default);
+
+                m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
+                m_commPara.WAIT_BEFORE_START = Convert.ToByte(this.textBox_waitBeforeStart.Text);
+                //sw.WriteLine("Exhalation threshold(mmgH):" + "," + Convert.ToString(m_commPara.EXHALATION_THRESHOLD));
+                //sw.WriteLine("Wait before start(Sec):" + "," + Convert.ToString(m_commPara.WAIT_BEFORE_START));
+
+                string str = "";
+                str += Convert.ToString(m_commPara.EXHALATION_THRESHOLD)+",";
+                str += Convert.ToString(m_commPara.WAIT_BEFORE_START)+","+"\n\n//MODE1\n";
+
+                int cnt = 0;
+                foreach (var para in m_mode1_list)
+                {
+                    str += "0x" + ConBverInt2Hex(Convert.ToByte(para.PWM_SERIAL_SELECTED)) + "," +
+                            Convert.ToString(Convert.ToByte(para.ENABLE)) + "," +
+                            Convert.ToString(Convert.ToByte(para.FREQUENCE)) + "," +
+                            Convert.ToString(Convert.ToByte(para.DUTY_CYCLE)) + "," +
+                            Convert.ToString(Convert.ToByte(para.PERIOD)) + "," +
+                            Convert.ToString(Convert.ToByte(para.NUM_OF_CYCLES)) + "," +
+                            Convert.ToString(Convert.ToByte(para.WAIT_BETWEEN)) + "," +
+                            Convert.ToString(Convert.ToByte(para.WAIT_AFTER)) + "," +"\n";
+                    if (cnt == 5 || cnt == 11 || cnt == 17)
+                    {
+                        str += "\n";
+                    }
+                    cnt++;
+                }
+                str += "\n//MODE2\n";
+
+                cnt = 0;
+                foreach (var para in m_mode2_list)
+                {
+                    str += "0x" + ConBverInt2Hex(Convert.ToByte(para.PWM_SERIAL_SELECTED)) + "," +
+                            Convert.ToString(Convert.ToByte(para.ENABLE)) + "," +
+                            Convert.ToString(Convert.ToByte(para.FREQUENCE)) + "," +
+                            Convert.ToString(Convert.ToByte(para.DUTY_CYCLE)) + "," +
+                            Convert.ToString(Convert.ToByte(para.PERIOD)) + "," +
+                            Convert.ToString(Convert.ToByte(para.NUM_OF_CYCLES)) + "," +
+                            Convert.ToString(Convert.ToByte(para.WAIT_BETWEEN)) + "," +
+                            Convert.ToString(Convert.ToByte(para.WAIT_AFTER)) + "," + "\n";
+                    if (cnt == 5 || cnt == 11 || cnt == 17)
+                    {
+                        str += "\n";
+                    }
+                    cnt++;
+                }
+                str += "\n//MODE3\n";
+
+                cnt = 0;
+                foreach (var para in m_mode3_list)
+                {
+                    str += "0x" + ConBverInt2Hex(Convert.ToByte(para.PWM_SERIAL_SELECTED)) + "," +
+                            Convert.ToString(Convert.ToByte(para.ENABLE)) + "," +
+                            Convert.ToString(Convert.ToByte(para.FREQUENCE)) + "," +
+                            Convert.ToString(Convert.ToByte(para.DUTY_CYCLE)) + "," +
+                            Convert.ToString(Convert.ToByte(para.PERIOD)) + "," +
+                            Convert.ToString(Convert.ToByte(para.NUM_OF_CYCLES)) + "," +
+                            Convert.ToString(Convert.ToByte(para.WAIT_BETWEEN)) + "," +
+                            Convert.ToString(Convert.ToByte(para.WAIT_AFTER)) + "," + "\n";
+                    if (cnt == 5 || cnt == 11 || cnt == 17)
+                    {
+                        str += "\n";
+                    }
+                    cnt++;
+                }
+                str += "\n";
+
+                sw.WriteLine(str);
+               
+                sw.Close();
+                fs.Close();
+                MessageBox.Show("Export \"Parameter.txt\" sucessfully!");
+            }
+            else
+            {
+
+            }
         }
 
       

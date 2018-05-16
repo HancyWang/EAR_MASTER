@@ -236,6 +236,7 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.exportTxtFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -2374,7 +2375,8 @@
             // 帮助ToolStripMenuItem
             // 
             this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.软件版本ToolStripMenuItem});
+            this.软件版本ToolStripMenuItem,
+            this.exportTxtFileToolStripMenuItem});
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
             this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
             this.帮助ToolStripMenuItem.Text = "Help";
@@ -2422,6 +2424,13 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Parameter File(*.cfg)|*.cfg|All Files(*.*)|*.*";
+            // 
+            // exportTxtFileToolStripMenuItem
+            // 
+            this.exportTxtFileToolStripMenuItem.Name = "exportTxtFileToolStripMenuItem";
+            this.exportTxtFileToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.exportTxtFileToolStripMenuItem.Text = "export txt file";
+            this.exportTxtFileToolStripMenuItem.Click += new System.EventHandler(this.exportTxtFileToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -2674,6 +2683,7 @@
         private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.TextBox textBox_paraCfgFilePath;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem exportTxtFileToolStripMenuItem;
     }
 }
 
