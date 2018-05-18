@@ -6562,7 +6562,6 @@ namespace EAR
                         {
                             m_mode3_list.Add(parameter);
                         }
-
                     }
                     #endregion
 
@@ -6586,7 +6585,36 @@ namespace EAR
             string tmp = null;
             Int32 a=Convert.ToInt32(bt) / 16;
             Int32 b = Convert.ToInt32(bt) % 16;
-            tmp += Convert.ToString(a);
+            //tmp += Convert.ToString(a);
+            if (a == 10)
+            {
+                tmp += "A";
+            }
+            else if (a == 11)
+            {
+                tmp += "B";
+            }
+            else if (a == 12)
+            {
+                tmp += "C";
+            }
+            else if (a == 13)
+            {
+                tmp += "D";
+            }
+            else if (a == 14)
+            {
+                tmp += "E";
+            }
+            else if (a == 15)
+            {
+                tmp += "F";
+            }
+            else
+            {
+                tmp += Convert.ToString(a);
+            }
+
             if (b == 10)
             {
                 tmp += "A";
@@ -6640,21 +6668,36 @@ namespace EAR
             {
                 var path = this.folderBrowserDialog1.SelectedPath;
                 //写配置文件1
-                FileStream fs = new FileStream(path + @"\" + "Parameters.txt", FileMode.Create);
+                FileStream fs = new FileStream(path + @"\" + "Parameters_EAR.txt", FileMode.Create);
                 StreamWriter sw = new StreamWriter(fs, Encoding.Default);
 
+                UInt32 sum = 0;
                 m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
                 m_commPara.WAIT_BEFORE_START = Convert.ToByte(this.textBox_waitBeforeStart.Text);
                 //sw.WriteLine("Exhalation threshold(mmgH):" + "," + Convert.ToString(m_commPara.EXHALATION_THRESHOLD));
                 //sw.WriteLine("Wait before start(Sec):" + "," + Convert.ToString(m_commPara.WAIT_BEFORE_START));
+
+                sum += Convert.ToUInt32(m_commPara.EXHALATION_THRESHOLD);
+                sum += Convert.ToUInt32(m_commPara.WAIT_BEFORE_START);
 
                 string str = "";
                 str += Convert.ToString(m_commPara.EXHALATION_THRESHOLD)+",";
                 str += Convert.ToString(m_commPara.WAIT_BEFORE_START)+","+"\n\n//MODE1\n";
 
                 int cnt = 0;
+                
                 foreach (var para in m_mode1_list)
                 {
+                    sum += Convert.ToUInt32(para.PWM_SERIAL_SELECTED);
+                    sum += Convert.ToUInt32(para.ENABLE);
+                    sum += Convert.ToUInt32(para.FREQUENCE);
+                    sum += Convert.ToUInt32(para.DUTY_CYCLE);
+                    sum += Convert.ToUInt32(para.PERIOD);
+                    sum += Convert.ToUInt32(para.NUM_OF_CYCLES);
+                    sum += Convert.ToUInt32(para.WAIT_BETWEEN);
+                    sum += Convert.ToUInt32(para.WAIT_AFTER);
+
+
                     str += "0x" + ConBverInt2Hex(Convert.ToByte(para.PWM_SERIAL_SELECTED)) + "," +
                             Convert.ToString(Convert.ToByte(para.ENABLE)) + "," +
                             Convert.ToString(Convert.ToByte(para.FREQUENCE)) + "," +
@@ -6674,6 +6717,15 @@ namespace EAR
                 cnt = 0;
                 foreach (var para in m_mode2_list)
                 {
+                    sum += Convert.ToUInt32(para.PWM_SERIAL_SELECTED);
+                    sum += Convert.ToUInt32(para.ENABLE);
+                    sum += Convert.ToUInt32(para.FREQUENCE);
+                    sum += Convert.ToUInt32(para.DUTY_CYCLE);
+                    sum += Convert.ToUInt32(para.PERIOD);
+                    sum += Convert.ToUInt32(para.NUM_OF_CYCLES);
+                    sum += Convert.ToUInt32(para.WAIT_BETWEEN);
+                    sum += Convert.ToUInt32(para.WAIT_AFTER);
+
                     str += "0x" + ConBverInt2Hex(Convert.ToByte(para.PWM_SERIAL_SELECTED)) + "," +
                             Convert.ToString(Convert.ToByte(para.ENABLE)) + "," +
                             Convert.ToString(Convert.ToByte(para.FREQUENCE)) + "," +
@@ -6693,6 +6745,15 @@ namespace EAR
                 cnt = 0;
                 foreach (var para in m_mode3_list)
                 {
+                    sum += Convert.ToUInt32(para.PWM_SERIAL_SELECTED);
+                    sum += Convert.ToUInt32(para.ENABLE);
+                    sum += Convert.ToUInt32(para.FREQUENCE);
+                    sum += Convert.ToUInt32(para.DUTY_CYCLE);
+                    sum += Convert.ToUInt32(para.PERIOD);
+                    sum += Convert.ToUInt32(para.NUM_OF_CYCLES);
+                    sum += Convert.ToUInt32(para.WAIT_BETWEEN);
+                    sum += Convert.ToUInt32(para.WAIT_AFTER);
+
                     str += "0x" + ConBverInt2Hex(Convert.ToByte(para.PWM_SERIAL_SELECTED)) + "," +
                             Convert.ToString(Convert.ToByte(para.ENABLE)) + "," +
                             Convert.ToString(Convert.ToByte(para.FREQUENCE)) + "," +
@@ -6707,13 +6768,17 @@ namespace EAR
                     }
                     cnt++;
                 }
-                str += "\n";
+                str += "\n//Checksum\n";
+
+                str += "0x" + ConBverInt2Hex(Convert.ToByte (sum / 256)) + ",";
+                str += "0x" + ConBverInt2Hex(Convert.ToByte(sum % 256));
+
 
                 sw.WriteLine(str);
                
                 sw.Close();
                 fs.Close();
-                MessageBox.Show("Export \"Parameter.txt\" sucessfully!");
+                MessageBox.Show("Export \"Parameters_EAR.txt\" sucessfully!");
             }
             else
             {
