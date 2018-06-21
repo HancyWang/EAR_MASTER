@@ -4039,7 +4039,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -4938,7 +4938,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -4962,7 +4962,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -4985,7 +4985,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5008,7 +5008,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5031,7 +5031,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5054,7 +5054,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5077,7 +5077,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5100,7 +5100,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5123,7 +5123,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5146,7 +5146,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5169,7 +5169,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5192,7 +5192,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5215,7 +5215,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5238,7 +5238,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5261,7 +5261,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5284,7 +5284,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
@@ -5307,7 +5307,7 @@ namespace EAR
                         return;
                 }
                 Int32 num = Convert.ToInt32(((TextBox)sender).Text);
-                if (num < 5 || num > 99)
+                if (num < 5 || num > 100)
                 {
                     MessageBox.Show("Out of range,please input again!");
                     ((TextBox)sender).Text = "";
