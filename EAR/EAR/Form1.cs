@@ -124,6 +124,25 @@ namespace EAR
             this.textBox_freq_PWM3_serial4.Text = "1";
             this.textBox_freq_PWM3_serial5.Text = "1";
             this.textBox_freq_PWM3_serial6.Text = "1";
+
+            this.textBox_freq_PWM1_serial1.Enabled = true;
+            this.textBox_freq_PWM1_serial2.Enabled = true;
+            this.textBox_freq_PWM1_serial3.Enabled = true;
+            this.textBox_freq_PWM1_serial4.Enabled = true;
+            this.textBox_freq_PWM1_serial5.Enabled = true;
+            this.textBox_freq_PWM1_serial6.Enabled = true;
+            this.textBox_freq_PWM2_serial1.Enabled = true;
+            this.textBox_freq_PWM2_serial2.Enabled = true;
+            this.textBox_freq_PWM2_serial3.Enabled = true;
+            this.textBox_freq_PWM2_serial4.Enabled = true;
+            this.textBox_freq_PWM2_serial5.Enabled = true;
+            this.textBox_freq_PWM2_serial6.Enabled = true;
+            this.textBox_freq_PWM3_serial1.Enabled = true;
+            this.textBox_freq_PWM3_serial2.Enabled = true;
+            this.textBox_freq_PWM3_serial3.Enabled = true;
+            this.textBox_freq_PWM3_serial4.Enabled = true;
+            this.textBox_freq_PWM3_serial5.Enabled = true;
+            this.textBox_freq_PWM3_serial6.Enabled = true;
             #endregion
 
             //dutyCycle默认为10%，范围为：[10%,90%]
@@ -146,6 +165,25 @@ namespace EAR
             this.textBox_dutyCycle_PWM3_serial4.Text = "10";
             this.textBox_dutyCycle_PWM3_serial5.Text = "10";
             this.textBox_dutyCycle_PWM3_serial6.Text = "10";
+
+            this.textBox_dutyCycle_PWM1_serial1.Enabled = true;
+            this.textBox_dutyCycle_PWM1_serial2.Enabled = true;
+            this.textBox_dutyCycle_PWM1_serial3.Enabled = true;
+            this.textBox_dutyCycle_PWM1_serial4.Enabled = true;
+            this.textBox_dutyCycle_PWM1_serial5.Enabled = true;
+            this.textBox_dutyCycle_PWM1_serial6.Enabled = true;
+            this.textBox_dutyCycle_PWM2_serial1.Enabled = true;
+            this.textBox_dutyCycle_PWM2_serial2.Enabled = true;
+            this.textBox_dutyCycle_PWM2_serial3.Enabled = true;
+            this.textBox_dutyCycle_PWM2_serial4.Enabled = true;
+            this.textBox_dutyCycle_PWM2_serial5.Enabled = true;
+            this.textBox_dutyCycle_PWM2_serial6.Enabled = true;
+            this.textBox_dutyCycle_PWM3_serial1.Enabled = true;
+            this.textBox_dutyCycle_PWM3_serial2.Enabled = true;
+            this.textBox_dutyCycle_PWM3_serial3.Enabled = true;
+            this.textBox_dutyCycle_PWM3_serial4.Enabled = true;
+            this.textBox_dutyCycle_PWM3_serial5.Enabled = true;
+            this.textBox_dutyCycle_PWM3_serial6.Enabled = true;
             #endregion
 
             //period默认为1，范围为：[1,255s]
@@ -168,6 +206,25 @@ namespace EAR
             this.textBox_period_PWM3_serial4.Text = "1";
             this.textBox_period_PWM3_serial5.Text = "1";
             this.textBox_period_PWM3_serial6.Text = "1";
+
+            this.textBox_period_PWM1_serial1.Enabled = true;
+            this.textBox_period_PWM1_serial2.Enabled = true;
+            this.textBox_period_PWM1_serial3.Enabled = true;
+            this.textBox_period_PWM1_serial4.Enabled = true;
+            this.textBox_period_PWM1_serial5.Enabled = true;
+            this.textBox_period_PWM1_serial6.Enabled = true;
+            this.textBox_period_PWM2_serial1.Enabled = true;
+            this.textBox_period_PWM2_serial2.Enabled = true;
+            this.textBox_period_PWM2_serial3.Enabled = true;
+            this.textBox_period_PWM2_serial4.Enabled = true;
+            this.textBox_period_PWM2_serial5.Enabled = true;
+            this.textBox_period_PWM2_serial6.Enabled = true;
+            this.textBox_period_PWM3_serial1.Enabled = true;
+            this.textBox_period_PWM3_serial2.Enabled = true;
+            this.textBox_period_PWM3_serial3.Enabled = true;
+            this.textBox_period_PWM3_serial4.Enabled = true;
+            this.textBox_period_PWM3_serial5.Enabled = true;
+            this.textBox_period_PWM3_serial6.Enabled = true;
             #endregion
 
             //Number of Cycle 默认为1，范围为：[1,250]
@@ -190,6 +247,25 @@ namespace EAR
             this.textBox_numberOfCycles_PWM3_serial4.Text = "1";
             this.textBox_numberOfCycles_PWM3_serial5.Text = "1";
             this.textBox_numberOfCycles_PWM3_serial6.Text = "1";
+
+            this.textBox_numberOfCycles_PWM1_serial1.Enabled = true;
+            this.textBox_numberOfCycles_PWM1_serial2.Enabled = true;
+            this.textBox_numberOfCycles_PWM1_serial3.Enabled = true;
+            this.textBox_numberOfCycles_PWM1_serial4.Enabled = true;
+            this.textBox_numberOfCycles_PWM1_serial5.Enabled = true;
+            this.textBox_numberOfCycles_PWM1_serial6.Enabled = true;
+            this.textBox_numberOfCycles_PWM2_serial1.Enabled = true;
+            this.textBox_numberOfCycles_PWM2_serial2.Enabled = true;
+            this.textBox_numberOfCycles_PWM2_serial3.Enabled = true;
+            this.textBox_numberOfCycles_PWM2_serial4.Enabled = true;
+            this.textBox_numberOfCycles_PWM2_serial5.Enabled = true;
+            this.textBox_numberOfCycles_PWM2_serial6.Enabled = true;
+            this.textBox_numberOfCycles_PWM3_serial1.Enabled = true;
+            this.textBox_numberOfCycles_PWM3_serial2.Enabled = true;
+            this.textBox_numberOfCycles_PWM3_serial3.Enabled = true;
+            this.textBox_numberOfCycles_PWM3_serial4.Enabled = true;
+            this.textBox_numberOfCycles_PWM3_serial5.Enabled = true;
+            this.textBox_numberOfCycles_PWM3_serial6.Enabled = true;
             #endregion
 
             //Wait Between 默认为0，范围为：[0,255s]
@@ -212,6 +288,25 @@ namespace EAR
             this.textBox_waitBetween_PWM3_serial4.Text = "0";
             this.textBox_waitBetween_PWM3_serial5.Text = "0";
             this.textBox_waitBetween_PWM3_serial6.Text = "0";
+
+            this.textBox_waitBetween_PWM1_serial1.Enabled = true;
+            this.textBox_waitBetween_PWM1_serial2.Enabled = true;
+            this.textBox_waitBetween_PWM1_serial3.Enabled = true;
+            this.textBox_waitBetween_PWM1_serial4.Enabled = true;
+            this.textBox_waitBetween_PWM1_serial5.Enabled = true;
+            this.textBox_waitBetween_PWM1_serial6.Enabled = true;
+            this.textBox_waitBetween_PWM2_serial1.Enabled = true;
+            this.textBox_waitBetween_PWM2_serial2.Enabled = true;
+            this.textBox_waitBetween_PWM2_serial3.Enabled = true;
+            this.textBox_waitBetween_PWM2_serial4.Enabled = true;
+            this.textBox_waitBetween_PWM2_serial5.Enabled = true;
+            this.textBox_waitBetween_PWM2_serial6.Enabled = true;
+            this.textBox_waitBetween_PWM3_serial1.Enabled = true;
+            this.textBox_waitBetween_PWM3_serial2.Enabled = true;
+            this.textBox_waitBetween_PWM3_serial3.Enabled = true;
+            this.textBox_waitBetween_PWM3_serial4.Enabled = true;
+            this.textBox_waitBetween_PWM3_serial5.Enabled = true;
+            this.textBox_waitBetween_PWM3_serial6.Enabled = true;
             #endregion
 
             //Wait After 默认为0，范围为：[0,255s]
@@ -235,6 +330,24 @@ namespace EAR
             this.textBox_waitAfter_PWM3_serial5.Text = "0";
             this.textBox_waitAfter_PWM3_serial6.Text = "0";
 
+            this.textBox_waitAfter_PWM1_serial1.Enabled = true;
+            this.textBox_waitAfter_PWM1_serial2.Enabled = true;
+            this.textBox_waitAfter_PWM1_serial3.Enabled = true;
+            this.textBox_waitAfter_PWM1_serial4.Enabled = true;
+            this.textBox_waitAfter_PWM1_serial5.Enabled = true;
+            this.textBox_waitAfter_PWM1_serial6.Enabled = true;
+            this.textBox_waitAfter_PWM2_serial1.Enabled = true;
+            this.textBox_waitAfter_PWM2_serial2.Enabled = true;
+            this.textBox_waitAfter_PWM2_serial3.Enabled = true;
+            this.textBox_waitAfter_PWM2_serial4.Enabled = true;
+            this.textBox_waitAfter_PWM2_serial5.Enabled = true;
+            this.textBox_waitAfter_PWM2_serial6.Enabled = true;
+            this.textBox_waitAfter_PWM3_serial1.Enabled = true;
+            this.textBox_waitAfter_PWM3_serial2.Enabled = true;
+            this.textBox_waitAfter_PWM3_serial3.Enabled = true;
+            this.textBox_waitAfter_PWM3_serial4.Enabled = true;
+            this.textBox_waitAfter_PWM3_serial5.Enabled = true;
+            this.textBox_waitAfter_PWM3_serial6.Enabled = true;
             #endregion
 
             #endregion
@@ -6784,6 +6897,29 @@ namespace EAR
             {
 
             }
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(m_commPara_cfgFilePath))
+            {
+                File.Delete(m_commPara_cfgFilePath);
+            }
+            if (File.Exists(m_mode1_cfgFilePath))
+            {
+                File.Delete(m_mode1_cfgFilePath);
+            }
+            if (File.Exists(m_mode2_cfgFilePath))
+            {
+                File.Delete(m_mode2_cfgFilePath);
+            }
+            if (File.Exists(m_mode3_cfgFilePath))
+            {
+                File.Delete(m_mode3_cfgFilePath);
+            }
+
+            InitCommParameter();
+            InitPWMSet();
         }
 
       

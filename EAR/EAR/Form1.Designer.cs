@@ -237,6 +237,7 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -506,7 +507,7 @@
             this.groupBox4.Controls.Add(this.textBox_paraCfgFilePath);
             this.groupBox4.Location = new System.Drawing.Point(0, 55);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1100, 82);
+            this.groupBox4.Size = new System.Drawing.Size(1377, 82);
             this.groupBox4.TabIndex = 56;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Files";
@@ -2376,7 +2377,8 @@
             // 
             this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.软件版本ToolStripMenuItem,
-            this.exportTxtFileToolStripMenuItem});
+            this.exportTxtFileToolStripMenuItem,
+            this.resetToolStripMenuItem});
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
             this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
             this.帮助ToolStripMenuItem.Text = "Help";
@@ -2431,6 +2433,13 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Parameter File(*.cfg)|*.cfg|All Files(*.*)|*.*";
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.resetToolStripMenuItem.Text = "reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -2684,6 +2693,7 @@
         private System.Windows.Forms.TextBox textBox_paraCfgFilePath;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem exportTxtFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
     }
 }
 

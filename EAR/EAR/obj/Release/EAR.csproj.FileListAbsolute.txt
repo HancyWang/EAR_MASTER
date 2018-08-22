@@ -8,3 +8,13 @@ D:\VS_Practice\EAR\EAR\obj\Release\EAR.csproj.GenerateResource.Cache
 D:\VS_Practice\EAR\EAR\obj\Release\EAR.exe
 D:\VS_Practice\EAR\EAR\obj\Release\EAR.pdb
 D:\VS_Practice\EAR\EAR\obj\Release\EAR.csprojResolveAssemblyReference.cache
+D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\bin\Release\EAR.exe.config
+D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\obj\Release\EAR.exe
+D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\obj\Release\EAR.pdb
+D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\bin\Release\EAR.exe
+D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\bin\Release\EAR.pdb
+D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\obj\Release\EAR.csprojResolveAssemblyReference.cache
+D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\obj\Release\EAR.Form1.resources
+D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\obj\Release\EAR.Form_aboutUs_english.resources
+D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\obj\Release\EAR.Properties.Resources.resources
+D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\obj\Release\EAR.csproj.GenerateResource.Cache
