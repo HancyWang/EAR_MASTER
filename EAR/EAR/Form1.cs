@@ -363,7 +363,8 @@ namespace EAR
             
             m_commPara.EXHALATION_THRESHOLD = buffer[0];
             m_commPara.WAIT_BEFORE_START = buffer[1];
-            this.textBox_exhalationThreshold.Text = Convert.ToString(buffer[0]);
+            this.textBox_exhalationThreshold.Text = Convert.ToString(buffer[0]/16);
+            this.textBox_exhalation_threshold_decimal_fraction.Text = Convert.ToString(buffer[0] % 16);
             this.textBox_waitBeforeStart.Text = Convert.ToString(buffer[1]);
 
             br.Close();
@@ -390,8 +391,10 @@ namespace EAR
             }
             else
             {
-                textBox_exhalationThreshold.Text = "5";
-                textBox_waitBeforeStart.Text = "3";
+                textBox_exhalationThreshold.Text = "2";
+                textBox_exhalation_threshold_decimal_fraction.Text = "0";
+
+                textBox_waitBeforeStart.Text = "1";
                 m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(5);
                 m_commPara.WAIT_BEFORE_START = Convert.ToByte(3);
             }
@@ -2405,10 +2408,12 @@ namespace EAR
             }
 
             bw.Close();
-            fs.Close(); 
+            fs.Close();
 
             //保存公共参数到cfg文件
-            m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
+            //m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
+            m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(Convert.ToInt32(this.textBox_exhalationThreshold.Text)*16
+                                                            +Convert.ToInt32(this.textBox_exhalation_threshold_decimal_fraction.Text));
             m_commPara.WAIT_BEFORE_START = Convert.ToByte(this.textBox_waitBeforeStart.Text);
 
             WriteCommPara2File();
@@ -2495,7 +2500,10 @@ namespace EAR
 
         private void SendCommPara2SerialPort()
         {
-            m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
+            //m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
+            m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(Convert.ToInt32(this.textBox_exhalationThreshold.Text)*16
+                                                            +Convert.ToInt32(this.textBox_exhalation_threshold_decimal_fraction.Text));
+
             m_commPara.WAIT_BEFORE_START = Convert.ToByte(this.textBox_waitBeforeStart.Text);
             byte[] buffer = new byte[8];
             buffer[HEAD] = 0xFF;
@@ -2958,7 +2966,9 @@ namespace EAR
         {
             m_commPara.EXHALATION_THRESHOLD = m_buffer[4];
             m_commPara.WAIT_BEFORE_START = m_buffer[5];
-            this.textBox_exhalationThreshold.Text = Convert.ToString(m_commPara.EXHALATION_THRESHOLD);
+            this.textBox_exhalationThreshold.Text = Convert.ToString(m_commPara.EXHALATION_THRESHOLD/16);
+            this.textBox_exhalation_threshold_decimal_fraction.Text = Convert.ToString(m_commPara.EXHALATION_THRESHOLD % 16); 
+
             this.textBox_waitBeforeStart.Text = Convert.ToString(m_commPara.WAIT_BEFORE_START);
             if(m_mode1_list.Count!=0)
             {
@@ -3102,7 +3112,9 @@ namespace EAR
             
 
             //保存公共参数到cfg文件
-            m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
+            m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(Convert.ToInt32(this.textBox_exhalationThreshold.Text)*16
+                                              +Convert.ToInt32(this.textBox_exhalation_threshold_decimal_fraction.Text));
+
             m_commPara.WAIT_BEFORE_START = Convert.ToByte(this.textBox_waitBeforeStart.Text);
 
             WriteCommPara2File();
@@ -3220,9 +3232,11 @@ namespace EAR
                 FileStream fs = new FileStream(path + @"\" + "Parameters.csv",FileMode.Create);
                 StreamWriter sw = new StreamWriter(fs, Encoding.Default);
 
-                m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
+                m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(Convert.ToInt32(this.textBox_exhalationThreshold.Text)*16
+                                                +Convert.ToInt32(this.textBox_exhalation_threshold_decimal_fraction.Text));
+
                 m_commPara.WAIT_BEFORE_START = Convert.ToByte(this.textBox_waitBeforeStart.Text);
-                sw.WriteLine("Exhalation threshold(mmgH):" + "," + Convert.ToString(m_commPara.EXHALATION_THRESHOLD));
+                sw.WriteLine("Exhalation threshold(mmgH):" + "," + Convert.ToString(m_commPara.EXHALATION_THRESHOLD/16)+"."+Convert.ToString(m_commPara.EXHALATION_THRESHOLD%16));
                 sw.WriteLine("Wait before start(Sec):" + "," + Convert.ToString(m_commPara.WAIT_BEFORE_START));
 
                 List<PARAMETER> list=null;
@@ -6515,7 +6529,7 @@ namespace EAR
                 return;
             }
 
-            if (Convert.ToInt32(((TextBox)sender).Text) < 1 || Convert.ToInt32(((TextBox)sender).Text) > 50)
+            if (Convert.ToInt32(((TextBox)sender).Text) < 0 || Convert.ToInt32(((TextBox)sender).Text) > 15)
             {
                 MessageBox.Show("Out of range,please input again!");
                 ((TextBox)sender).Text = "";
@@ -6543,7 +6557,9 @@ namespace EAR
                 FileStream fs = new FileStream(this.saveFileDialog1.FileName, FileMode.Create);
                 BinaryWriter bw = new BinaryWriter(fs, Encoding.ASCII);
 
-                m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
+                m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(Convert.ToInt32(this.textBox_exhalationThreshold.Text)*16
+                                                 +Convert.ToInt32(this.textBox_exhalation_threshold_decimal_fraction.Text));
+
                 m_commPara.WAIT_BEFORE_START = Convert.ToByte(this.textBox_waitBeforeStart.Text);
                 bw.Write(m_commPara.EXHALATION_THRESHOLD);
                 bw.Write(m_commPara.WAIT_BEFORE_START);
@@ -6638,7 +6654,9 @@ namespace EAR
 
                 m_commPara.EXHALATION_THRESHOLD = buffer[0];
                 m_commPara.WAIT_BEFORE_START = buffer[1];
-                this.textBox_exhalationThreshold.Text = Convert.ToString(m_commPara.EXHALATION_THRESHOLD);
+                this.textBox_exhalationThreshold.Text = Convert.ToString(m_commPara.EXHALATION_THRESHOLD/16);
+                this.textBox_exhalation_threshold_decimal_fraction.Text = Convert.ToString(m_commPara.EXHALATION_THRESHOLD % 16);
+
                 this.textBox_waitBeforeStart.Text = Convert.ToString(m_commPara.WAIT_BEFORE_START);
 
                 if (m_mode1_list.Count != 0 && m_mode2_list.Count != 0 && m_mode3_list.Count != 0)
@@ -6785,7 +6803,10 @@ namespace EAR
                 StreamWriter sw = new StreamWriter(fs, Encoding.Default);
 
                 UInt32 sum = 0;
-                m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
+                //m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(this.textBox_exhalationThreshold.Text);
+                m_commPara.EXHALATION_THRESHOLD = Convert.ToByte(Convert.ToInt32(this.textBox_exhalationThreshold.Text)*16
+                                                 +Convert.ToInt32(this.textBox_exhalation_threshold_decimal_fraction.Text));
+
                 m_commPara.WAIT_BEFORE_START = Convert.ToByte(this.textBox_waitBeforeStart.Text);
                 //sw.WriteLine("Exhalation threshold(mmgH):" + "," + Convert.ToString(m_commPara.EXHALATION_THRESHOLD));
                 //sw.WriteLine("Wait before start(Sec):" + "," + Convert.ToString(m_commPara.WAIT_BEFORE_START));
@@ -6794,7 +6815,8 @@ namespace EAR
                 sum += Convert.ToUInt32(m_commPara.WAIT_BEFORE_START);
 
                 string str = "";
-                str += Convert.ToString(m_commPara.EXHALATION_THRESHOLD)+",";
+                str += Convert.ToString(m_commPara.EXHALATION_THRESHOLD/16)+"."+Convert.ToString(m_commPara.EXHALATION_THRESHOLD%16)
+                    +"("+ Convert.ToString(m_commPara.EXHALATION_THRESHOLD) + ")"+",";
                 str += Convert.ToString(m_commPara.WAIT_BEFORE_START)+","+"\n\n//MODE1\n";
 
                 int cnt = 0;
@@ -6922,11 +6944,16 @@ namespace EAR
             InitPWMSet();
         }
 
-      
-            
-
-        
-
-
+        private void textBox_exhalation_threshold_decimal_fraction_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= '0' && e.KeyChar <= '9') || (e.KeyChar == 8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

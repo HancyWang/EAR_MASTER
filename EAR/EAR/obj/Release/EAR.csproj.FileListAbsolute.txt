@@ -18,3 +18,13 @@ D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\obj\Release\EAR.Form1.resour
 D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\obj\Release\EAR.Form_aboutUs_english.resources
 D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\obj\Release\EAR.Properties.Resources.resources
 D:\Users\Administrator\Documents\GitHub\EAR\EAR\EAR\obj\Release\EAR.csproj.GenerateResource.Cache
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\bin\Release\EAR.exe.config
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\bin\Release\EAR.exe
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\bin\Release\EAR.pdb
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.Form1.resources
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.Form_aboutUs_english.resources
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.Properties.Resources.resources
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.csproj.GenerateResource.cache
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.csproj.CoreCompileInputs.cache
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.exe
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.pdb
