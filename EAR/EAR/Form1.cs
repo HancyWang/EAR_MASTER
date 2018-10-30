@@ -35,7 +35,28 @@ namespace EAR
         private const int LEN = 1;
         private const int CMDTYPE = 2;
         private const int FRAME_ID = 3;
-       
+
+
+        private int m_rtcInfo_record_numbers;  //记录收到的rtc信息条数
+        //private int m_prev_pack_No=0;
+        private int m_total_frames = 0;  //总帧数
+        private int m_requestNo = 1;
+        private List<RTC_INFO> m_rtc_data_list = new List<RTC_INFO>();
+        private bool m_b_saveRtcFile = true;
+
+
+        private struct RTC_INFO
+        {
+            public byte RTC_CODE;
+            public byte RTC_RESERVED;
+            public byte RTC_YEAR;
+            public byte RTC_MONTH;
+            public byte RTC_DAY;
+            public byte RTC_HOUR;
+            public byte RTC_MIN;
+            public byte RTC_SEC;
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -1260,10 +1281,12 @@ namespace EAR
                 InitParameterList(2);
                 InitParameterList(3);
                 SetPWMDefaultParameter();
-            }
+            }  
+        }
 
-           
-            
+        private void GetSystemDateTime()
+        {
+            textBox_DateTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         private void InitApp()
@@ -1287,6 +1310,12 @@ namespace EAR
 
             //加载图片
             LoadPicture();
+
+            //获取系统时间
+            GetSystemDateTime();
+
+            //初始化noNeed checkbox
+            checkBox_no_need_log.Checked = true;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -3119,6 +3148,86 @@ namespace EAR
 
             WriteCommPara2File();
         }
+        private void request_rtc_frame_x(ref int number)
+        {
+            if (m_requestNo > m_total_frames)
+                return;
+
+            byte[] buffer = new byte[8];
+            buffer[HEAD] = 0xFF;
+            buffer[LEN] = 0x06;
+            buffer[CMDTYPE] = 0x01;
+            buffer[FRAME_ID] = 0x70;   //请求RTC数据包 
+
+            buffer[4] = Convert.ToByte(number / 256);   //请求第x包，x=1,2,3,4....
+            buffer[5] = Convert.ToByte(number % 256);
+
+            int sum = 0;
+            for (int i = 1; i < Convert.ToInt32(buffer[LEN]); i++)
+            {
+                sum += buffer[i];
+            }
+            buffer[Convert.ToInt32(buffer[LEN])] = Convert.ToByte(sum / 256);
+            buffer[Convert.ToInt32(buffer[LEN]) + 1] = Convert.ToByte(sum % 256);
+            this.serialPort1.Write(buffer, 0, Convert.ToInt32(buffer[LEN]) + 2);
+        }
+        private void get_rtc_total_record_numbers()
+        {
+            m_rtcInfo_record_numbers = m_buffer[4] * 256 * 256 * 256 + m_buffer[5] * 256 * 256 + m_buffer[6] * 256 + m_buffer[7];
+            //MessageBox.Show("数据记录条数:" + Convert.ToString(m_rtcInfo_record_numbers));
+
+            System.Threading.Thread.Sleep(50);
+
+            init_rtc_releated_var();
+
+            //通过m_rtcInfo_record_numbers知道一共有多少帧会传上来
+            int pageNumbers = m_rtcInfo_record_numbers / 256;  //有pageNumbers页
+            int pageRest = m_rtcInfo_record_numbers % 256;      //不足一页的，还剩下pageRest条记录
+
+            m_total_frames += 9 * pageNumbers; //9的含义：每页可以分成8+1次发送, 8个满包(8*30条记录),1个非满包(16条记录)
+
+            //不足一页的
+            m_total_frames += pageRest / 30;  //满包
+            if (pageRest % 30 != 0)
+            {
+                m_total_frames++;  //非满包的就只有一个
+            }
+            m_requestNo = 1;
+
+            request_rtc_frame_x(ref m_requestNo);
+
+            //初始化progressbar
+            progressBar1.Maximum = m_rtcInfo_record_numbers;
+        }
+
+        private void get_rtc_data()
+        {
+            int record_size = (m_buffer[LEN] - 2 - 4) / 8;  //有几条记录
+            if (record_size <= 0 || (m_buffer[LEN] - 2 - 4) % 8 != 0)
+            {
+                return;
+            }
+
+            int j = 6;
+            for (int i = 0; i < record_size; i++)
+            {
+                RTC_INFO info = new RTC_INFO();
+
+                info.RTC_CODE = m_buffer[j++];
+                info.RTC_RESERVED = m_buffer[j++];
+                info.RTC_YEAR = m_buffer[j++];
+                info.RTC_MONTH = m_buffer[j++];
+                info.RTC_DAY = m_buffer[j++];
+                info.RTC_HOUR = m_buffer[j++];
+                info.RTC_MIN = m_buffer[j++];
+                info.RTC_SEC = m_buffer[j++];
+
+                m_rtc_data_list.Add(info);
+            }
+
+            //debug
+            //MessageBox.Show(Convert.ToString(m_rtc_data_list.Count));
+        }
 
         private void ParseData2Lists()
         {
@@ -3147,7 +3256,48 @@ namespace EAR
                  case 0x0A:  //如果是报警数据帧2
                      ParseFrame2();
                      break;
-                 default:
+                case 0x66:
+                    if (m_buffer[m_buffer[LEN] - 1] == 0x01)
+                    {
+                        button_synch.Enabled = false;
+                        button_enable_synRTC_function.Text = "ENABLE";
+                        MessageBox.Show("Synchronize to equipment successful!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Synchronize to equipment failed!");
+                    }
+                    break;
+                case 0x69:
+                    get_rtc_total_record_numbers();
+                    break;
+                case 0x71:
+                    if (m_buffer[4] * 256 + m_buffer[5] == m_requestNo)
+                    {
+                        get_rtc_data();
+
+                        progressBar1.Value = m_rtc_data_list.Count;
+                        if (m_rtc_data_list.Count == m_rtcInfo_record_numbers)
+                        {
+                            System.Threading.Thread.Sleep(500);
+
+                            MessageBox.Show("Receive RTC data successful!\n\nYou can save it now!");
+
+                            //Thread th = new Thread(new ThreadStart(delegate() { save_rtc_data(); }));
+                            //th.TrySetApartmentState(ApartmentState.STA);
+                            //th.Start();
+                            //th.Join();
+
+                            return;
+                        }
+
+                        //System.Threading.Thread.Sleep(10);
+
+                        m_requestNo++;
+                        request_rtc_frame_x(ref m_requestNo);
+                    }
+                    break;
+                default:
                      break;
              }
 
@@ -6815,8 +6965,11 @@ namespace EAR
                 sum += Convert.ToUInt32(m_commPara.WAIT_BEFORE_START);
 
                 string str = "";
-                str += Convert.ToString(m_commPara.EXHALATION_THRESHOLD/16)+"."+Convert.ToString(m_commPara.EXHALATION_THRESHOLD%16)
-                    +"("+ Convert.ToString(m_commPara.EXHALATION_THRESHOLD) + ")"+",";
+                str += Convert.ToString(m_commPara.EXHALATION_THRESHOLD)+",//"
+                    +Convert.ToString(m_commPara.EXHALATION_THRESHOLD/16)+"."+Convert.ToString(m_commPara.EXHALATION_THRESHOLD%16) 
+                    +","+ Convert.ToString(m_commPara.EXHALATION_THRESHOLD / 16)+"*16+" + Convert.ToString(m_commPara.EXHALATION_THRESHOLD % 16)
+                    +"="+Convert.ToString(m_commPara.EXHALATION_THRESHOLD) + "\n";
+
                 str += Convert.ToString(m_commPara.WAIT_BEFORE_START)+","+"\n\n//MODE1\n";
 
                 int cnt = 0;
@@ -6954,6 +7107,414 @@ namespace EAR
             {
                 e.Handled = true;
             }
+        }
+
+        private void button_enable_synRTC_function_Click(object sender, EventArgs e)
+        {
+            button_synch.Enabled = !button_synch.Enabled;
+            if (button_synch.Enabled == true)
+            {
+                button_enable_synRTC_function.Text = "DISABLE";
+                button_synch.Enabled = true;
+            }
+            else
+            {
+                button_enable_synRTC_function.Text = "ENABLE";
+                button_synch.Enabled = false;
+            }
+        }
+
+        private void button_synch_Click(object sender, EventArgs e)
+        {
+            if (!serialPort1.IsOpen)
+            {
+                MessageBox.Show("Please open serial port first!");
+                return;
+            }
+
+            DateTime dt = DateTime.Now;
+            Byte year1 = Convert.ToByte(dt.Year / 100);
+            Byte year2 = Convert.ToByte(dt.Year % 100);
+            Byte month = Convert.ToByte(dt.Month);
+            Byte day = Convert.ToByte(dt.Day);
+            Byte weekDay = Convert.ToByte(dt.DayOfWeek);
+            Byte hour = Convert.ToByte(dt.Hour);
+            Byte min = Convert.ToByte(dt.Minute);
+            Byte sec = Convert.ToByte(dt.Second);
+
+
+            ////debug
+            //Byte year1 = Convert.ToByte(19);
+            //Byte year2 = Convert.ToByte(99);
+            //Byte month = Convert.ToByte(12);
+            //Byte day = Convert.ToByte(31);
+            //Byte hour = Convert.ToByte(23);
+            //Byte min = Convert.ToByte(59);
+            //Byte sec = Convert.ToByte(50);
+
+            byte[] buffer = new byte[14];
+            buffer[HEAD] = 0xFF;
+            buffer[LEN] = 12;
+            buffer[CMDTYPE] = 0x01;
+            buffer[FRAME_ID] = 0x65;
+
+            buffer[4 + 0] = year1;
+            buffer[4 + 1] = year2;
+            buffer[4 + 2] = month;
+            buffer[4 + 3] = day;
+            buffer[4 + 4] = weekDay;
+            buffer[4 + 5] = hour;
+            buffer[4 + 6] = min;
+            buffer[4 + 7] = sec;
+
+            int sum = 0;
+            for (int i = 1; i < Convert.ToInt32(buffer[LEN]); i++)
+            {
+                sum += buffer[i];
+            }
+            buffer[Convert.ToInt32(buffer[LEN])] = Convert.ToByte(sum / 256);
+            buffer[Convert.ToInt32(buffer[LEN]) + 1] = Convert.ToByte(sum % 256);
+            this.serialPort1.Write(buffer, 0, Convert.ToInt32(buffer[LEN]) + 2);
+        }
+
+        private void button_get_RTC_info_Click(object sender, EventArgs e)
+        {
+            if (!serialPort1.IsOpen)
+            {
+                MessageBox.Show("Please open serial port first!");
+                return;
+            }
+
+
+            byte[] buffer = new byte[6];
+            buffer[HEAD] = 0xFF;
+            buffer[LEN] = 0x04;
+            buffer[CMDTYPE] = 0x01;
+            buffer[FRAME_ID] = 0x68;   //请求RTC数据总字节数
+
+            int sum = 0;
+            for (int i = 1; i < Convert.ToInt32(buffer[LEN]); i++)
+            {
+                sum += buffer[i];
+            }
+            buffer[Convert.ToInt32(buffer[LEN])] = Convert.ToByte(sum / 256);
+            buffer[Convert.ToInt32(buffer[LEN]) + 1] = Convert.ToByte(sum % 256);
+            this.serialPort1.Write(buffer, 0, Convert.ToInt32(buffer[LEN]) + 2);
+        }
+
+        private String code2HEX(byte code)
+        {
+            #region
+            String tmp = "";
+            switch (code)
+            {
+                case 0x11:
+                    tmp = "0x11";
+                    break;
+                case 0x12:
+                    tmp = "0x12";
+                    break;
+                case 0x13:
+                    tmp = "0x13";
+                    break;
+                case 0x14:
+                    tmp = "0x14";
+                    break;
+                case 0x15:
+                    tmp = "0x15";
+                    break;
+                case 0x16:
+                    tmp = "0x16";
+                    break;
+                case 0x17:
+                    tmp = "0x17";
+                    break;
+                case 0x18:
+                    tmp = "0x18";
+                    break;
+                case 0x19:
+                    tmp = "0x19";
+                    break;
+                case 0x20:
+                    tmp = "0x20"; ;
+                    break;
+                case 0x21:
+                    tmp = "0x21"; ;
+                    break;
+                case 0x22:
+                    tmp = "0x22"; ;
+                    break;
+                case 0x23:
+                    tmp = "0x23"; ;
+                    break;
+                case 0x24:
+                    tmp = "0x24"; ;
+                    break;
+                case 0x25:
+                    tmp = "0x25"; ;
+                    break;
+                case 0x26:
+                    tmp = "0x26"; ;
+                    break;
+                default:
+                    break;
+            }
+            return tmp;
+            #endregion
+        }
+
+        private String code2str(byte code)
+        {
+            #region
+            String tmp = "";
+            switch (code)
+            {
+                case 0x11:
+                    tmp = "System power on";
+                    break;
+                case 0x12:
+                    tmp = "One cycle finished";
+                    break;
+                case 0x13:
+                    tmp = "Manual power off";
+                    break;
+                //case 0x14:
+                //    tmp = "Not detect hand";
+                    //break;
+                case 0x15:
+                    tmp = "Low power";
+                    break;
+                case 0x16:
+                    tmp = "Over pressure";
+                    break;
+                case 0x17:
+                    tmp = "System_been_triggered";
+                    break;
+                //case 0x18:
+                //    tmp = "Self test fail";
+                //    break;
+                case 0x19:
+                    tmp = "No trigger in 60s";
+                    break;
+                case 0x20:
+                    tmp = "PC synchronize RTC";
+                    break;
+                case 0x21:
+                    tmp = "Switch to mode1";
+                    break;
+                case 0x22:
+                    tmp = "Switch to mode2";
+                    break;
+                case 0x23:
+                    tmp = "Switch to mode3";
+                    break;
+                case 0x24:
+                    tmp = "Current mode is MODE1";
+                    break;
+                case 0x25:
+                    tmp = "Current mode is MODE2";
+                    break;
+                case 0x26:
+                    tmp = "Current mode is MODE3";
+                    break;
+                default:
+                    break;
+            }
+            return tmp;
+            #endregion
+        }
+
+        private bool export_rtc_info_to_file()
+        {
+            String str = this.saveFileDialog2.FileName;
+
+            str = str.Insert(str.IndexOf('.'), "");
+            FileStream fs1 = null;
+            try
+            {
+                fs1 = new FileStream(str, FileMode.Create);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
+
+            StreamWriter sw1 = new StreamWriter(fs1, Encoding.Default);
+
+            Byte pre_code = 0x00;
+            DateTime pre_dt = DateTime.Now;
+
+
+            sw1.WriteLine("StartTime" + "," + "EndTime" + "," + "Info" + "," + "Duration");
+            foreach (var info in m_rtc_data_list)
+            {
+                if (pre_code == 0x11)
+                {
+                    if (info.RTC_CODE != 0x20&&info.RTC_CODE != 0x11)
+                    { 
+                        if (info.RTC_CODE == 0x13|| info.RTC_CODE == 0x15|| info.RTC_CODE == 0x16|| info.RTC_CODE == 0x19)
+                        {
+                            //可以开始写文件了
+                            DateTime startTime = pre_dt;
+                            DateTime endTime = Convert.ToDateTime(Convert.ToString(info.RTC_YEAR) + "-"
+                                                    + Convert.ToString(info.RTC_MONTH) + "-"
+                                                    + Convert.ToString(info.RTC_DAY) + " "
+                                                    + Convert.ToString(info.RTC_HOUR) + ":"
+                                                    + Convert.ToString(info.RTC_MIN) + ":"
+                                                    + Convert.ToString(info.RTC_SEC));
+                            TimeSpan tsp = endTime - startTime;
+                            String str_duration = tsp.Hours.ToString() + ":" + tsp.Minutes.ToString() + ":" + tsp.Seconds.ToString();
+                            sw1.WriteLine(startTime.ToString("yy-MM-dd HH:mm:ss") + "," + endTime.ToString("yy-MM-dd HH:mm:ss")
+                                + "," + code2str(info.RTC_CODE) + "," + str_duration);
+                        }
+                       
+                        
+                    }
+                }
+
+                if (info.RTC_CODE == 0x11)
+                {
+                    pre_code = info.RTC_CODE;
+                    pre_dt = Convert.ToDateTime(Convert.ToString(info.RTC_YEAR) + "-"
+                                                + Convert.ToString(info.RTC_MONTH) + "-"
+                                                + Convert.ToString(info.RTC_DAY) + " "
+                                                + Convert.ToString(info.RTC_HOUR) + ":"
+                                                + Convert.ToString(info.RTC_MIN) + ":"
+                                                + Convert.ToString(info.RTC_SEC));
+                }
+            }
+
+
+            sw1.Close();
+            fs1.Close();
+            return true;
+        }
+
+        private bool export_rtc_log()
+        {
+            //String fileName = "rtc_data " + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".csv";
+            //FileStream fs = new FileStream(path + @"\" + fileName, FileMode.Create);
+            String str = this.saveFileDialog2.FileName;
+            str = str.Insert(str.IndexOf('.'), "_log");
+            FileStream fs = null;
+            try
+            {
+                fs = new FileStream(str, FileMode.Create);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
+
+            StreamWriter sw = new StreamWriter(fs, Encoding.Default);
+
+            //输出码表对照
+            sw.WriteLine("Code" + "," + "Code Info" + "," + "Mark");
+            sw.WriteLine("0x11" + "," + "System power on" + "," + "User power on the system");
+            sw.WriteLine("0x12" + "," + "One cycle finished" + "," + "System run over all parameters after system been triggered");
+            sw.WriteLine("0x13" + "," + "Manual power off" + "," + "User manual power off the system");
+            //sw.WriteLine("0x14" + "," + "Not detect hand" + "," + "System auto power off because of not detect hand in 20s");
+            sw.WriteLine("0x15" + "," + "Low power" + "," + "System auto power off because of low power");
+            sw.WriteLine("0x16" + "," + "Over pressure" + "," + "System auto power off because of over pressure");
+            sw.WriteLine("0x17" + "," + "System been triggered" + "," + "Treatment start as exhale triggered the system");
+           // sw.WriteLine("0x18" + "," + "Self test fail" + "," + "System auto power off because of self test fail");
+            sw.WriteLine("0x19" + "," + "No trigger in 60s" + "," + "System auto power off because of no trigger in 60s");
+            sw.WriteLine("0x20" + "," + "PC synchronize RTC" + "," + "Press synchronize time button on App");
+            //sw.WriteLine("0x21" + "," + "Switch to MODE1" + "," + "User manual switch to MODE1");
+            //sw.WriteLine("0x22" + "," + "Switch to MODE2" + "," + "User manual switch to MODE2");
+            //sw.WriteLine("0x23" + "," + "Switch to MODE3" + "," + "User manual switch to MODE3");
+            //sw.WriteLine("0x24" + "," + "Current mode is 1" + "," + "UCurrent mode is MODE1");
+            //sw.WriteLine("0x25" + "," + "Current mode is 2" + "," + "UCurrent mode is MODE2");
+            //sw.WriteLine("0x26" + "," + "Current mode is 3" + "," + "UCurrent mode is MODE3");
+
+            sw.WriteLine(" "); //空一行
+
+            sw.WriteLine("DateTime" + "," + "Code" + "," + "Code Info");
+            foreach (var info in m_rtc_data_list)
+            {
+                String str_dateTime = Convert.ToString(info.RTC_YEAR) + "-"
+                            + Convert.ToString(info.RTC_MONTH) + "-"
+                            + Convert.ToString(info.RTC_DAY) + " "
+                            + Convert.ToString(info.RTC_HOUR) + ":"
+                            + Convert.ToString(info.RTC_MIN) + ":"
+                            + Convert.ToString(info.RTC_SEC);
+                //DateTime dt = Convert.ToDateTime(str_dateTime);
+                //str_dateTime=dt.ToString("yy/MM/dd HH:mm:ss");
+                sw.WriteLine(str_dateTime + "," + code2HEX(info.RTC_CODE) + "," + code2str(info.RTC_CODE));
+            }
+
+            sw.Close();
+            fs.Close();
+            return true;
+        }
+
+        private void save_rtc_data()
+        {
+            #region
+            if (m_rtc_data_list.Count > 0)
+            {
+                //没有接收完,不允许操作
+                if (m_rtc_data_list.Count != m_rtcInfo_record_numbers)
+                {
+                    MessageBox.Show("Please save after receive completed!");
+                    return;
+                }
+
+                if (this.saveFileDialog2.ShowDialog() == DialogResult.OK)
+                {
+                    //导出用户需要的rtc信息 
+                    if (!export_rtc_info_to_file())
+                    {
+                        return;
+                    }
+
+                    if (checkBox_no_need_log.Checked == false)
+                    {
+                        //根据用户的需要导出详细的数据信息
+                        if (!export_rtc_log())
+                        {
+                            return;
+                        }
+                    }
+                    m_b_saveRtcFile = true;
+                    MessageBox.Show("RTC file save successful!");
+                }
+                else
+                {
+                    m_b_saveRtcFile = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please get rtc data first!");
+            }
+            #endregion
+        }
+
+        private void init_rtc_releated_var()
+        {
+            if (m_rtc_data_list != null)
+            {
+                m_rtc_data_list.Clear();
+            }
+            m_total_frames = 0; //清除m_total_frames
+            progressBar1.Value = 0;
+        }
+
+        private void button_save_rtc_data_Click(object sender, EventArgs e)
+        {
+            save_rtc_data();
+            if (m_b_saveRtcFile)
+            {
+                init_rtc_releated_var();
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            GetSystemDateTime();
         }
     }
 }
