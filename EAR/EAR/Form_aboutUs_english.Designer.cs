@@ -37,38 +37,42 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(112, 45);
+            this.label1.Location = new System.Drawing.Point(149, 56);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 12);
+            this.label1.Size = new System.Drawing.Size(190, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Software Version：1.1.0";
+            this.label1.Text = "Software Version：1.0.0";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 84);
+            this.label2.Location = new System.Drawing.Point(55, 105);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(305, 12);
+            this.label2.Size = new System.Drawing.Size(407, 15);
             this.label2.TabIndex = 1;
             this.label2.Text = "@2018-2026 by DongGuan Vincent Medical Co.,limited";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(54, 20);
+            this.label3.Location = new System.Drawing.Point(72, 25);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 12);
+            this.label3.Size = new System.Drawing.Size(0, 15);
             this.label3.TabIndex = 2;
             // 
             // Form_aboutUs_english
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 143);
+            this.ClientSize = new System.Drawing.Size(540, 179);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form_aboutUs_english";

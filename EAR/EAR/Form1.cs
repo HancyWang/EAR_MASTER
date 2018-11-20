@@ -7282,7 +7282,7 @@ namespace EAR
                 //    tmp = "Not detect hand";
                     //break;
                 case 0x15:
-                    tmp = "Low power";
+                    tmp = "No power";
                     break;
                 case 0x16:
                     tmp = "Over pressure";
@@ -7416,7 +7416,7 @@ namespace EAR
             sw.WriteLine("0x12" + "," + "One cycle finished" + "," + "System run over all parameters after system been triggered");
             sw.WriteLine("0x13" + "," + "Manual power off" + "," + "User manual power off the system");
             //sw.WriteLine("0x14" + "," + "Not detect hand" + "," + "System auto power off because of not detect hand in 20s");
-            sw.WriteLine("0x15" + "," + "Low power" + "," + "System auto power off because of low power");
+            sw.WriteLine("0x15" + "," + "No power" + "," + "System auto power off because of no power");
             sw.WriteLine("0x16" + "," + "Over pressure" + "," + "System auto power off because of over pressure");
             sw.WriteLine("0x17" + "," + "System been triggered" + "," + "Treatment start as exhale triggered the system");
            // sw.WriteLine("0x18" + "," + "Self test fail" + "," + "System auto power off because of self test fail");
