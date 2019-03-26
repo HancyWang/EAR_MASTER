@@ -7,3 +7,14 @@ D:\VS_Practice\EAR\EAR\obj\Debug\EAR.Properties.Resources.resources
 D:\VS_Practice\EAR\EAR\obj\Debug\EAR.csproj.GenerateResource.Cache
 D:\VS_Practice\EAR\EAR\obj\Debug\EAR.exe
 D:\VS_Practice\EAR\EAR\obj\Debug\EAR.pdb
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\bin\Debug\EAR.exe.config
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\bin\Debug\EAR.exe
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\bin\Debug\EAR.pdb
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.Form1.resources
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.Form_aboutUs_english.resources
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.Properties.Resources.resources
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.csproj.GenerateResource.cache
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.csproj.CoreCompileInputs.cache
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.exe
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.pdb
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.csprojAssemblyReference.cache

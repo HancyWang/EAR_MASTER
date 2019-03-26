@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -55,19 +58,72 @@
             this.comboBox_portName = new System.Windows.Forms.ComboBox();
             this.label_portName = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.checkBox_no_need_log = new System.Windows.Forms.CheckBox();
-            this.button_save_rtc_data = new System.Windows.Forms.Button();
-            this.button_get_RTC_info = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.button_synch = new System.Windows.Forms.Button();
-            this.button_enable_synRTC_function = new System.Windows.Forms.Button();
-            this.textBox_DateTime = new System.Windows.Forms.TextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button_load = new System.Windows.Forms.Button();
-            this.button_save = new System.Windows.Forms.Button();
-            this.textBox_paraCfgFilePath = new System.Windows.Forms.TextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.textBox_waitAfter_PWM1_serial6 = new System.Windows.Forms.TextBox();
+            this.textBox_waitBetween_PWM1_serial6 = new System.Windows.Forms.TextBox();
+            this.checkBox_PWM1_serial6 = new System.Windows.Forms.CheckBox();
+            this.textBox_numberOfCycles_PWM1_serial6 = new System.Windows.Forms.TextBox();
+            this.textBox_period_PWM1_serial6 = new System.Windows.Forms.TextBox();
+            this.textBox_dutyCycle_PWM1_serial6 = new System.Windows.Forms.TextBox();
+            this.textBox_freq_PWM1_serial6 = new System.Windows.Forms.TextBox();
+            this.textBox_waitAfter_PWM1_serial5 = new System.Windows.Forms.TextBox();
+            this.textBox_waitBetween_PWM1_serial5 = new System.Windows.Forms.TextBox();
+            this.checkBox_PWM1_serial5 = new System.Windows.Forms.CheckBox();
+            this.textBox_numberOfCycles_PWM1_serial5 = new System.Windows.Forms.TextBox();
+            this.textBox_period_PWM1_serial5 = new System.Windows.Forms.TextBox();
+            this.textBox_dutyCycle_PWM1_serial5 = new System.Windows.Forms.TextBox();
+            this.textBox_freq_PWM1_serial5 = new System.Windows.Forms.TextBox();
+            this.textBox_waitAfter_PWM1_serial4 = new System.Windows.Forms.TextBox();
+            this.textBox_waitBetween_PWM1_serial4 = new System.Windows.Forms.TextBox();
+            this.checkBox_PWM1_serial4 = new System.Windows.Forms.CheckBox();
+            this.textBox_numberOfCycles_PWM1_serial4 = new System.Windows.Forms.TextBox();
+            this.textBox_period_PWM1_serial4 = new System.Windows.Forms.TextBox();
+            this.textBox_dutyCycle_PWM1_serial4 = new System.Windows.Forms.TextBox();
+            this.textBox_freq_PWM1_serial4 = new System.Windows.Forms.TextBox();
+            this.textBox_waitAfter_PWM1_serial3 = new System.Windows.Forms.TextBox();
+            this.textBox_waitBetween_PWM1_serial3 = new System.Windows.Forms.TextBox();
+            this.checkBox_PWM1_serial3 = new System.Windows.Forms.CheckBox();
+            this.textBox_numberOfCycles_PWM1_serial3 = new System.Windows.Forms.TextBox();
+            this.textBox_period_PWM1_serial3 = new System.Windows.Forms.TextBox();
+            this.textBox_dutyCycle_PWM1_serial3 = new System.Windows.Forms.TextBox();
+            this.textBox_freq_PWM1_serial3 = new System.Windows.Forms.TextBox();
+            this.textBox_waitAfter_PWM1_serial2 = new System.Windows.Forms.TextBox();
+            this.textBox_waitBetween_PWM1_serial2 = new System.Windows.Forms.TextBox();
+            this.checkBox_PWM1_serial2 = new System.Windows.Forms.CheckBox();
+            this.textBox_numberOfCycles_PWM1_serial2 = new System.Windows.Forms.TextBox();
+            this.textBox_period_PWM1_serial2 = new System.Windows.Forms.TextBox();
+            this.textBox_dutyCycle_PWM1_serial2 = new System.Windows.Forms.TextBox();
+            this.textBox_freq_PWM1_serial2 = new System.Windows.Forms.TextBox();
+            this.textBox_waitAfter_PWM1_serial1 = new System.Windows.Forms.TextBox();
+            this.textBox_waitBetween_PWM1_serial1 = new System.Windows.Forms.TextBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.checkBox_PWM1_serial1 = new System.Windows.Forms.CheckBox();
+            this.label53 = new System.Windows.Forms.Label();
+            this.textBox_numberOfCycles_PWM1_serial1 = new System.Windows.Forms.TextBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.textBox_period_PWM1_serial1 = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.textBox_dutyCycle_PWM1_serial1 = new System.Windows.Forms.TextBox();
+            this.textBox_freq_PWM1_serial1 = new System.Windows.Forms.TextBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.textBox_waitAfter_PWM3_serial6 = new System.Windows.Forms.TextBox();
             this.textBox_waitBetween_PWM3_serial6 = new System.Windows.Forms.TextBox();
@@ -166,69 +222,26 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBox_dutyCycle_PWM2_serial1 = new System.Windows.Forms.TextBox();
             this.textBox_freq_PWM2_serial1 = new System.Windows.Forms.TextBox();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.textBox_waitAfter_PWM1_serial6 = new System.Windows.Forms.TextBox();
-            this.textBox_waitBetween_PWM1_serial6 = new System.Windows.Forms.TextBox();
-            this.checkBox_PWM1_serial6 = new System.Windows.Forms.CheckBox();
-            this.textBox_numberOfCycles_PWM1_serial6 = new System.Windows.Forms.TextBox();
-            this.textBox_period_PWM1_serial6 = new System.Windows.Forms.TextBox();
-            this.textBox_dutyCycle_PWM1_serial6 = new System.Windows.Forms.TextBox();
-            this.textBox_freq_PWM1_serial6 = new System.Windows.Forms.TextBox();
-            this.textBox_waitAfter_PWM1_serial5 = new System.Windows.Forms.TextBox();
-            this.textBox_waitBetween_PWM1_serial5 = new System.Windows.Forms.TextBox();
-            this.checkBox_PWM1_serial5 = new System.Windows.Forms.CheckBox();
-            this.textBox_numberOfCycles_PWM1_serial5 = new System.Windows.Forms.TextBox();
-            this.textBox_period_PWM1_serial5 = new System.Windows.Forms.TextBox();
-            this.textBox_dutyCycle_PWM1_serial5 = new System.Windows.Forms.TextBox();
-            this.textBox_freq_PWM1_serial5 = new System.Windows.Forms.TextBox();
-            this.textBox_waitAfter_PWM1_serial4 = new System.Windows.Forms.TextBox();
-            this.textBox_waitBetween_PWM1_serial4 = new System.Windows.Forms.TextBox();
-            this.checkBox_PWM1_serial4 = new System.Windows.Forms.CheckBox();
-            this.textBox_numberOfCycles_PWM1_serial4 = new System.Windows.Forms.TextBox();
-            this.textBox_period_PWM1_serial4 = new System.Windows.Forms.TextBox();
-            this.textBox_dutyCycle_PWM1_serial4 = new System.Windows.Forms.TextBox();
-            this.textBox_freq_PWM1_serial4 = new System.Windows.Forms.TextBox();
-            this.textBox_waitAfter_PWM1_serial3 = new System.Windows.Forms.TextBox();
-            this.textBox_waitBetween_PWM1_serial3 = new System.Windows.Forms.TextBox();
-            this.checkBox_PWM1_serial3 = new System.Windows.Forms.CheckBox();
-            this.textBox_numberOfCycles_PWM1_serial3 = new System.Windows.Forms.TextBox();
-            this.textBox_period_PWM1_serial3 = new System.Windows.Forms.TextBox();
-            this.textBox_dutyCycle_PWM1_serial3 = new System.Windows.Forms.TextBox();
-            this.textBox_freq_PWM1_serial3 = new System.Windows.Forms.TextBox();
-            this.textBox_waitAfter_PWM1_serial2 = new System.Windows.Forms.TextBox();
-            this.textBox_waitBetween_PWM1_serial2 = new System.Windows.Forms.TextBox();
-            this.checkBox_PWM1_serial2 = new System.Windows.Forms.CheckBox();
-            this.textBox_numberOfCycles_PWM1_serial2 = new System.Windows.Forms.TextBox();
-            this.textBox_period_PWM1_serial2 = new System.Windows.Forms.TextBox();
-            this.textBox_dutyCycle_PWM1_serial2 = new System.Windows.Forms.TextBox();
-            this.textBox_freq_PWM1_serial2 = new System.Windows.Forms.TextBox();
-            this.textBox_waitAfter_PWM1_serial1 = new System.Windows.Forms.TextBox();
-            this.textBox_waitBetween_PWM1_serial1 = new System.Windows.Forms.TextBox();
-            this.label52 = new System.Windows.Forms.Label();
-            this.checkBox_PWM1_serial1 = new System.Windows.Forms.CheckBox();
-            this.label53 = new System.Windows.Forms.Label();
-            this.textBox_numberOfCycles_PWM1_serial1 = new System.Windows.Forms.TextBox();
-            this.label54 = new System.Windows.Forms.Label();
-            this.label55 = new System.Windows.Forms.Label();
-            this.label56 = new System.Windows.Forms.Label();
-            this.textBox_period_PWM1_serial1 = new System.Windows.Forms.TextBox();
-            this.label57 = new System.Windows.Forms.Label();
-            this.textBox_dutyCycle_PWM1_serial1 = new System.Windows.Forms.TextBox();
-            this.textBox_freq_PWM1_serial1 = new System.Windows.Forms.TextBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label58 = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
-            this.label60 = new System.Windows.Forms.Label();
-            this.label61 = new System.Windows.Forms.Label();
-            this.label62 = new System.Windows.Forms.Label();
-            this.label63 = new System.Windows.Forms.Label();
-            this.label64 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label_HW = new System.Windows.Forms.Label();
+            this.button_save = new System.Windows.Forms.Button();
+            this.button_start = new System.Windows.Forms.Button();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.checkBox_no_need_log = new System.Windows.Forms.CheckBox();
+            this.button_save_rtc_data = new System.Windows.Forms.Button();
+            this.button_get_RTC_info = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.button_synch = new System.Windows.Forms.Button();
+            this.button_enable_synRTC_function = new System.Windows.Forms.Button();
+            this.textBox_DateTime = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button_load = new System.Windows.Forms.Button();
+            this.textBox_paraCfgFilePath = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button_export = new System.Windows.Forms.Button();
             this.button_saveParameter = new System.Windows.Forms.Button();
@@ -245,8 +258,6 @@
             this.exportTxtFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
@@ -257,13 +268,20 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.groupBox10.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox12.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -547,13 +565,11 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.tabControl1);
+            this.panel1.Controls.Add(this.groupBox10);
             this.panel1.Controls.Add(this.groupBox9);
             this.panel1.Controls.Add(this.groupBox8);
             this.panel1.Controls.Add(this.groupBox4);
-            this.panel1.Controls.Add(this.groupBox7);
-            this.panel1.Controls.Add(this.groupBox6);
-            this.panel1.Controls.Add(this.groupBox12);
-            this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.groupBox5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(251, 4);
@@ -562,141 +578,780 @@
             this.panel1.Size = new System.Drawing.Size(1097, 736);
             this.panel1.TabIndex = 3;
             // 
-            // groupBox9
+            // tabControl1
             // 
-            this.groupBox9.Controls.Add(this.checkBox_no_need_log);
-            this.groupBox9.Controls.Add(this.button_save_rtc_data);
-            this.groupBox9.Controls.Add(this.button_get_RTC_info);
-            this.groupBox9.Controls.Add(this.progressBar1);
-            this.groupBox9.Location = new System.Drawing.Point(267, 69);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(312, 102);
-            this.groupBox9.TabIndex = 58;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Get RTC Info";
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(11, 241);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1597, 651);
+            this.tabControl1.TabIndex = 5;
             // 
-            // checkBox_no_need_log
+            // tabPage1
             // 
-            this.checkBox_no_need_log.AutoSize = true;
-            this.checkBox_no_need_log.Location = new System.Drawing.Point(173, 62);
-            this.checkBox_no_need_log.Name = "checkBox_no_need_log";
-            this.checkBox_no_need_log.Size = new System.Drawing.Size(133, 19);
-            this.checkBox_no_need_log.TabIndex = 3;
-            this.checkBox_no_need_log.Text = "No detail log";
-            this.checkBox_no_need_log.UseVisualStyleBackColor = true;
+            this.tabPage1.Controls.Add(this.panel2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1589, 622);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "PWM Set";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button_save_rtc_data
+            // panel2
             // 
-            this.button_save_rtc_data.Location = new System.Drawing.Point(86, 55);
-            this.button_save_rtc_data.Name = "button_save_rtc_data";
-            this.button_save_rtc_data.Size = new System.Drawing.Size(65, 28);
-            this.button_save_rtc_data.TabIndex = 2;
-            this.button_save_rtc_data.Text = "Save";
-            this.button_save_rtc_data.UseVisualStyleBackColor = true;
-            this.button_save_rtc_data.Click += new System.EventHandler(this.button_save_rtc_data_Click);
+            this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.groupBox12);
+            this.panel2.Controls.Add(this.panel5);
+            this.panel2.Controls.Add(this.groupBox7);
+            this.panel2.Controls.Add(this.groupBox6);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1583, 616);
+            this.panel2.TabIndex = 5;
             // 
-            // button_get_RTC_info
+            // groupBox12
             // 
-            this.button_get_RTC_info.Location = new System.Drawing.Point(5, 55);
-            this.button_get_RTC_info.Name = "button_get_RTC_info";
-            this.button_get_RTC_info.Size = new System.Drawing.Size(65, 28);
-            this.button_get_RTC_info.TabIndex = 1;
-            this.button_get_RTC_info.Text = "Get";
-            this.button_get_RTC_info.UseVisualStyleBackColor = true;
-            this.button_get_RTC_info.Click += new System.EventHandler(this.button_get_RTC_info_Click);
+            this.groupBox12.Controls.Add(this.textBox_waitAfter_PWM1_serial6);
+            this.groupBox12.Controls.Add(this.textBox_waitBetween_PWM1_serial6);
+            this.groupBox12.Controls.Add(this.checkBox_PWM1_serial6);
+            this.groupBox12.Controls.Add(this.textBox_numberOfCycles_PWM1_serial6);
+            this.groupBox12.Controls.Add(this.textBox_period_PWM1_serial6);
+            this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial6);
+            this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial6);
+            this.groupBox12.Controls.Add(this.textBox_waitAfter_PWM1_serial5);
+            this.groupBox12.Controls.Add(this.textBox_waitBetween_PWM1_serial5);
+            this.groupBox12.Controls.Add(this.checkBox_PWM1_serial5);
+            this.groupBox12.Controls.Add(this.textBox_numberOfCycles_PWM1_serial5);
+            this.groupBox12.Controls.Add(this.textBox_period_PWM1_serial5);
+            this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial5);
+            this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial5);
+            this.groupBox12.Controls.Add(this.textBox_waitAfter_PWM1_serial4);
+            this.groupBox12.Controls.Add(this.textBox_waitBetween_PWM1_serial4);
+            this.groupBox12.Controls.Add(this.checkBox_PWM1_serial4);
+            this.groupBox12.Controls.Add(this.textBox_numberOfCycles_PWM1_serial4);
+            this.groupBox12.Controls.Add(this.textBox_period_PWM1_serial4);
+            this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial4);
+            this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial4);
+            this.groupBox12.Controls.Add(this.textBox_waitAfter_PWM1_serial3);
+            this.groupBox12.Controls.Add(this.textBox_waitBetween_PWM1_serial3);
+            this.groupBox12.Controls.Add(this.checkBox_PWM1_serial3);
+            this.groupBox12.Controls.Add(this.textBox_numberOfCycles_PWM1_serial3);
+            this.groupBox12.Controls.Add(this.textBox_period_PWM1_serial3);
+            this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial3);
+            this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial3);
+            this.groupBox12.Controls.Add(this.textBox_waitAfter_PWM1_serial2);
+            this.groupBox12.Controls.Add(this.textBox_waitBetween_PWM1_serial2);
+            this.groupBox12.Controls.Add(this.checkBox_PWM1_serial2);
+            this.groupBox12.Controls.Add(this.textBox_numberOfCycles_PWM1_serial2);
+            this.groupBox12.Controls.Add(this.textBox_period_PWM1_serial2);
+            this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial2);
+            this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial2);
+            this.groupBox12.Controls.Add(this.textBox_waitAfter_PWM1_serial1);
+            this.groupBox12.Controls.Add(this.textBox_waitBetween_PWM1_serial1);
+            this.groupBox12.Controls.Add(this.label52);
+            this.groupBox12.Controls.Add(this.checkBox_PWM1_serial1);
+            this.groupBox12.Controls.Add(this.label53);
+            this.groupBox12.Controls.Add(this.textBox_numberOfCycles_PWM1_serial1);
+            this.groupBox12.Controls.Add(this.label54);
+            this.groupBox12.Controls.Add(this.label55);
+            this.groupBox12.Controls.Add(this.label56);
+            this.groupBox12.Controls.Add(this.textBox_period_PWM1_serial1);
+            this.groupBox12.Controls.Add(this.label57);
+            this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial1);
+            this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial1);
+            this.groupBox12.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox12.Location = new System.Drawing.Point(185, 19);
+            this.groupBox12.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox12.Size = new System.Drawing.Size(419, 524);
+            this.groupBox12.TabIndex = 39;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "PWM1";
             // 
-            // progressBar1
+            // textBox_waitAfter_PWM1_serial6
             // 
-            this.progressBar1.Location = new System.Drawing.Point(5, 24);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(301, 21);
-            this.progressBar1.TabIndex = 0;
+            this.textBox_waitAfter_PWM1_serial6.Location = new System.Drawing.Point(348, 464);
+            this.textBox_waitAfter_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_waitAfter_PWM1_serial6.MaxLength = 3;
+            this.textBox_waitAfter_PWM1_serial6.Name = "textBox_waitAfter_PWM1_serial6";
+            this.textBox_waitAfter_PWM1_serial6.Size = new System.Drawing.Size(44, 25);
+            this.textBox_waitAfter_PWM1_serial6.TabIndex = 53;
+            this.textBox_waitAfter_PWM1_serial6.TextChanged += new System.EventHandler(this.textBox_waitAfter_PWM1_serial6_TextChanged);
+            this.textBox_waitAfter_PWM1_serial6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitAfter_PWM1_serial6_KeyPress);
             // 
-            // groupBox8
+            // textBox_waitBetween_PWM1_serial6
             // 
-            this.groupBox8.Controls.Add(this.button_synch);
-            this.groupBox8.Controls.Add(this.button_enable_synRTC_function);
-            this.groupBox8.Controls.Add(this.textBox_DateTime);
-            this.groupBox8.Location = new System.Drawing.Point(3, 69);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(258, 102);
-            this.groupBox8.TabIndex = 57;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Synchronize Time";
+            this.textBox_waitBetween_PWM1_serial6.Location = new System.Drawing.Point(348, 400);
+            this.textBox_waitBetween_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_waitBetween_PWM1_serial6.MaxLength = 3;
+            this.textBox_waitBetween_PWM1_serial6.Name = "textBox_waitBetween_PWM1_serial6";
+            this.textBox_waitBetween_PWM1_serial6.Size = new System.Drawing.Size(44, 25);
+            this.textBox_waitBetween_PWM1_serial6.TabIndex = 52;
+            this.textBox_waitBetween_PWM1_serial6.TextChanged += new System.EventHandler(this.textBox_waitBetween_PWM1_serial6_TextChanged);
+            this.textBox_waitBetween_PWM1_serial6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitBetween_PWM1_serial6_KeyPress);
             // 
-            // button_synch
+            // checkBox_PWM1_serial6
             // 
-            this.button_synch.Enabled = false;
-            this.button_synch.Location = new System.Drawing.Point(115, 52);
-            this.button_synch.Name = "button_synch";
-            this.button_synch.Size = new System.Drawing.Size(128, 46);
-            this.button_synch.TabIndex = 2;
-            this.button_synch.Text = "Synchronize to device";
-            this.button_synch.UseVisualStyleBackColor = true;
-            this.button_synch.Click += new System.EventHandler(this.button_synch_Click);
+            this.checkBox_PWM1_serial6.AutoSize = true;
+            this.checkBox_PWM1_serial6.Location = new System.Drawing.Point(352, 112);
+            this.checkBox_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox_PWM1_serial6.Name = "checkBox_PWM1_serial6";
+            this.checkBox_PWM1_serial6.Size = new System.Drawing.Size(18, 17);
+            this.checkBox_PWM1_serial6.TabIndex = 51;
+            this.checkBox_PWM1_serial6.UseVisualStyleBackColor = true;
+            this.checkBox_PWM1_serial6.Click += new System.EventHandler(this.checkBox_PWM1_serial6_Click);
             // 
-            // button_enable_synRTC_function
+            // textBox_numberOfCycles_PWM1_serial6
             // 
-            this.button_enable_synRTC_function.Location = new System.Drawing.Point(12, 52);
-            this.button_enable_synRTC_function.Name = "button_enable_synRTC_function";
-            this.button_enable_synRTC_function.Size = new System.Drawing.Size(75, 44);
-            this.button_enable_synRTC_function.TabIndex = 1;
-            this.button_enable_synRTC_function.Text = "ENABLE";
-            this.button_enable_synRTC_function.UseVisualStyleBackColor = true;
-            this.button_enable_synRTC_function.Click += new System.EventHandler(this.button_enable_synRTC_function_Click);
+            this.textBox_numberOfCycles_PWM1_serial6.Location = new System.Drawing.Point(348, 345);
+            this.textBox_numberOfCycles_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_numberOfCycles_PWM1_serial6.MaxLength = 3;
+            this.textBox_numberOfCycles_PWM1_serial6.Name = "textBox_numberOfCycles_PWM1_serial6";
+            this.textBox_numberOfCycles_PWM1_serial6.Size = new System.Drawing.Size(44, 25);
+            this.textBox_numberOfCycles_PWM1_serial6.TabIndex = 50;
+            this.textBox_numberOfCycles_PWM1_serial6.TextChanged += new System.EventHandler(this.textBox_numberOfCycles_PWM1_serial6_TextChanged);
+            this.textBox_numberOfCycles_PWM1_serial6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_numberOfCycles_PWM1_serial6_KeyPress);
             // 
-            // textBox_DateTime
+            // textBox_period_PWM1_serial6
             // 
-            this.textBox_DateTime.Location = new System.Drawing.Point(10, 21);
-            this.textBox_DateTime.Name = "textBox_DateTime";
-            this.textBox_DateTime.Size = new System.Drawing.Size(233, 25);
-            this.textBox_DateTime.TabIndex = 0;
+            this.textBox_period_PWM1_serial6.Location = new System.Drawing.Point(348, 286);
+            this.textBox_period_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_period_PWM1_serial6.MaxLength = 3;
+            this.textBox_period_PWM1_serial6.Name = "textBox_period_PWM1_serial6";
+            this.textBox_period_PWM1_serial6.Size = new System.Drawing.Size(44, 25);
+            this.textBox_period_PWM1_serial6.TabIndex = 49;
+            this.textBox_period_PWM1_serial6.TextChanged += new System.EventHandler(this.textBox_period_PWM1_serial6_TextChanged);
+            this.textBox_period_PWM1_serial6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_period_PWM1_serial6_KeyPress);
             // 
-            // groupBox4
+            // textBox_dutyCycle_PWM1_serial6
             // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.button_load);
-            this.groupBox4.Controls.Add(this.button_save);
-            this.groupBox4.Controls.Add(this.textBox_paraCfgFilePath);
-            this.groupBox4.Location = new System.Drawing.Point(586, 69);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Size = new System.Drawing.Size(3429, 102);
-            this.groupBox4.TabIndex = 56;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Files";
+            this.textBox_dutyCycle_PWM1_serial6.Location = new System.Drawing.Point(348, 228);
+            this.textBox_dutyCycle_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_dutyCycle_PWM1_serial6.MaxLength = 3;
+            this.textBox_dutyCycle_PWM1_serial6.Name = "textBox_dutyCycle_PWM1_serial6";
+            this.textBox_dutyCycle_PWM1_serial6.Size = new System.Drawing.Size(44, 25);
+            this.textBox_dutyCycle_PWM1_serial6.TabIndex = 48;
+            this.textBox_dutyCycle_PWM1_serial6.TextChanged += new System.EventHandler(this.textBox_dutyCycle_PWM1_serial6_TextChanged);
+            this.textBox_dutyCycle_PWM1_serial6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_dutyCycle_PWM1_serial6_KeyPress);
             // 
-            // button_load
+            // textBox_freq_PWM1_serial6
             // 
-            this.button_load.Location = new System.Drawing.Point(175, 57);
-            this.button_load.Margin = new System.Windows.Forms.Padding(4);
-            this.button_load.Name = "button_load";
-            this.button_load.Size = new System.Drawing.Size(100, 29);
-            this.button_load.TabIndex = 2;
-            this.button_load.Text = "Load";
-            this.button_load.UseVisualStyleBackColor = true;
-            this.button_load.Click += new System.EventHandler(this.button_load_Click);
+            this.textBox_freq_PWM1_serial6.Location = new System.Drawing.Point(348, 164);
+            this.textBox_freq_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_freq_PWM1_serial6.MaxLength = 3;
+            this.textBox_freq_PWM1_serial6.Name = "textBox_freq_PWM1_serial6";
+            this.textBox_freq_PWM1_serial6.Size = new System.Drawing.Size(44, 25);
+            this.textBox_freq_PWM1_serial6.TabIndex = 47;
+            this.textBox_freq_PWM1_serial6.TextChanged += new System.EventHandler(this.textBox_freq_PWM1_serial6_TextChanged);
+            this.textBox_freq_PWM1_serial6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM1_serial6_KeyPress);
             // 
-            // button_save
+            // textBox_waitAfter_PWM1_serial5
             // 
-            this.button_save.Location = new System.Drawing.Point(9, 57);
-            this.button_save.Margin = new System.Windows.Forms.Padding(4);
-            this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(100, 29);
-            this.button_save.TabIndex = 1;
-            this.button_save.Text = "Save";
-            this.button_save.UseVisualStyleBackColor = true;
-            this.button_save.Click += new System.EventHandler(this.button_save_Click);
+            this.textBox_waitAfter_PWM1_serial5.Location = new System.Drawing.Point(277, 464);
+            this.textBox_waitAfter_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_waitAfter_PWM1_serial5.MaxLength = 3;
+            this.textBox_waitAfter_PWM1_serial5.Name = "textBox_waitAfter_PWM1_serial5";
+            this.textBox_waitAfter_PWM1_serial5.Size = new System.Drawing.Size(44, 25);
+            this.textBox_waitAfter_PWM1_serial5.TabIndex = 46;
+            this.textBox_waitAfter_PWM1_serial5.TextChanged += new System.EventHandler(this.textBox_waitAfter_PWM1_serial5_TextChanged);
+            this.textBox_waitAfter_PWM1_serial5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitAfter_PWM1_serial5_KeyPress);
             // 
-            // textBox_paraCfgFilePath
+            // textBox_waitBetween_PWM1_serial5
             // 
-            this.textBox_paraCfgFilePath.Location = new System.Drawing.Point(7, 22);
-            this.textBox_paraCfgFilePath.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_paraCfgFilePath.Name = "textBox_paraCfgFilePath";
-            this.textBox_paraCfgFilePath.Size = new System.Drawing.Size(999, 25);
-            this.textBox_paraCfgFilePath.TabIndex = 0;
+            this.textBox_waitBetween_PWM1_serial5.Location = new System.Drawing.Point(277, 400);
+            this.textBox_waitBetween_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_waitBetween_PWM1_serial5.MaxLength = 3;
+            this.textBox_waitBetween_PWM1_serial5.Name = "textBox_waitBetween_PWM1_serial5";
+            this.textBox_waitBetween_PWM1_serial5.Size = new System.Drawing.Size(44, 25);
+            this.textBox_waitBetween_PWM1_serial5.TabIndex = 45;
+            this.textBox_waitBetween_PWM1_serial5.TextChanged += new System.EventHandler(this.textBox_waitBetween_PWM1_serial5_TextChanged);
+            this.textBox_waitBetween_PWM1_serial5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitBetween_PWM1_serial5_KeyPress);
+            // 
+            // checkBox_PWM1_serial5
+            // 
+            this.checkBox_PWM1_serial5.AutoSize = true;
+            this.checkBox_PWM1_serial5.Location = new System.Drawing.Point(281, 112);
+            this.checkBox_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox_PWM1_serial5.Name = "checkBox_PWM1_serial5";
+            this.checkBox_PWM1_serial5.Size = new System.Drawing.Size(18, 17);
+            this.checkBox_PWM1_serial5.TabIndex = 44;
+            this.checkBox_PWM1_serial5.UseVisualStyleBackColor = true;
+            this.checkBox_PWM1_serial5.Click += new System.EventHandler(this.checkBox_PWM1_serial5_Click);
+            // 
+            // textBox_numberOfCycles_PWM1_serial5
+            // 
+            this.textBox_numberOfCycles_PWM1_serial5.Location = new System.Drawing.Point(277, 345);
+            this.textBox_numberOfCycles_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_numberOfCycles_PWM1_serial5.MaxLength = 3;
+            this.textBox_numberOfCycles_PWM1_serial5.Name = "textBox_numberOfCycles_PWM1_serial5";
+            this.textBox_numberOfCycles_PWM1_serial5.Size = new System.Drawing.Size(44, 25);
+            this.textBox_numberOfCycles_PWM1_serial5.TabIndex = 43;
+            this.textBox_numberOfCycles_PWM1_serial5.TextChanged += new System.EventHandler(this.textBox_numberOfCycles_PWM1_serial5_TextChanged);
+            this.textBox_numberOfCycles_PWM1_serial5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_numberOfCycles_PWM1_serial5_KeyPress);
+            // 
+            // textBox_period_PWM1_serial5
+            // 
+            this.textBox_period_PWM1_serial5.Location = new System.Drawing.Point(277, 286);
+            this.textBox_period_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_period_PWM1_serial5.MaxLength = 3;
+            this.textBox_period_PWM1_serial5.Name = "textBox_period_PWM1_serial5";
+            this.textBox_period_PWM1_serial5.Size = new System.Drawing.Size(44, 25);
+            this.textBox_period_PWM1_serial5.TabIndex = 42;
+            this.textBox_period_PWM1_serial5.TextChanged += new System.EventHandler(this.textBox_period_PWM1_serial5_TextChanged);
+            this.textBox_period_PWM1_serial5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_period_PWM1_serial5_KeyPress);
+            // 
+            // textBox_dutyCycle_PWM1_serial5
+            // 
+            this.textBox_dutyCycle_PWM1_serial5.Location = new System.Drawing.Point(277, 228);
+            this.textBox_dutyCycle_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_dutyCycle_PWM1_serial5.MaxLength = 3;
+            this.textBox_dutyCycle_PWM1_serial5.Name = "textBox_dutyCycle_PWM1_serial5";
+            this.textBox_dutyCycle_PWM1_serial5.Size = new System.Drawing.Size(44, 25);
+            this.textBox_dutyCycle_PWM1_serial5.TabIndex = 41;
+            this.textBox_dutyCycle_PWM1_serial5.TextChanged += new System.EventHandler(this.textBox_dutyCycle_PWM1_serial5_TextChanged);
+            this.textBox_dutyCycle_PWM1_serial5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_dutyCycle_PWM1_serial5_KeyPress);
+            // 
+            // textBox_freq_PWM1_serial5
+            // 
+            this.textBox_freq_PWM1_serial5.Location = new System.Drawing.Point(277, 164);
+            this.textBox_freq_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_freq_PWM1_serial5.MaxLength = 3;
+            this.textBox_freq_PWM1_serial5.Name = "textBox_freq_PWM1_serial5";
+            this.textBox_freq_PWM1_serial5.Size = new System.Drawing.Size(44, 25);
+            this.textBox_freq_PWM1_serial5.TabIndex = 40;
+            this.textBox_freq_PWM1_serial5.TextChanged += new System.EventHandler(this.textBox_freq_PWM1_serial5_TextChanged);
+            this.textBox_freq_PWM1_serial5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM1_serial5_KeyPress);
+            // 
+            // textBox_waitAfter_PWM1_serial4
+            // 
+            this.textBox_waitAfter_PWM1_serial4.Location = new System.Drawing.Point(211, 464);
+            this.textBox_waitAfter_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_waitAfter_PWM1_serial4.MaxLength = 3;
+            this.textBox_waitAfter_PWM1_serial4.Name = "textBox_waitAfter_PWM1_serial4";
+            this.textBox_waitAfter_PWM1_serial4.Size = new System.Drawing.Size(44, 25);
+            this.textBox_waitAfter_PWM1_serial4.TabIndex = 39;
+            this.textBox_waitAfter_PWM1_serial4.TextChanged += new System.EventHandler(this.textBox_waitAfter_PWM1_serial4_TextChanged);
+            this.textBox_waitAfter_PWM1_serial4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitAfter_PWM1_serial4_KeyPress);
+            // 
+            // textBox_waitBetween_PWM1_serial4
+            // 
+            this.textBox_waitBetween_PWM1_serial4.Location = new System.Drawing.Point(211, 400);
+            this.textBox_waitBetween_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_waitBetween_PWM1_serial4.MaxLength = 3;
+            this.textBox_waitBetween_PWM1_serial4.Name = "textBox_waitBetween_PWM1_serial4";
+            this.textBox_waitBetween_PWM1_serial4.Size = new System.Drawing.Size(44, 25);
+            this.textBox_waitBetween_PWM1_serial4.TabIndex = 38;
+            this.textBox_waitBetween_PWM1_serial4.TextChanged += new System.EventHandler(this.textBox_waitBetween_PWM1_serial4_TextChanged);
+            this.textBox_waitBetween_PWM1_serial4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitBetween_PWM1_serial4_KeyPress);
+            // 
+            // checkBox_PWM1_serial4
+            // 
+            this.checkBox_PWM1_serial4.AutoSize = true;
+            this.checkBox_PWM1_serial4.Location = new System.Drawing.Point(215, 112);
+            this.checkBox_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox_PWM1_serial4.Name = "checkBox_PWM1_serial4";
+            this.checkBox_PWM1_serial4.Size = new System.Drawing.Size(18, 17);
+            this.checkBox_PWM1_serial4.TabIndex = 37;
+            this.checkBox_PWM1_serial4.UseVisualStyleBackColor = true;
+            this.checkBox_PWM1_serial4.Click += new System.EventHandler(this.checkBox_PWM1_serial4_Click);
+            // 
+            // textBox_numberOfCycles_PWM1_serial4
+            // 
+            this.textBox_numberOfCycles_PWM1_serial4.Location = new System.Drawing.Point(211, 345);
+            this.textBox_numberOfCycles_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_numberOfCycles_PWM1_serial4.MaxLength = 3;
+            this.textBox_numberOfCycles_PWM1_serial4.Name = "textBox_numberOfCycles_PWM1_serial4";
+            this.textBox_numberOfCycles_PWM1_serial4.Size = new System.Drawing.Size(44, 25);
+            this.textBox_numberOfCycles_PWM1_serial4.TabIndex = 36;
+            this.textBox_numberOfCycles_PWM1_serial4.TextChanged += new System.EventHandler(this.textBox_numberOfCycles_PWM1_serial4_TextChanged);
+            this.textBox_numberOfCycles_PWM1_serial4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_numberOfCycles_PWM1_serial4_KeyPress);
+            // 
+            // textBox_period_PWM1_serial4
+            // 
+            this.textBox_period_PWM1_serial4.Location = new System.Drawing.Point(211, 286);
+            this.textBox_period_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_period_PWM1_serial4.MaxLength = 3;
+            this.textBox_period_PWM1_serial4.Name = "textBox_period_PWM1_serial4";
+            this.textBox_period_PWM1_serial4.Size = new System.Drawing.Size(44, 25);
+            this.textBox_period_PWM1_serial4.TabIndex = 35;
+            this.textBox_period_PWM1_serial4.TextChanged += new System.EventHandler(this.textBox_period_PWM1_serial4_TextChanged);
+            this.textBox_period_PWM1_serial4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_period_PWM1_serial4_KeyPress);
+            // 
+            // textBox_dutyCycle_PWM1_serial4
+            // 
+            this.textBox_dutyCycle_PWM1_serial4.Location = new System.Drawing.Point(211, 228);
+            this.textBox_dutyCycle_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_dutyCycle_PWM1_serial4.MaxLength = 3;
+            this.textBox_dutyCycle_PWM1_serial4.Name = "textBox_dutyCycle_PWM1_serial4";
+            this.textBox_dutyCycle_PWM1_serial4.Size = new System.Drawing.Size(44, 25);
+            this.textBox_dutyCycle_PWM1_serial4.TabIndex = 34;
+            this.textBox_dutyCycle_PWM1_serial4.TextChanged += new System.EventHandler(this.textBox_dutyCycle_PWM1_serial4_TextChanged);
+            this.textBox_dutyCycle_PWM1_serial4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_dutyCycle_PWM1_serial4_KeyPress);
+            // 
+            // textBox_freq_PWM1_serial4
+            // 
+            this.textBox_freq_PWM1_serial4.Location = new System.Drawing.Point(211, 164);
+            this.textBox_freq_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_freq_PWM1_serial4.MaxLength = 3;
+            this.textBox_freq_PWM1_serial4.Name = "textBox_freq_PWM1_serial4";
+            this.textBox_freq_PWM1_serial4.Size = new System.Drawing.Size(44, 25);
+            this.textBox_freq_PWM1_serial4.TabIndex = 33;
+            this.textBox_freq_PWM1_serial4.TextChanged += new System.EventHandler(this.textBox_freq_PWM1_serial4_TextChanged);
+            this.textBox_freq_PWM1_serial4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM1_serial4_KeyPress);
+            // 
+            // textBox_waitAfter_PWM1_serial3
+            // 
+            this.textBox_waitAfter_PWM1_serial3.Location = new System.Drawing.Point(141, 464);
+            this.textBox_waitAfter_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_waitAfter_PWM1_serial3.MaxLength = 3;
+            this.textBox_waitAfter_PWM1_serial3.Name = "textBox_waitAfter_PWM1_serial3";
+            this.textBox_waitAfter_PWM1_serial3.Size = new System.Drawing.Size(44, 25);
+            this.textBox_waitAfter_PWM1_serial3.TabIndex = 32;
+            this.textBox_waitAfter_PWM1_serial3.TextChanged += new System.EventHandler(this.textBox_waitAfter_PWM1_serial3_TextChanged);
+            this.textBox_waitAfter_PWM1_serial3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitAfter_PWM1_serial3_KeyPress);
+            // 
+            // textBox_waitBetween_PWM1_serial3
+            // 
+            this.textBox_waitBetween_PWM1_serial3.Location = new System.Drawing.Point(141, 400);
+            this.textBox_waitBetween_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_waitBetween_PWM1_serial3.MaxLength = 3;
+            this.textBox_waitBetween_PWM1_serial3.Name = "textBox_waitBetween_PWM1_serial3";
+            this.textBox_waitBetween_PWM1_serial3.Size = new System.Drawing.Size(44, 25);
+            this.textBox_waitBetween_PWM1_serial3.TabIndex = 31;
+            this.textBox_waitBetween_PWM1_serial3.TextChanged += new System.EventHandler(this.textBox_waitBetween_PWM1_serial3_TextChanged);
+            this.textBox_waitBetween_PWM1_serial3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitBetween_PWM1_serial3_KeyPress);
+            // 
+            // checkBox_PWM1_serial3
+            // 
+            this.checkBox_PWM1_serial3.AutoSize = true;
+            this.checkBox_PWM1_serial3.Location = new System.Drawing.Point(145, 112);
+            this.checkBox_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox_PWM1_serial3.Name = "checkBox_PWM1_serial3";
+            this.checkBox_PWM1_serial3.Size = new System.Drawing.Size(18, 17);
+            this.checkBox_PWM1_serial3.TabIndex = 30;
+            this.checkBox_PWM1_serial3.UseVisualStyleBackColor = true;
+            this.checkBox_PWM1_serial3.Click += new System.EventHandler(this.checkBox_PWM1_serial3_Click);
+            // 
+            // textBox_numberOfCycles_PWM1_serial3
+            // 
+            this.textBox_numberOfCycles_PWM1_serial3.Location = new System.Drawing.Point(141, 345);
+            this.textBox_numberOfCycles_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_numberOfCycles_PWM1_serial3.MaxLength = 3;
+            this.textBox_numberOfCycles_PWM1_serial3.Name = "textBox_numberOfCycles_PWM1_serial3";
+            this.textBox_numberOfCycles_PWM1_serial3.Size = new System.Drawing.Size(44, 25);
+            this.textBox_numberOfCycles_PWM1_serial3.TabIndex = 29;
+            this.textBox_numberOfCycles_PWM1_serial3.TextChanged += new System.EventHandler(this.textBox_numberOfCycles_PWM1_serial3_TextChanged);
+            this.textBox_numberOfCycles_PWM1_serial3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_numberOfCycles_PWM1_serial3_KeyPress);
+            // 
+            // textBox_period_PWM1_serial3
+            // 
+            this.textBox_period_PWM1_serial3.Location = new System.Drawing.Point(141, 286);
+            this.textBox_period_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_period_PWM1_serial3.MaxLength = 3;
+            this.textBox_period_PWM1_serial3.Name = "textBox_period_PWM1_serial3";
+            this.textBox_period_PWM1_serial3.Size = new System.Drawing.Size(44, 25);
+            this.textBox_period_PWM1_serial3.TabIndex = 28;
+            this.textBox_period_PWM1_serial3.TextChanged += new System.EventHandler(this.textBox_period_PWM1_serial3_TextChanged);
+            this.textBox_period_PWM1_serial3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_period_PWM1_serial3_KeyPress);
+            // 
+            // textBox_dutyCycle_PWM1_serial3
+            // 
+            this.textBox_dutyCycle_PWM1_serial3.Location = new System.Drawing.Point(141, 228);
+            this.textBox_dutyCycle_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_dutyCycle_PWM1_serial3.MaxLength = 3;
+            this.textBox_dutyCycle_PWM1_serial3.Name = "textBox_dutyCycle_PWM1_serial3";
+            this.textBox_dutyCycle_PWM1_serial3.Size = new System.Drawing.Size(44, 25);
+            this.textBox_dutyCycle_PWM1_serial3.TabIndex = 27;
+            this.textBox_dutyCycle_PWM1_serial3.TextChanged += new System.EventHandler(this.textBox_dutyCycle_PWM1_serial3_TextChanged);
+            this.textBox_dutyCycle_PWM1_serial3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_dutyCycle_PWM1_serial3_KeyPress);
+            // 
+            // textBox_freq_PWM1_serial3
+            // 
+            this.textBox_freq_PWM1_serial3.Location = new System.Drawing.Point(141, 164);
+            this.textBox_freq_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_freq_PWM1_serial3.MaxLength = 3;
+            this.textBox_freq_PWM1_serial3.Name = "textBox_freq_PWM1_serial3";
+            this.textBox_freq_PWM1_serial3.Size = new System.Drawing.Size(44, 25);
+            this.textBox_freq_PWM1_serial3.TabIndex = 26;
+            this.textBox_freq_PWM1_serial3.TextChanged += new System.EventHandler(this.textBox_freq_PWM1_serial3_TextChanged);
+            this.textBox_freq_PWM1_serial3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM1_serial3_KeyPress);
+            // 
+            // textBox_waitAfter_PWM1_serial2
+            // 
+            this.textBox_waitAfter_PWM1_serial2.Location = new System.Drawing.Point(73, 464);
+            this.textBox_waitAfter_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_waitAfter_PWM1_serial2.MaxLength = 3;
+            this.textBox_waitAfter_PWM1_serial2.Name = "textBox_waitAfter_PWM1_serial2";
+            this.textBox_waitAfter_PWM1_serial2.Size = new System.Drawing.Size(44, 25);
+            this.textBox_waitAfter_PWM1_serial2.TabIndex = 25;
+            this.textBox_waitAfter_PWM1_serial2.TextChanged += new System.EventHandler(this.textBox_waitAfter_PWM1_serial2_TextChanged);
+            this.textBox_waitAfter_PWM1_serial2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitAfter_PWM1_serial2_KeyPress);
+            // 
+            // textBox_waitBetween_PWM1_serial2
+            // 
+            this.textBox_waitBetween_PWM1_serial2.Location = new System.Drawing.Point(73, 400);
+            this.textBox_waitBetween_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_waitBetween_PWM1_serial2.MaxLength = 3;
+            this.textBox_waitBetween_PWM1_serial2.Name = "textBox_waitBetween_PWM1_serial2";
+            this.textBox_waitBetween_PWM1_serial2.Size = new System.Drawing.Size(44, 25);
+            this.textBox_waitBetween_PWM1_serial2.TabIndex = 24;
+            this.textBox_waitBetween_PWM1_serial2.TextChanged += new System.EventHandler(this.textBox_waitBetween_PWM1_serial2_TextChanged);
+            this.textBox_waitBetween_PWM1_serial2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitBetween_PWM1_serial2_KeyPress);
+            // 
+            // checkBox_PWM1_serial2
+            // 
+            this.checkBox_PWM1_serial2.AutoSize = true;
+            this.checkBox_PWM1_serial2.Location = new System.Drawing.Point(77, 112);
+            this.checkBox_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox_PWM1_serial2.Name = "checkBox_PWM1_serial2";
+            this.checkBox_PWM1_serial2.Size = new System.Drawing.Size(18, 17);
+            this.checkBox_PWM1_serial2.TabIndex = 23;
+            this.checkBox_PWM1_serial2.UseVisualStyleBackColor = true;
+            this.checkBox_PWM1_serial2.Click += new System.EventHandler(this.checkBox_PWM1_serial2_Click);
+            // 
+            // textBox_numberOfCycles_PWM1_serial2
+            // 
+            this.textBox_numberOfCycles_PWM1_serial2.Location = new System.Drawing.Point(73, 345);
+            this.textBox_numberOfCycles_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_numberOfCycles_PWM1_serial2.MaxLength = 3;
+            this.textBox_numberOfCycles_PWM1_serial2.Name = "textBox_numberOfCycles_PWM1_serial2";
+            this.textBox_numberOfCycles_PWM1_serial2.Size = new System.Drawing.Size(44, 25);
+            this.textBox_numberOfCycles_PWM1_serial2.TabIndex = 22;
+            this.textBox_numberOfCycles_PWM1_serial2.TextChanged += new System.EventHandler(this.textBox_numberOfCycles_PWM1_serial2_TextChanged);
+            this.textBox_numberOfCycles_PWM1_serial2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_numberOfCycles_PWM1_serial2_KeyPress);
+            // 
+            // textBox_period_PWM1_serial2
+            // 
+            this.textBox_period_PWM1_serial2.Location = new System.Drawing.Point(73, 286);
+            this.textBox_period_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_period_PWM1_serial2.MaxLength = 3;
+            this.textBox_period_PWM1_serial2.Name = "textBox_period_PWM1_serial2";
+            this.textBox_period_PWM1_serial2.Size = new System.Drawing.Size(44, 25);
+            this.textBox_period_PWM1_serial2.TabIndex = 21;
+            this.textBox_period_PWM1_serial2.TextChanged += new System.EventHandler(this.textBox_period_PWM1_serial2_TextChanged);
+            this.textBox_period_PWM1_serial2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_period_PWM1_serial2_KeyPress);
+            // 
+            // textBox_dutyCycle_PWM1_serial2
+            // 
+            this.textBox_dutyCycle_PWM1_serial2.Location = new System.Drawing.Point(73, 228);
+            this.textBox_dutyCycle_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_dutyCycle_PWM1_serial2.MaxLength = 3;
+            this.textBox_dutyCycle_PWM1_serial2.Name = "textBox_dutyCycle_PWM1_serial2";
+            this.textBox_dutyCycle_PWM1_serial2.Size = new System.Drawing.Size(44, 25);
+            this.textBox_dutyCycle_PWM1_serial2.TabIndex = 20;
+            this.textBox_dutyCycle_PWM1_serial2.TextChanged += new System.EventHandler(this.textBox_dutyCycle_PWM1_serial2_TextChanged);
+            this.textBox_dutyCycle_PWM1_serial2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_dutyCycle_PWM1_serial2_KeyPress);
+            // 
+            // textBox_freq_PWM1_serial2
+            // 
+            this.textBox_freq_PWM1_serial2.Location = new System.Drawing.Point(73, 164);
+            this.textBox_freq_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_freq_PWM1_serial2.MaxLength = 3;
+            this.textBox_freq_PWM1_serial2.Name = "textBox_freq_PWM1_serial2";
+            this.textBox_freq_PWM1_serial2.Size = new System.Drawing.Size(44, 25);
+            this.textBox_freq_PWM1_serial2.TabIndex = 19;
+            this.textBox_freq_PWM1_serial2.TextChanged += new System.EventHandler(this.textBox_freq_PWM1_serial2_TextChanged);
+            this.textBox_freq_PWM1_serial2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM1_serial2_KeyPress);
+            // 
+            // textBox_waitAfter_PWM1_serial1
+            // 
+            this.textBox_waitAfter_PWM1_serial1.Location = new System.Drawing.Point(15, 464);
+            this.textBox_waitAfter_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_waitAfter_PWM1_serial1.MaxLength = 3;
+            this.textBox_waitAfter_PWM1_serial1.Name = "textBox_waitAfter_PWM1_serial1";
+            this.textBox_waitAfter_PWM1_serial1.Size = new System.Drawing.Size(44, 25);
+            this.textBox_waitAfter_PWM1_serial1.TabIndex = 18;
+            this.textBox_waitAfter_PWM1_serial1.TextChanged += new System.EventHandler(this.textBox_waitAfter_PWM1_serial1_TextChanged);
+            this.textBox_waitAfter_PWM1_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitAfter_PWM1_serial1_KeyPress);
+            // 
+            // textBox_waitBetween_PWM1_serial1
+            // 
+            this.textBox_waitBetween_PWM1_serial1.Location = new System.Drawing.Point(15, 400);
+            this.textBox_waitBetween_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_waitBetween_PWM1_serial1.MaxLength = 3;
+            this.textBox_waitBetween_PWM1_serial1.Name = "textBox_waitBetween_PWM1_serial1";
+            this.textBox_waitBetween_PWM1_serial1.Size = new System.Drawing.Size(44, 25);
+            this.textBox_waitBetween_PWM1_serial1.TabIndex = 17;
+            this.textBox_waitBetween_PWM1_serial1.TextChanged += new System.EventHandler(this.textBox_waitBetween_PWM1_serial1_TextChanged);
+            this.textBox_waitBetween_PWM1_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitBetween_PWM1_serial1_KeyPress);
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(8, 69);
+            this.label52.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(63, 15);
+            this.label52.TabIndex = 0;
+            this.label52.Text = "serial1";
+            // 
+            // checkBox_PWM1_serial1
+            // 
+            this.checkBox_PWM1_serial1.AutoSize = true;
+            this.checkBox_PWM1_serial1.Location = new System.Drawing.Point(19, 112);
+            this.checkBox_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox_PWM1_serial1.Name = "checkBox_PWM1_serial1";
+            this.checkBox_PWM1_serial1.Size = new System.Drawing.Size(18, 17);
+            this.checkBox_PWM1_serial1.TabIndex = 16;
+            this.checkBox_PWM1_serial1.UseVisualStyleBackColor = true;
+            this.checkBox_PWM1_serial1.Click += new System.EventHandler(this.checkBox_PWM1_serial1_Click);
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(75, 69);
+            this.label53.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(63, 15);
+            this.label53.TabIndex = 1;
+            this.label53.Text = "serial2";
+            // 
+            // textBox_numberOfCycles_PWM1_serial1
+            // 
+            this.textBox_numberOfCycles_PWM1_serial1.Location = new System.Drawing.Point(15, 345);
+            this.textBox_numberOfCycles_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_numberOfCycles_PWM1_serial1.MaxLength = 3;
+            this.textBox_numberOfCycles_PWM1_serial1.Name = "textBox_numberOfCycles_PWM1_serial1";
+            this.textBox_numberOfCycles_PWM1_serial1.Size = new System.Drawing.Size(44, 25);
+            this.textBox_numberOfCycles_PWM1_serial1.TabIndex = 15;
+            this.textBox_numberOfCycles_PWM1_serial1.TextChanged += new System.EventHandler(this.textBox_numberOfCycles_PWM1_serial1_TextChanged);
+            this.textBox_numberOfCycles_PWM1_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_numberOfCycles_PWM1_serial1_KeyPress);
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(143, 69);
+            this.label54.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(63, 15);
+            this.label54.TabIndex = 2;
+            this.label54.Text = "serial3";
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(212, 69);
+            this.label55.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(63, 15);
+            this.label55.TabIndex = 3;
+            this.label55.Text = "serial4";
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(279, 69);
+            this.label56.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(63, 15);
+            this.label56.TabIndex = 4;
+            this.label56.Text = "serial5";
+            // 
+            // textBox_period_PWM1_serial1
+            // 
+            this.textBox_period_PWM1_serial1.Location = new System.Drawing.Point(15, 286);
+            this.textBox_period_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_period_PWM1_serial1.MaxLength = 3;
+            this.textBox_period_PWM1_serial1.Name = "textBox_period_PWM1_serial1";
+            this.textBox_period_PWM1_serial1.Size = new System.Drawing.Size(44, 25);
+            this.textBox_period_PWM1_serial1.TabIndex = 8;
+            this.textBox_period_PWM1_serial1.TextChanged += new System.EventHandler(this.textBox_period_PWM1_serial1_TextChanged);
+            this.textBox_period_PWM1_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_period_PWM1_serial1_KeyPress);
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(349, 69);
+            this.label57.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(63, 15);
+            this.label57.TabIndex = 5;
+            this.label57.Text = "serial6";
+            // 
+            // textBox_dutyCycle_PWM1_serial1
+            // 
+            this.textBox_dutyCycle_PWM1_serial1.Location = new System.Drawing.Point(15, 228);
+            this.textBox_dutyCycle_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_dutyCycle_PWM1_serial1.MaxLength = 3;
+            this.textBox_dutyCycle_PWM1_serial1.Name = "textBox_dutyCycle_PWM1_serial1";
+            this.textBox_dutyCycle_PWM1_serial1.Size = new System.Drawing.Size(44, 25);
+            this.textBox_dutyCycle_PWM1_serial1.TabIndex = 7;
+            this.textBox_dutyCycle_PWM1_serial1.TextChanged += new System.EventHandler(this.textBox_dutyCycle_PWM1_serial1_TextChanged);
+            this.textBox_dutyCycle_PWM1_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_dutyCycle_PWM1_serial1_KeyPress);
+            // 
+            // textBox_freq_PWM1_serial1
+            // 
+            this.textBox_freq_PWM1_serial1.Location = new System.Drawing.Point(15, 164);
+            this.textBox_freq_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_freq_PWM1_serial1.MaxLength = 3;
+            this.textBox_freq_PWM1_serial1.Name = "textBox_freq_PWM1_serial1";
+            this.textBox_freq_PWM1_serial1.Size = new System.Drawing.Size(44, 25);
+            this.textBox_freq_PWM1_serial1.TabIndex = 6;
+            this.textBox_freq_PWM1_serial1.TextChanged += new System.EventHandler(this.textBox_freq_PWM1_serial1_TextChanged);
+            this.textBox_freq_PWM1_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM1_serial1_KeyPress);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.label20);
+            this.panel5.Controls.Add(this.label19);
+            this.panel5.Controls.Add(this.label18);
+            this.panel5.Controls.Add(this.label17);
+            this.panel5.Controls.Add(this.label16);
+            this.panel5.Controls.Add(this.label8);
+            this.panel5.Controls.Add(this.label58);
+            this.panel5.Controls.Add(this.label59);
+            this.panel5.Controls.Add(this.label60);
+            this.panel5.Controls.Add(this.label61);
+            this.panel5.Controls.Add(this.label62);
+            this.panel5.Controls.Add(this.label63);
+            this.panel5.Controls.Add(this.label64);
+            this.panel5.Location = new System.Drawing.Point(1, 25);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(184, 524);
+            this.panel5.TabIndex = 40;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(15, 485);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(95, 15);
+            this.label20.TabIndex = 12;
+            this.label20.Text = "[0-255 Sec]";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(13, 426);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(95, 15);
+            this.label19.TabIndex = 11;
+            this.label19.Text = "[0-255 Sec]";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(15, 368);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(63, 15);
+            this.label18.TabIndex = 10;
+            this.label18.Text = "[1-250]";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(15, 310);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(95, 15);
+            this.label17.TabIndex = 9;
+            this.label17.Text = "[1-255 Sec]";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(15, 249);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(79, 15);
+            this.label16.TabIndex = 8;
+            this.label16.Text = "[5%-100%]";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(12, 189);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(79, 15);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "[1-255Hz]";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label58.Location = new System.Drawing.Point(12, 111);
+            this.label58.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(70, 15);
+            this.label58.TabIndex = 6;
+            this.label58.Text = "Enable:";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label59.Location = new System.Drawing.Point(15, 464);
+            this.label59.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(106, 15);
+            this.label59.TabIndex = 5;
+            this.label59.Text = "Wait After:";
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label60.Location = new System.Drawing.Point(12, 405);
+            this.label60.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(124, 15);
+            this.label60.TabIndex = 4;
+            this.label60.Text = "Wait Between:";
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label61.Location = new System.Drawing.Point(12, 348);
+            this.label61.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(160, 15);
+            this.label61.TabIndex = 3;
+            this.label61.Text = "Number Of Cycles:";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label62.Location = new System.Drawing.Point(12, 289);
+            this.label62.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(70, 15);
+            this.label62.TabIndex = 2;
+            this.label62.Text = "Period:";
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label63.Location = new System.Drawing.Point(13, 228);
+            this.label63.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(106, 15);
+            this.label63.TabIndex = 1;
+            this.label63.Text = "Duty Cycle:";
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label64.Location = new System.Drawing.Point(12, 166);
+            this.label64.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(97, 15);
+            this.label64.TabIndex = 0;
+            this.label64.Text = "Frequency:";
             // 
             // groupBox7
             // 
@@ -748,7 +1403,7 @@
             this.groupBox7.Controls.Add(this.label13);
             this.groupBox7.Controls.Add(this.textBox_dutyCycle_PWM3_serial1);
             this.groupBox7.Controls.Add(this.textBox_freq_PWM3_serial1);
-            this.groupBox7.Location = new System.Drawing.Point(1043, 174);
+            this.groupBox7.Location = new System.Drawing.Point(1041, 19);
             this.groupBox7.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Padding = new System.Windows.Forms.Padding(4);
@@ -1329,7 +1984,7 @@
             this.groupBox6.Controls.Add(this.label6);
             this.groupBox6.Controls.Add(this.textBox_dutyCycle_PWM2_serial1);
             this.groupBox6.Controls.Add(this.textBox_freq_PWM2_serial1);
-            this.groupBox6.Location = new System.Drawing.Point(612, 174);
+            this.groupBox6.Location = new System.Drawing.Point(610, 19);
             this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
@@ -1860,746 +2515,216 @@
             this.textBox_freq_PWM2_serial1.TextChanged += new System.EventHandler(this.textBox_freq_PWM2_serial1_TextChanged);
             this.textBox_freq_PWM2_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM2_serial1_KeyPress);
             // 
-            // groupBox12
-            // 
-            this.groupBox12.Controls.Add(this.textBox_waitAfter_PWM1_serial6);
-            this.groupBox12.Controls.Add(this.textBox_waitBetween_PWM1_serial6);
-            this.groupBox12.Controls.Add(this.checkBox_PWM1_serial6);
-            this.groupBox12.Controls.Add(this.textBox_numberOfCycles_PWM1_serial6);
-            this.groupBox12.Controls.Add(this.textBox_period_PWM1_serial6);
-            this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial6);
-            this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial6);
-            this.groupBox12.Controls.Add(this.textBox_waitAfter_PWM1_serial5);
-            this.groupBox12.Controls.Add(this.textBox_waitBetween_PWM1_serial5);
-            this.groupBox12.Controls.Add(this.checkBox_PWM1_serial5);
-            this.groupBox12.Controls.Add(this.textBox_numberOfCycles_PWM1_serial5);
-            this.groupBox12.Controls.Add(this.textBox_period_PWM1_serial5);
-            this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial5);
-            this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial5);
-            this.groupBox12.Controls.Add(this.textBox_waitAfter_PWM1_serial4);
-            this.groupBox12.Controls.Add(this.textBox_waitBetween_PWM1_serial4);
-            this.groupBox12.Controls.Add(this.checkBox_PWM1_serial4);
-            this.groupBox12.Controls.Add(this.textBox_numberOfCycles_PWM1_serial4);
-            this.groupBox12.Controls.Add(this.textBox_period_PWM1_serial4);
-            this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial4);
-            this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial4);
-            this.groupBox12.Controls.Add(this.textBox_waitAfter_PWM1_serial3);
-            this.groupBox12.Controls.Add(this.textBox_waitBetween_PWM1_serial3);
-            this.groupBox12.Controls.Add(this.checkBox_PWM1_serial3);
-            this.groupBox12.Controls.Add(this.textBox_numberOfCycles_PWM1_serial3);
-            this.groupBox12.Controls.Add(this.textBox_period_PWM1_serial3);
-            this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial3);
-            this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial3);
-            this.groupBox12.Controls.Add(this.textBox_waitAfter_PWM1_serial2);
-            this.groupBox12.Controls.Add(this.textBox_waitBetween_PWM1_serial2);
-            this.groupBox12.Controls.Add(this.checkBox_PWM1_serial2);
-            this.groupBox12.Controls.Add(this.textBox_numberOfCycles_PWM1_serial2);
-            this.groupBox12.Controls.Add(this.textBox_period_PWM1_serial2);
-            this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial2);
-            this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial2);
-            this.groupBox12.Controls.Add(this.textBox_waitAfter_PWM1_serial1);
-            this.groupBox12.Controls.Add(this.textBox_waitBetween_PWM1_serial1);
-            this.groupBox12.Controls.Add(this.label52);
-            this.groupBox12.Controls.Add(this.checkBox_PWM1_serial1);
-            this.groupBox12.Controls.Add(this.label53);
-            this.groupBox12.Controls.Add(this.textBox_numberOfCycles_PWM1_serial1);
-            this.groupBox12.Controls.Add(this.label54);
-            this.groupBox12.Controls.Add(this.label55);
-            this.groupBox12.Controls.Add(this.label56);
-            this.groupBox12.Controls.Add(this.textBox_period_PWM1_serial1);
-            this.groupBox12.Controls.Add(this.label57);
-            this.groupBox12.Controls.Add(this.textBox_dutyCycle_PWM1_serial1);
-            this.groupBox12.Controls.Add(this.textBox_freq_PWM1_serial1);
-            this.groupBox12.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox12.Location = new System.Drawing.Point(187, 174);
-            this.groupBox12.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox12.Size = new System.Drawing.Size(419, 524);
-            this.groupBox12.TabIndex = 39;
-            this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "PWM1";
-            // 
-            // textBox_waitAfter_PWM1_serial6
-            // 
-            this.textBox_waitAfter_PWM1_serial6.Location = new System.Drawing.Point(348, 464);
-            this.textBox_waitAfter_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_waitAfter_PWM1_serial6.MaxLength = 3;
-            this.textBox_waitAfter_PWM1_serial6.Name = "textBox_waitAfter_PWM1_serial6";
-            this.textBox_waitAfter_PWM1_serial6.Size = new System.Drawing.Size(44, 25);
-            this.textBox_waitAfter_PWM1_serial6.TabIndex = 53;
-            this.textBox_waitAfter_PWM1_serial6.TextChanged += new System.EventHandler(this.textBox_waitAfter_PWM1_serial6_TextChanged);
-            this.textBox_waitAfter_PWM1_serial6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitAfter_PWM1_serial6_KeyPress);
-            // 
-            // textBox_waitBetween_PWM1_serial6
-            // 
-            this.textBox_waitBetween_PWM1_serial6.Location = new System.Drawing.Point(348, 400);
-            this.textBox_waitBetween_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_waitBetween_PWM1_serial6.MaxLength = 3;
-            this.textBox_waitBetween_PWM1_serial6.Name = "textBox_waitBetween_PWM1_serial6";
-            this.textBox_waitBetween_PWM1_serial6.Size = new System.Drawing.Size(44, 25);
-            this.textBox_waitBetween_PWM1_serial6.TabIndex = 52;
-            this.textBox_waitBetween_PWM1_serial6.TextChanged += new System.EventHandler(this.textBox_waitBetween_PWM1_serial6_TextChanged);
-            this.textBox_waitBetween_PWM1_serial6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitBetween_PWM1_serial6_KeyPress);
-            // 
-            // checkBox_PWM1_serial6
-            // 
-            this.checkBox_PWM1_serial6.AutoSize = true;
-            this.checkBox_PWM1_serial6.Location = new System.Drawing.Point(352, 112);
-            this.checkBox_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_PWM1_serial6.Name = "checkBox_PWM1_serial6";
-            this.checkBox_PWM1_serial6.Size = new System.Drawing.Size(18, 17);
-            this.checkBox_PWM1_serial6.TabIndex = 51;
-            this.checkBox_PWM1_serial6.UseVisualStyleBackColor = true;
-            this.checkBox_PWM1_serial6.Click += new System.EventHandler(this.checkBox_PWM1_serial6_Click);
-            // 
-            // textBox_numberOfCycles_PWM1_serial6
-            // 
-            this.textBox_numberOfCycles_PWM1_serial6.Location = new System.Drawing.Point(348, 345);
-            this.textBox_numberOfCycles_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_numberOfCycles_PWM1_serial6.MaxLength = 3;
-            this.textBox_numberOfCycles_PWM1_serial6.Name = "textBox_numberOfCycles_PWM1_serial6";
-            this.textBox_numberOfCycles_PWM1_serial6.Size = new System.Drawing.Size(44, 25);
-            this.textBox_numberOfCycles_PWM1_serial6.TabIndex = 50;
-            this.textBox_numberOfCycles_PWM1_serial6.TextChanged += new System.EventHandler(this.textBox_numberOfCycles_PWM1_serial6_TextChanged);
-            this.textBox_numberOfCycles_PWM1_serial6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_numberOfCycles_PWM1_serial6_KeyPress);
-            // 
-            // textBox_period_PWM1_serial6
-            // 
-            this.textBox_period_PWM1_serial6.Location = new System.Drawing.Point(348, 286);
-            this.textBox_period_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_period_PWM1_serial6.MaxLength = 3;
-            this.textBox_period_PWM1_serial6.Name = "textBox_period_PWM1_serial6";
-            this.textBox_period_PWM1_serial6.Size = new System.Drawing.Size(44, 25);
-            this.textBox_period_PWM1_serial6.TabIndex = 49;
-            this.textBox_period_PWM1_serial6.TextChanged += new System.EventHandler(this.textBox_period_PWM1_serial6_TextChanged);
-            this.textBox_period_PWM1_serial6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_period_PWM1_serial6_KeyPress);
-            // 
-            // textBox_dutyCycle_PWM1_serial6
-            // 
-            this.textBox_dutyCycle_PWM1_serial6.Location = new System.Drawing.Point(348, 228);
-            this.textBox_dutyCycle_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_dutyCycle_PWM1_serial6.MaxLength = 3;
-            this.textBox_dutyCycle_PWM1_serial6.Name = "textBox_dutyCycle_PWM1_serial6";
-            this.textBox_dutyCycle_PWM1_serial6.Size = new System.Drawing.Size(44, 25);
-            this.textBox_dutyCycle_PWM1_serial6.TabIndex = 48;
-            this.textBox_dutyCycle_PWM1_serial6.TextChanged += new System.EventHandler(this.textBox_dutyCycle_PWM1_serial6_TextChanged);
-            this.textBox_dutyCycle_PWM1_serial6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_dutyCycle_PWM1_serial6_KeyPress);
-            // 
-            // textBox_freq_PWM1_serial6
-            // 
-            this.textBox_freq_PWM1_serial6.Location = new System.Drawing.Point(348, 164);
-            this.textBox_freq_PWM1_serial6.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_freq_PWM1_serial6.MaxLength = 3;
-            this.textBox_freq_PWM1_serial6.Name = "textBox_freq_PWM1_serial6";
-            this.textBox_freq_PWM1_serial6.Size = new System.Drawing.Size(44, 25);
-            this.textBox_freq_PWM1_serial6.TabIndex = 47;
-            this.textBox_freq_PWM1_serial6.TextChanged += new System.EventHandler(this.textBox_freq_PWM1_serial6_TextChanged);
-            this.textBox_freq_PWM1_serial6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM1_serial6_KeyPress);
-            // 
-            // textBox_waitAfter_PWM1_serial5
-            // 
-            this.textBox_waitAfter_PWM1_serial5.Location = new System.Drawing.Point(277, 464);
-            this.textBox_waitAfter_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_waitAfter_PWM1_serial5.MaxLength = 3;
-            this.textBox_waitAfter_PWM1_serial5.Name = "textBox_waitAfter_PWM1_serial5";
-            this.textBox_waitAfter_PWM1_serial5.Size = new System.Drawing.Size(44, 25);
-            this.textBox_waitAfter_PWM1_serial5.TabIndex = 46;
-            this.textBox_waitAfter_PWM1_serial5.TextChanged += new System.EventHandler(this.textBox_waitAfter_PWM1_serial5_TextChanged);
-            this.textBox_waitAfter_PWM1_serial5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitAfter_PWM1_serial5_KeyPress);
-            // 
-            // textBox_waitBetween_PWM1_serial5
-            // 
-            this.textBox_waitBetween_PWM1_serial5.Location = new System.Drawing.Point(277, 400);
-            this.textBox_waitBetween_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_waitBetween_PWM1_serial5.MaxLength = 3;
-            this.textBox_waitBetween_PWM1_serial5.Name = "textBox_waitBetween_PWM1_serial5";
-            this.textBox_waitBetween_PWM1_serial5.Size = new System.Drawing.Size(44, 25);
-            this.textBox_waitBetween_PWM1_serial5.TabIndex = 45;
-            this.textBox_waitBetween_PWM1_serial5.TextChanged += new System.EventHandler(this.textBox_waitBetween_PWM1_serial5_TextChanged);
-            this.textBox_waitBetween_PWM1_serial5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitBetween_PWM1_serial5_KeyPress);
-            // 
-            // checkBox_PWM1_serial5
-            // 
-            this.checkBox_PWM1_serial5.AutoSize = true;
-            this.checkBox_PWM1_serial5.Location = new System.Drawing.Point(281, 112);
-            this.checkBox_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_PWM1_serial5.Name = "checkBox_PWM1_serial5";
-            this.checkBox_PWM1_serial5.Size = new System.Drawing.Size(18, 17);
-            this.checkBox_PWM1_serial5.TabIndex = 44;
-            this.checkBox_PWM1_serial5.UseVisualStyleBackColor = true;
-            this.checkBox_PWM1_serial5.Click += new System.EventHandler(this.checkBox_PWM1_serial5_Click);
-            // 
-            // textBox_numberOfCycles_PWM1_serial5
-            // 
-            this.textBox_numberOfCycles_PWM1_serial5.Location = new System.Drawing.Point(277, 345);
-            this.textBox_numberOfCycles_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_numberOfCycles_PWM1_serial5.MaxLength = 3;
-            this.textBox_numberOfCycles_PWM1_serial5.Name = "textBox_numberOfCycles_PWM1_serial5";
-            this.textBox_numberOfCycles_PWM1_serial5.Size = new System.Drawing.Size(44, 25);
-            this.textBox_numberOfCycles_PWM1_serial5.TabIndex = 43;
-            this.textBox_numberOfCycles_PWM1_serial5.TextChanged += new System.EventHandler(this.textBox_numberOfCycles_PWM1_serial5_TextChanged);
-            this.textBox_numberOfCycles_PWM1_serial5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_numberOfCycles_PWM1_serial5_KeyPress);
-            // 
-            // textBox_period_PWM1_serial5
-            // 
-            this.textBox_period_PWM1_serial5.Location = new System.Drawing.Point(277, 286);
-            this.textBox_period_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_period_PWM1_serial5.MaxLength = 3;
-            this.textBox_period_PWM1_serial5.Name = "textBox_period_PWM1_serial5";
-            this.textBox_period_PWM1_serial5.Size = new System.Drawing.Size(44, 25);
-            this.textBox_period_PWM1_serial5.TabIndex = 42;
-            this.textBox_period_PWM1_serial5.TextChanged += new System.EventHandler(this.textBox_period_PWM1_serial5_TextChanged);
-            this.textBox_period_PWM1_serial5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_period_PWM1_serial5_KeyPress);
-            // 
-            // textBox_dutyCycle_PWM1_serial5
-            // 
-            this.textBox_dutyCycle_PWM1_serial5.Location = new System.Drawing.Point(277, 228);
-            this.textBox_dutyCycle_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_dutyCycle_PWM1_serial5.MaxLength = 3;
-            this.textBox_dutyCycle_PWM1_serial5.Name = "textBox_dutyCycle_PWM1_serial5";
-            this.textBox_dutyCycle_PWM1_serial5.Size = new System.Drawing.Size(44, 25);
-            this.textBox_dutyCycle_PWM1_serial5.TabIndex = 41;
-            this.textBox_dutyCycle_PWM1_serial5.TextChanged += new System.EventHandler(this.textBox_dutyCycle_PWM1_serial5_TextChanged);
-            this.textBox_dutyCycle_PWM1_serial5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_dutyCycle_PWM1_serial5_KeyPress);
-            // 
-            // textBox_freq_PWM1_serial5
-            // 
-            this.textBox_freq_PWM1_serial5.Location = new System.Drawing.Point(277, 164);
-            this.textBox_freq_PWM1_serial5.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_freq_PWM1_serial5.MaxLength = 3;
-            this.textBox_freq_PWM1_serial5.Name = "textBox_freq_PWM1_serial5";
-            this.textBox_freq_PWM1_serial5.Size = new System.Drawing.Size(44, 25);
-            this.textBox_freq_PWM1_serial5.TabIndex = 40;
-            this.textBox_freq_PWM1_serial5.TextChanged += new System.EventHandler(this.textBox_freq_PWM1_serial5_TextChanged);
-            this.textBox_freq_PWM1_serial5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM1_serial5_KeyPress);
-            // 
-            // textBox_waitAfter_PWM1_serial4
-            // 
-            this.textBox_waitAfter_PWM1_serial4.Location = new System.Drawing.Point(211, 464);
-            this.textBox_waitAfter_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_waitAfter_PWM1_serial4.MaxLength = 3;
-            this.textBox_waitAfter_PWM1_serial4.Name = "textBox_waitAfter_PWM1_serial4";
-            this.textBox_waitAfter_PWM1_serial4.Size = new System.Drawing.Size(44, 25);
-            this.textBox_waitAfter_PWM1_serial4.TabIndex = 39;
-            this.textBox_waitAfter_PWM1_serial4.TextChanged += new System.EventHandler(this.textBox_waitAfter_PWM1_serial4_TextChanged);
-            this.textBox_waitAfter_PWM1_serial4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitAfter_PWM1_serial4_KeyPress);
-            // 
-            // textBox_waitBetween_PWM1_serial4
-            // 
-            this.textBox_waitBetween_PWM1_serial4.Location = new System.Drawing.Point(211, 400);
-            this.textBox_waitBetween_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_waitBetween_PWM1_serial4.MaxLength = 3;
-            this.textBox_waitBetween_PWM1_serial4.Name = "textBox_waitBetween_PWM1_serial4";
-            this.textBox_waitBetween_PWM1_serial4.Size = new System.Drawing.Size(44, 25);
-            this.textBox_waitBetween_PWM1_serial4.TabIndex = 38;
-            this.textBox_waitBetween_PWM1_serial4.TextChanged += new System.EventHandler(this.textBox_waitBetween_PWM1_serial4_TextChanged);
-            this.textBox_waitBetween_PWM1_serial4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitBetween_PWM1_serial4_KeyPress);
-            // 
-            // checkBox_PWM1_serial4
-            // 
-            this.checkBox_PWM1_serial4.AutoSize = true;
-            this.checkBox_PWM1_serial4.Location = new System.Drawing.Point(215, 112);
-            this.checkBox_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_PWM1_serial4.Name = "checkBox_PWM1_serial4";
-            this.checkBox_PWM1_serial4.Size = new System.Drawing.Size(18, 17);
-            this.checkBox_PWM1_serial4.TabIndex = 37;
-            this.checkBox_PWM1_serial4.UseVisualStyleBackColor = true;
-            this.checkBox_PWM1_serial4.Click += new System.EventHandler(this.checkBox_PWM1_serial4_Click);
-            // 
-            // textBox_numberOfCycles_PWM1_serial4
-            // 
-            this.textBox_numberOfCycles_PWM1_serial4.Location = new System.Drawing.Point(211, 345);
-            this.textBox_numberOfCycles_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_numberOfCycles_PWM1_serial4.MaxLength = 3;
-            this.textBox_numberOfCycles_PWM1_serial4.Name = "textBox_numberOfCycles_PWM1_serial4";
-            this.textBox_numberOfCycles_PWM1_serial4.Size = new System.Drawing.Size(44, 25);
-            this.textBox_numberOfCycles_PWM1_serial4.TabIndex = 36;
-            this.textBox_numberOfCycles_PWM1_serial4.TextChanged += new System.EventHandler(this.textBox_numberOfCycles_PWM1_serial4_TextChanged);
-            this.textBox_numberOfCycles_PWM1_serial4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_numberOfCycles_PWM1_serial4_KeyPress);
-            // 
-            // textBox_period_PWM1_serial4
-            // 
-            this.textBox_period_PWM1_serial4.Location = new System.Drawing.Point(211, 286);
-            this.textBox_period_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_period_PWM1_serial4.MaxLength = 3;
-            this.textBox_period_PWM1_serial4.Name = "textBox_period_PWM1_serial4";
-            this.textBox_period_PWM1_serial4.Size = new System.Drawing.Size(44, 25);
-            this.textBox_period_PWM1_serial4.TabIndex = 35;
-            this.textBox_period_PWM1_serial4.TextChanged += new System.EventHandler(this.textBox_period_PWM1_serial4_TextChanged);
-            this.textBox_period_PWM1_serial4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_period_PWM1_serial4_KeyPress);
-            // 
-            // textBox_dutyCycle_PWM1_serial4
-            // 
-            this.textBox_dutyCycle_PWM1_serial4.Location = new System.Drawing.Point(211, 228);
-            this.textBox_dutyCycle_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_dutyCycle_PWM1_serial4.MaxLength = 3;
-            this.textBox_dutyCycle_PWM1_serial4.Name = "textBox_dutyCycle_PWM1_serial4";
-            this.textBox_dutyCycle_PWM1_serial4.Size = new System.Drawing.Size(44, 25);
-            this.textBox_dutyCycle_PWM1_serial4.TabIndex = 34;
-            this.textBox_dutyCycle_PWM1_serial4.TextChanged += new System.EventHandler(this.textBox_dutyCycle_PWM1_serial4_TextChanged);
-            this.textBox_dutyCycle_PWM1_serial4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_dutyCycle_PWM1_serial4_KeyPress);
-            // 
-            // textBox_freq_PWM1_serial4
-            // 
-            this.textBox_freq_PWM1_serial4.Location = new System.Drawing.Point(211, 164);
-            this.textBox_freq_PWM1_serial4.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_freq_PWM1_serial4.MaxLength = 3;
-            this.textBox_freq_PWM1_serial4.Name = "textBox_freq_PWM1_serial4";
-            this.textBox_freq_PWM1_serial4.Size = new System.Drawing.Size(44, 25);
-            this.textBox_freq_PWM1_serial4.TabIndex = 33;
-            this.textBox_freq_PWM1_serial4.TextChanged += new System.EventHandler(this.textBox_freq_PWM1_serial4_TextChanged);
-            this.textBox_freq_PWM1_serial4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM1_serial4_KeyPress);
-            // 
-            // textBox_waitAfter_PWM1_serial3
-            // 
-            this.textBox_waitAfter_PWM1_serial3.Location = new System.Drawing.Point(141, 464);
-            this.textBox_waitAfter_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_waitAfter_PWM1_serial3.MaxLength = 3;
-            this.textBox_waitAfter_PWM1_serial3.Name = "textBox_waitAfter_PWM1_serial3";
-            this.textBox_waitAfter_PWM1_serial3.Size = new System.Drawing.Size(44, 25);
-            this.textBox_waitAfter_PWM1_serial3.TabIndex = 32;
-            this.textBox_waitAfter_PWM1_serial3.TextChanged += new System.EventHandler(this.textBox_waitAfter_PWM1_serial3_TextChanged);
-            this.textBox_waitAfter_PWM1_serial3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitAfter_PWM1_serial3_KeyPress);
-            // 
-            // textBox_waitBetween_PWM1_serial3
-            // 
-            this.textBox_waitBetween_PWM1_serial3.Location = new System.Drawing.Point(141, 400);
-            this.textBox_waitBetween_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_waitBetween_PWM1_serial3.MaxLength = 3;
-            this.textBox_waitBetween_PWM1_serial3.Name = "textBox_waitBetween_PWM1_serial3";
-            this.textBox_waitBetween_PWM1_serial3.Size = new System.Drawing.Size(44, 25);
-            this.textBox_waitBetween_PWM1_serial3.TabIndex = 31;
-            this.textBox_waitBetween_PWM1_serial3.TextChanged += new System.EventHandler(this.textBox_waitBetween_PWM1_serial3_TextChanged);
-            this.textBox_waitBetween_PWM1_serial3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitBetween_PWM1_serial3_KeyPress);
-            // 
-            // checkBox_PWM1_serial3
-            // 
-            this.checkBox_PWM1_serial3.AutoSize = true;
-            this.checkBox_PWM1_serial3.Location = new System.Drawing.Point(145, 112);
-            this.checkBox_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_PWM1_serial3.Name = "checkBox_PWM1_serial3";
-            this.checkBox_PWM1_serial3.Size = new System.Drawing.Size(18, 17);
-            this.checkBox_PWM1_serial3.TabIndex = 30;
-            this.checkBox_PWM1_serial3.UseVisualStyleBackColor = true;
-            this.checkBox_PWM1_serial3.Click += new System.EventHandler(this.checkBox_PWM1_serial3_Click);
-            // 
-            // textBox_numberOfCycles_PWM1_serial3
-            // 
-            this.textBox_numberOfCycles_PWM1_serial3.Location = new System.Drawing.Point(141, 345);
-            this.textBox_numberOfCycles_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_numberOfCycles_PWM1_serial3.MaxLength = 3;
-            this.textBox_numberOfCycles_PWM1_serial3.Name = "textBox_numberOfCycles_PWM1_serial3";
-            this.textBox_numberOfCycles_PWM1_serial3.Size = new System.Drawing.Size(44, 25);
-            this.textBox_numberOfCycles_PWM1_serial3.TabIndex = 29;
-            this.textBox_numberOfCycles_PWM1_serial3.TextChanged += new System.EventHandler(this.textBox_numberOfCycles_PWM1_serial3_TextChanged);
-            this.textBox_numberOfCycles_PWM1_serial3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_numberOfCycles_PWM1_serial3_KeyPress);
-            // 
-            // textBox_period_PWM1_serial3
-            // 
-            this.textBox_period_PWM1_serial3.Location = new System.Drawing.Point(141, 286);
-            this.textBox_period_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_period_PWM1_serial3.MaxLength = 3;
-            this.textBox_period_PWM1_serial3.Name = "textBox_period_PWM1_serial3";
-            this.textBox_period_PWM1_serial3.Size = new System.Drawing.Size(44, 25);
-            this.textBox_period_PWM1_serial3.TabIndex = 28;
-            this.textBox_period_PWM1_serial3.TextChanged += new System.EventHandler(this.textBox_period_PWM1_serial3_TextChanged);
-            this.textBox_period_PWM1_serial3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_period_PWM1_serial3_KeyPress);
-            // 
-            // textBox_dutyCycle_PWM1_serial3
-            // 
-            this.textBox_dutyCycle_PWM1_serial3.Location = new System.Drawing.Point(141, 228);
-            this.textBox_dutyCycle_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_dutyCycle_PWM1_serial3.MaxLength = 3;
-            this.textBox_dutyCycle_PWM1_serial3.Name = "textBox_dutyCycle_PWM1_serial3";
-            this.textBox_dutyCycle_PWM1_serial3.Size = new System.Drawing.Size(44, 25);
-            this.textBox_dutyCycle_PWM1_serial3.TabIndex = 27;
-            this.textBox_dutyCycle_PWM1_serial3.TextChanged += new System.EventHandler(this.textBox_dutyCycle_PWM1_serial3_TextChanged);
-            this.textBox_dutyCycle_PWM1_serial3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_dutyCycle_PWM1_serial3_KeyPress);
-            // 
-            // textBox_freq_PWM1_serial3
-            // 
-            this.textBox_freq_PWM1_serial3.Location = new System.Drawing.Point(141, 164);
-            this.textBox_freq_PWM1_serial3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_freq_PWM1_serial3.MaxLength = 3;
-            this.textBox_freq_PWM1_serial3.Name = "textBox_freq_PWM1_serial3";
-            this.textBox_freq_PWM1_serial3.Size = new System.Drawing.Size(44, 25);
-            this.textBox_freq_PWM1_serial3.TabIndex = 26;
-            this.textBox_freq_PWM1_serial3.TextChanged += new System.EventHandler(this.textBox_freq_PWM1_serial3_TextChanged);
-            this.textBox_freq_PWM1_serial3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM1_serial3_KeyPress);
-            // 
-            // textBox_waitAfter_PWM1_serial2
-            // 
-            this.textBox_waitAfter_PWM1_serial2.Location = new System.Drawing.Point(73, 464);
-            this.textBox_waitAfter_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_waitAfter_PWM1_serial2.MaxLength = 3;
-            this.textBox_waitAfter_PWM1_serial2.Name = "textBox_waitAfter_PWM1_serial2";
-            this.textBox_waitAfter_PWM1_serial2.Size = new System.Drawing.Size(44, 25);
-            this.textBox_waitAfter_PWM1_serial2.TabIndex = 25;
-            this.textBox_waitAfter_PWM1_serial2.TextChanged += new System.EventHandler(this.textBox_waitAfter_PWM1_serial2_TextChanged);
-            this.textBox_waitAfter_PWM1_serial2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitAfter_PWM1_serial2_KeyPress);
-            // 
-            // textBox_waitBetween_PWM1_serial2
-            // 
-            this.textBox_waitBetween_PWM1_serial2.Location = new System.Drawing.Point(73, 400);
-            this.textBox_waitBetween_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_waitBetween_PWM1_serial2.MaxLength = 3;
-            this.textBox_waitBetween_PWM1_serial2.Name = "textBox_waitBetween_PWM1_serial2";
-            this.textBox_waitBetween_PWM1_serial2.Size = new System.Drawing.Size(44, 25);
-            this.textBox_waitBetween_PWM1_serial2.TabIndex = 24;
-            this.textBox_waitBetween_PWM1_serial2.TextChanged += new System.EventHandler(this.textBox_waitBetween_PWM1_serial2_TextChanged);
-            this.textBox_waitBetween_PWM1_serial2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitBetween_PWM1_serial2_KeyPress);
-            // 
-            // checkBox_PWM1_serial2
-            // 
-            this.checkBox_PWM1_serial2.AutoSize = true;
-            this.checkBox_PWM1_serial2.Location = new System.Drawing.Point(77, 112);
-            this.checkBox_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_PWM1_serial2.Name = "checkBox_PWM1_serial2";
-            this.checkBox_PWM1_serial2.Size = new System.Drawing.Size(18, 17);
-            this.checkBox_PWM1_serial2.TabIndex = 23;
-            this.checkBox_PWM1_serial2.UseVisualStyleBackColor = true;
-            this.checkBox_PWM1_serial2.Click += new System.EventHandler(this.checkBox_PWM1_serial2_Click);
-            // 
-            // textBox_numberOfCycles_PWM1_serial2
-            // 
-            this.textBox_numberOfCycles_PWM1_serial2.Location = new System.Drawing.Point(73, 345);
-            this.textBox_numberOfCycles_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_numberOfCycles_PWM1_serial2.MaxLength = 3;
-            this.textBox_numberOfCycles_PWM1_serial2.Name = "textBox_numberOfCycles_PWM1_serial2";
-            this.textBox_numberOfCycles_PWM1_serial2.Size = new System.Drawing.Size(44, 25);
-            this.textBox_numberOfCycles_PWM1_serial2.TabIndex = 22;
-            this.textBox_numberOfCycles_PWM1_serial2.TextChanged += new System.EventHandler(this.textBox_numberOfCycles_PWM1_serial2_TextChanged);
-            this.textBox_numberOfCycles_PWM1_serial2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_numberOfCycles_PWM1_serial2_KeyPress);
-            // 
-            // textBox_period_PWM1_serial2
-            // 
-            this.textBox_period_PWM1_serial2.Location = new System.Drawing.Point(73, 286);
-            this.textBox_period_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_period_PWM1_serial2.MaxLength = 3;
-            this.textBox_period_PWM1_serial2.Name = "textBox_period_PWM1_serial2";
-            this.textBox_period_PWM1_serial2.Size = new System.Drawing.Size(44, 25);
-            this.textBox_period_PWM1_serial2.TabIndex = 21;
-            this.textBox_period_PWM1_serial2.TextChanged += new System.EventHandler(this.textBox_period_PWM1_serial2_TextChanged);
-            this.textBox_period_PWM1_serial2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_period_PWM1_serial2_KeyPress);
-            // 
-            // textBox_dutyCycle_PWM1_serial2
-            // 
-            this.textBox_dutyCycle_PWM1_serial2.Location = new System.Drawing.Point(73, 228);
-            this.textBox_dutyCycle_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_dutyCycle_PWM1_serial2.MaxLength = 3;
-            this.textBox_dutyCycle_PWM1_serial2.Name = "textBox_dutyCycle_PWM1_serial2";
-            this.textBox_dutyCycle_PWM1_serial2.Size = new System.Drawing.Size(44, 25);
-            this.textBox_dutyCycle_PWM1_serial2.TabIndex = 20;
-            this.textBox_dutyCycle_PWM1_serial2.TextChanged += new System.EventHandler(this.textBox_dutyCycle_PWM1_serial2_TextChanged);
-            this.textBox_dutyCycle_PWM1_serial2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_dutyCycle_PWM1_serial2_KeyPress);
-            // 
-            // textBox_freq_PWM1_serial2
-            // 
-            this.textBox_freq_PWM1_serial2.Location = new System.Drawing.Point(73, 164);
-            this.textBox_freq_PWM1_serial2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_freq_PWM1_serial2.MaxLength = 3;
-            this.textBox_freq_PWM1_serial2.Name = "textBox_freq_PWM1_serial2";
-            this.textBox_freq_PWM1_serial2.Size = new System.Drawing.Size(44, 25);
-            this.textBox_freq_PWM1_serial2.TabIndex = 19;
-            this.textBox_freq_PWM1_serial2.TextChanged += new System.EventHandler(this.textBox_freq_PWM1_serial2_TextChanged);
-            this.textBox_freq_PWM1_serial2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM1_serial2_KeyPress);
-            // 
-            // textBox_waitAfter_PWM1_serial1
-            // 
-            this.textBox_waitAfter_PWM1_serial1.Location = new System.Drawing.Point(15, 464);
-            this.textBox_waitAfter_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_waitAfter_PWM1_serial1.MaxLength = 3;
-            this.textBox_waitAfter_PWM1_serial1.Name = "textBox_waitAfter_PWM1_serial1";
-            this.textBox_waitAfter_PWM1_serial1.Size = new System.Drawing.Size(44, 25);
-            this.textBox_waitAfter_PWM1_serial1.TabIndex = 18;
-            this.textBox_waitAfter_PWM1_serial1.TextChanged += new System.EventHandler(this.textBox_waitAfter_PWM1_serial1_TextChanged);
-            this.textBox_waitAfter_PWM1_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitAfter_PWM1_serial1_KeyPress);
-            // 
-            // textBox_waitBetween_PWM1_serial1
-            // 
-            this.textBox_waitBetween_PWM1_serial1.Location = new System.Drawing.Point(15, 400);
-            this.textBox_waitBetween_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_waitBetween_PWM1_serial1.MaxLength = 3;
-            this.textBox_waitBetween_PWM1_serial1.Name = "textBox_waitBetween_PWM1_serial1";
-            this.textBox_waitBetween_PWM1_serial1.Size = new System.Drawing.Size(44, 25);
-            this.textBox_waitBetween_PWM1_serial1.TabIndex = 17;
-            this.textBox_waitBetween_PWM1_serial1.TextChanged += new System.EventHandler(this.textBox_waitBetween_PWM1_serial1_TextChanged);
-            this.textBox_waitBetween_PWM1_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_waitBetween_PWM1_serial1_KeyPress);
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(8, 69);
-            this.label52.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(63, 15);
-            this.label52.TabIndex = 0;
-            this.label52.Text = "serial1";
-            // 
-            // checkBox_PWM1_serial1
-            // 
-            this.checkBox_PWM1_serial1.AutoSize = true;
-            this.checkBox_PWM1_serial1.Location = new System.Drawing.Point(19, 112);
-            this.checkBox_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_PWM1_serial1.Name = "checkBox_PWM1_serial1";
-            this.checkBox_PWM1_serial1.Size = new System.Drawing.Size(18, 17);
-            this.checkBox_PWM1_serial1.TabIndex = 16;
-            this.checkBox_PWM1_serial1.UseVisualStyleBackColor = true;
-            this.checkBox_PWM1_serial1.Click += new System.EventHandler(this.checkBox_PWM1_serial1_Click);
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(75, 69);
-            this.label53.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(63, 15);
-            this.label53.TabIndex = 1;
-            this.label53.Text = "serial2";
-            // 
-            // textBox_numberOfCycles_PWM1_serial1
-            // 
-            this.textBox_numberOfCycles_PWM1_serial1.Location = new System.Drawing.Point(15, 345);
-            this.textBox_numberOfCycles_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_numberOfCycles_PWM1_serial1.MaxLength = 3;
-            this.textBox_numberOfCycles_PWM1_serial1.Name = "textBox_numberOfCycles_PWM1_serial1";
-            this.textBox_numberOfCycles_PWM1_serial1.Size = new System.Drawing.Size(44, 25);
-            this.textBox_numberOfCycles_PWM1_serial1.TabIndex = 15;
-            this.textBox_numberOfCycles_PWM1_serial1.TextChanged += new System.EventHandler(this.textBox_numberOfCycles_PWM1_serial1_TextChanged);
-            this.textBox_numberOfCycles_PWM1_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_numberOfCycles_PWM1_serial1_KeyPress);
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(143, 69);
-            this.label54.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(63, 15);
-            this.label54.TabIndex = 2;
-            this.label54.Text = "serial3";
-            // 
-            // label55
-            // 
-            this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(212, 69);
-            this.label55.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(63, 15);
-            this.label55.TabIndex = 3;
-            this.label55.Text = "serial4";
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(279, 69);
-            this.label56.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(63, 15);
-            this.label56.TabIndex = 4;
-            this.label56.Text = "serial5";
-            // 
-            // textBox_period_PWM1_serial1
-            // 
-            this.textBox_period_PWM1_serial1.Location = new System.Drawing.Point(15, 286);
-            this.textBox_period_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_period_PWM1_serial1.MaxLength = 3;
-            this.textBox_period_PWM1_serial1.Name = "textBox_period_PWM1_serial1";
-            this.textBox_period_PWM1_serial1.Size = new System.Drawing.Size(44, 25);
-            this.textBox_period_PWM1_serial1.TabIndex = 8;
-            this.textBox_period_PWM1_serial1.TextChanged += new System.EventHandler(this.textBox_period_PWM1_serial1_TextChanged);
-            this.textBox_period_PWM1_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_period_PWM1_serial1_KeyPress);
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(349, 69);
-            this.label57.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(63, 15);
-            this.label57.TabIndex = 5;
-            this.label57.Text = "serial6";
-            // 
-            // textBox_dutyCycle_PWM1_serial1
-            // 
-            this.textBox_dutyCycle_PWM1_serial1.Location = new System.Drawing.Point(15, 228);
-            this.textBox_dutyCycle_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_dutyCycle_PWM1_serial1.MaxLength = 3;
-            this.textBox_dutyCycle_PWM1_serial1.Name = "textBox_dutyCycle_PWM1_serial1";
-            this.textBox_dutyCycle_PWM1_serial1.Size = new System.Drawing.Size(44, 25);
-            this.textBox_dutyCycle_PWM1_serial1.TabIndex = 7;
-            this.textBox_dutyCycle_PWM1_serial1.TextChanged += new System.EventHandler(this.textBox_dutyCycle_PWM1_serial1_TextChanged);
-            this.textBox_dutyCycle_PWM1_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_dutyCycle_PWM1_serial1_KeyPress);
-            // 
-            // textBox_freq_PWM1_serial1
-            // 
-            this.textBox_freq_PWM1_serial1.Location = new System.Drawing.Point(15, 164);
-            this.textBox_freq_PWM1_serial1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_freq_PWM1_serial1.MaxLength = 3;
-            this.textBox_freq_PWM1_serial1.Name = "textBox_freq_PWM1_serial1";
-            this.textBox_freq_PWM1_serial1.Size = new System.Drawing.Size(44, 25);
-            this.textBox_freq_PWM1_serial1.TabIndex = 6;
-            this.textBox_freq_PWM1_serial1.TextChanged += new System.EventHandler(this.textBox_freq_PWM1_serial1_TextChanged);
-            this.textBox_freq_PWM1_serial1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_freq_PWM1_serial1_KeyPress);
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.label20);
-            this.panel5.Controls.Add(this.label19);
-            this.panel5.Controls.Add(this.label18);
-            this.panel5.Controls.Add(this.label17);
-            this.panel5.Controls.Add(this.label16);
-            this.panel5.Controls.Add(this.label8);
-            this.panel5.Controls.Add(this.label58);
-            this.panel5.Controls.Add(this.label59);
-            this.panel5.Controls.Add(this.label60);
-            this.panel5.Controls.Add(this.label61);
-            this.panel5.Controls.Add(this.label62);
-            this.panel5.Controls.Add(this.label63);
-            this.panel5.Controls.Add(this.label64);
-            this.panel5.Location = new System.Drawing.Point(3, 180);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(184, 524);
-            this.panel5.TabIndex = 40;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(15, 485);
-            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(95, 15);
-            this.label20.TabIndex = 12;
-            this.label20.Text = "[0-255 Sec]";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(13, 426);
-            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(95, 15);
-            this.label19.TabIndex = 11;
-            this.label19.Text = "[0-255 Sec]";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(15, 368);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(63, 15);
-            this.label18.TabIndex = 10;
-            this.label18.Text = "[1-250]";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(15, 310);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(95, 15);
-            this.label17.TabIndex = 9;
-            this.label17.Text = "[1-255 Sec]";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(15, 249);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(79, 15);
-            this.label16.TabIndex = 8;
-            this.label16.Text = "[5%-100%]";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(12, 189);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(79, 15);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "[1-255Hz]";
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label58.Location = new System.Drawing.Point(12, 111);
-            this.label58.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(70, 15);
-            this.label58.TabIndex = 6;
-            this.label58.Text = "Enable:";
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label59.Location = new System.Drawing.Point(15, 464);
-            this.label59.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(106, 15);
-            this.label59.TabIndex = 5;
-            this.label59.Text = "Wait After:";
-            // 
-            // label60
-            // 
-            this.label60.AutoSize = true;
-            this.label60.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label60.Location = new System.Drawing.Point(12, 405);
-            this.label60.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(124, 15);
-            this.label60.TabIndex = 4;
-            this.label60.Text = "Wait Between:";
-            // 
-            // label61
-            // 
-            this.label61.AutoSize = true;
-            this.label61.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label61.Location = new System.Drawing.Point(12, 348);
-            this.label61.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(160, 15);
-            this.label61.TabIndex = 3;
-            this.label61.Text = "Number Of Cycles:";
-            // 
-            // label62
-            // 
-            this.label62.AutoSize = true;
-            this.label62.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label62.Location = new System.Drawing.Point(12, 289);
-            this.label62.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(70, 15);
-            this.label62.TabIndex = 2;
-            this.label62.Text = "Period:";
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label63.Location = new System.Drawing.Point(13, 228);
-            this.label63.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(106, 15);
-            this.label63.TabIndex = 1;
-            this.label63.Text = "Duty Cycle:";
-            // 
-            // label64
-            // 
-            this.label64.AutoSize = true;
-            this.label64.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label64.Location = new System.Drawing.Point(12, 166);
-            this.label64.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(97, 15);
-            this.label64.TabIndex = 0;
-            this.label64.Text = "Frequency:";
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.panel3);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1589, 622);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Chart";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.chart1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1583, 616);
+            this.panel3.TabIndex = 0;
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(43, 18);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(1162, 278);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.label25);
+            this.groupBox10.Controls.Add(this.label_HW);
+            this.groupBox10.Controls.Add(this.button_save);
+            this.groupBox10.Controls.Add(this.button_start);
+            this.groupBox10.Location = new System.Drawing.Point(4, 172);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(1262, 63);
+            this.groupBox10.TabIndex = 59;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "GetSensorData";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(402, 31);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(127, 15);
+            this.label25.TabIndex = 3;
+            this.label25.Text = "Receiving Data:";
+            // 
+            // label_HW
+            // 
+            this.label_HW.AutoSize = true;
+            this.label_HW.Location = new System.Drawing.Point(549, 31);
+            this.label_HW.Name = "label_HW";
+            this.label_HW.Size = new System.Drawing.Size(15, 15);
+            this.label_HW.TabIndex = 2;
+            this.label_HW.Text = "0";
+            // 
+            // button_save
+            // 
+            this.button_save.Location = new System.Drawing.Point(183, 22);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(140, 33);
+            this.button_save.TabIndex = 1;
+            this.button_save.Text = "Save";
+            this.button_save.UseVisualStyleBackColor = true;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click_1);
+            // 
+            // button_start
+            // 
+            this.button_start.Location = new System.Drawing.Point(10, 22);
+            this.button_start.Name = "button_start";
+            this.button_start.Size = new System.Drawing.Size(140, 33);
+            this.button_start.TabIndex = 0;
+            this.button_start.Text = "Start";
+            this.button_start.UseVisualStyleBackColor = true;
+            this.button_start.Click += new System.EventHandler(this.button_start_Click);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.checkBox_no_need_log);
+            this.groupBox9.Controls.Add(this.button_save_rtc_data);
+            this.groupBox9.Controls.Add(this.button_get_RTC_info);
+            this.groupBox9.Controls.Add(this.progressBar1);
+            this.groupBox9.Location = new System.Drawing.Point(267, 69);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(312, 102);
+            this.groupBox9.TabIndex = 58;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Get RTC Info";
+            // 
+            // checkBox_no_need_log
+            // 
+            this.checkBox_no_need_log.AutoSize = true;
+            this.checkBox_no_need_log.Location = new System.Drawing.Point(173, 62);
+            this.checkBox_no_need_log.Name = "checkBox_no_need_log";
+            this.checkBox_no_need_log.Size = new System.Drawing.Size(133, 19);
+            this.checkBox_no_need_log.TabIndex = 3;
+            this.checkBox_no_need_log.Text = "No detail log";
+            this.checkBox_no_need_log.UseVisualStyleBackColor = true;
+            // 
+            // button_save_rtc_data
+            // 
+            this.button_save_rtc_data.Location = new System.Drawing.Point(86, 55);
+            this.button_save_rtc_data.Name = "button_save_rtc_data";
+            this.button_save_rtc_data.Size = new System.Drawing.Size(65, 28);
+            this.button_save_rtc_data.TabIndex = 2;
+            this.button_save_rtc_data.Text = "Save";
+            this.button_save_rtc_data.UseVisualStyleBackColor = true;
+            this.button_save_rtc_data.Click += new System.EventHandler(this.button_save_rtc_data_Click);
+            // 
+            // button_get_RTC_info
+            // 
+            this.button_get_RTC_info.Location = new System.Drawing.Point(5, 55);
+            this.button_get_RTC_info.Name = "button_get_RTC_info";
+            this.button_get_RTC_info.Size = new System.Drawing.Size(65, 28);
+            this.button_get_RTC_info.TabIndex = 1;
+            this.button_get_RTC_info.Text = "Get";
+            this.button_get_RTC_info.UseVisualStyleBackColor = true;
+            this.button_get_RTC_info.Click += new System.EventHandler(this.button_get_RTC_info_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(5, 24);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(301, 21);
+            this.progressBar1.TabIndex = 0;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.button_synch);
+            this.groupBox8.Controls.Add(this.button_enable_synRTC_function);
+            this.groupBox8.Controls.Add(this.textBox_DateTime);
+            this.groupBox8.Location = new System.Drawing.Point(3, 69);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(258, 102);
+            this.groupBox8.TabIndex = 57;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Synchronize Time";
+            // 
+            // button_synch
+            // 
+            this.button_synch.Enabled = false;
+            this.button_synch.Location = new System.Drawing.Point(115, 52);
+            this.button_synch.Name = "button_synch";
+            this.button_synch.Size = new System.Drawing.Size(128, 46);
+            this.button_synch.TabIndex = 2;
+            this.button_synch.Text = "Synchronize to device";
+            this.button_synch.UseVisualStyleBackColor = true;
+            this.button_synch.Click += new System.EventHandler(this.button_synch_Click);
+            // 
+            // button_enable_synRTC_function
+            // 
+            this.button_enable_synRTC_function.Location = new System.Drawing.Point(12, 52);
+            this.button_enable_synRTC_function.Name = "button_enable_synRTC_function";
+            this.button_enable_synRTC_function.Size = new System.Drawing.Size(75, 44);
+            this.button_enable_synRTC_function.TabIndex = 1;
+            this.button_enable_synRTC_function.Text = "ENABLE";
+            this.button_enable_synRTC_function.UseVisualStyleBackColor = true;
+            this.button_enable_synRTC_function.Click += new System.EventHandler(this.button_enable_synRTC_function_Click);
+            // 
+            // textBox_DateTime
+            // 
+            this.textBox_DateTime.Location = new System.Drawing.Point(10, 21);
+            this.textBox_DateTime.Name = "textBox_DateTime";
+            this.textBox_DateTime.Size = new System.Drawing.Size(233, 25);
+            this.textBox_DateTime.TabIndex = 0;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.button_load);
+            this.groupBox4.Controls.Add(this.textBox_paraCfgFilePath);
+            this.groupBox4.Location = new System.Drawing.Point(586, 69);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Size = new System.Drawing.Size(6497, 102);
+            this.groupBox4.TabIndex = 56;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Files";
+            // 
+            // button_load
+            // 
+            this.button_load.Location = new System.Drawing.Point(175, 57);
+            this.button_load.Margin = new System.Windows.Forms.Padding(4);
+            this.button_load.Name = "button_load";
+            this.button_load.Size = new System.Drawing.Size(100, 29);
+            this.button_load.TabIndex = 2;
+            this.button_load.Text = "Load";
+            this.button_load.UseVisualStyleBackColor = true;
+            this.button_load.Click += new System.EventHandler(this.button_load_Click);
+            // 
+            // textBox_paraCfgFilePath
+            // 
+            this.textBox_paraCfgFilePath.Location = new System.Drawing.Point(7, 22);
+            this.textBox_paraCfgFilePath.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_paraCfgFilePath.Name = "textBox_paraCfgFilePath";
+            this.textBox_paraCfgFilePath.Size = new System.Drawing.Size(999, 25);
+            this.textBox_paraCfgFilePath.TabIndex = 0;
             // 
             // groupBox5
             // 
@@ -2614,7 +2739,7 @@
             this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox5.Size = new System.Drawing.Size(1467, 68);
+            this.groupBox5.Size = new System.Drawing.Size(1608, 61);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Operation";
@@ -2742,8 +2867,6 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem,
-            this.loadToolStripMenuItem,
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -2752,20 +2875,6 @@
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
-            this.saveToolStripMenuItem.Text = "Save Parameter";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // loadToolStripMenuItem
-            // 
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(125, 24);
-            this.loadToolStripMenuItem.Text = "Load Parameter";
-            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveFileDialog1
             // 
@@ -2783,6 +2892,7 @@
             // timer2
             // 
             this.timer2.Enabled = true;
+            this.timer2.Interval = 500;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // Form1
@@ -2792,6 +2902,7 @@
             this.ClientSize = new System.Drawing.Size(1360, 798);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -2809,20 +2920,28 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.groupBox12.ResumeLayout(false);
-            this.groupBox12.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -3033,12 +3152,10 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 软件版本ToolStripMenuItem;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button_load;
-        private System.Windows.Forms.Button button_save;
+    
         private System.Windows.Forms.TextBox textBox_paraCfgFilePath;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem exportTxtFileToolStripMenuItem;
@@ -3056,6 +3173,17 @@
         private System.Windows.Forms.TextBox textBox_DateTime;
         private System.Windows.Forms.SaveFileDialog saveFileDialog2;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Button button_start;
+        private System.Windows.Forms.Button button_save;
+        private System.Windows.Forms.Label label_HW;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 

@@ -28,3 +28,8 @@ D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.csproj.Gener
 D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.csproj.CoreCompileInputs.cache
 D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.exe
 D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.pdb
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.csprojAssemblyReference.cache
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\bin\Release\yo-NG\EAR.resources.dll
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.Form_Sensor.resources
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\EAR.Form_Sensor.yo-NG.resources
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Release\yo-NG\EAR.resources.dll

@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 using System.IO.Ports;
 using System.IO;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Threading;
 
 namespace EAR
 {
@@ -44,8 +46,18 @@ namespace EAR
         private List<RTC_INFO> m_rtc_data_list = new List<RTC_INFO>();
         private bool m_b_saveRtcFile = true;
 
+        //private Form_Sensor m_Fm_sensor;
+        //private List<SENSOR_DATA> m_honeywellData_list = new List<SENSOR_DATA>();
+        //private DataTable m_table = new DataTable();
+        public delegate void ShowChartHandler(List<SENSOR_DATA> data_buffer);   //定义委托
+        //public event ShowChartHandler ShowChart;
 
-        private struct RTC_INFO
+        private List<SENSOR_DATA> m_HWData_list = new List<SENSOR_DATA>();
+        private bool b_stop_geting_HW_data = false;
+        private bool b_start_HW_data = false;
+        private Thread m_thread_show_chart;
+
+        public struct RTC_INFO
         {
             public byte RTC_CODE;
             public byte RTC_RESERVED;
@@ -67,6 +79,19 @@ namespace EAR
             public byte EXHALATION_THRESHOLD;
             public byte WAIT_BEFORE_START;
         }
+
+        public class SENSOR_DATA
+        {
+            //public byte YEAR;
+            //public byte MONTH;
+            //public byte DAY;
+            //public byte HOUR;
+            //public byte MIN;
+            //public byte SECOND;
+            public byte DATA_0;
+            public byte DATA_1;
+        }
+
 
         private struct CHECK_STATE
         {
@@ -92,7 +117,22 @@ namespace EAR
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //屏蔽线程检查
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
+
+            //双缓冲，解决大量数据刷新界面的问题
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer
+                | ControlStyles.ResizeRedraw | ControlStyles.AllPaintingInWmPaint, true);
+
             InitApp();
+
+            //m_thread_show_chart = new Thread(new ParameterizedThreadStart(show_chart));
+            ////ShowChartHandler showChart = new ShowChartHandler(show_chart);
+
+
+            ////showChart.BeginInvoke(m_HWData_list,null,null);
+
+            ////this.chart1.BeginInvoke(new ShowChartHandler(show_chart), m_HWData_list);
         }
 
         private void SetPWMDefaultParameter()
@@ -1293,8 +1333,7 @@ namespace EAR
         {
             //不需要save current page,隐藏该button
             this.button_saveParameter.Visible = false;
-            this.saveToolStripMenuItem.Visible = false;
-            this.loadToolStripMenuItem.Visible = false;
+
 
             //初始化参数设置
             InitModeSelect();
@@ -1316,6 +1355,14 @@ namespace EAR
 
             //初始化noNeed checkbox
             checkBox_no_need_log.Checked = true;
+
+            ////初始化table
+            //m_table.Columns.Add("Item", typeof(int));
+            //m_table.Columns.Add("数据", typeof(float));
+
+            ////初始化get honeywell data button
+            //this.button_start.Enabled = true;
+            //this.button_save.Enabled = false;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -1913,6 +1960,12 @@ namespace EAR
                 this.comboBox_portName.Enabled = false;
                 LoadPicture();
 
+                //2019.3.26
+                send_stop_getting_HW_data();
+                m_HWData_list.Clear();
+                m_buffer.Clear();
+                label_HW.Text = "0";
+
                 
             }
             else
@@ -1922,6 +1975,7 @@ namespace EAR
                 m_SerialPortOpened = false;
                 LoadPicture();
                 this.comboBox_portName.Enabled = true;
+
             }
         }
 
@@ -2972,8 +3026,7 @@ namespace EAR
                 return;
             }
 
-            
-
+           
             //MessageBox.Show(this.serialPort1.PortName);
             //this.button_Read.Enabled = false;
             //下发请求
@@ -3297,10 +3350,119 @@ namespace EAR
                         request_rtc_frame_x(ref m_requestNo);
                     }
                     break;
+                case 0x77:
+                    //Show_honeywell_data_2_chart(m_buffer);
+                    if (!b_stop_geting_HW_data)
+                    {
+                        get_HW_data_2_list();
+                    }
+                    break;
                 default:
                      break;
              }
+        }
 
+        private void get_HW_data_2_list()
+        {
+            int SIZE = 30;
+            int strc_len = 2;
+
+            string str_tmp = "";
+
+            for (int i = 0; i < SIZE; i++)
+            {
+                //注意strct_data一定不能写在for的外面，不然会出现几个数据相同问题
+                SENSOR_DATA strct_data = new SENSOR_DATA();   
+
+                strct_data.DATA_0 = m_buffer[4 + 0 + i * strc_len];
+                strct_data.DATA_1 = m_buffer[4 + 1 + i * strc_len];
+
+                str_tmp+= strct_data.DATA_0.ToString()+"."+strct_data.DATA_1.ToString() + " ";
+
+                m_HWData_list.Add(strct_data);
+            }
+
+            //this.label_HW.Text = m_HWData_list.Count.ToString();
+            this.label_HW.Text = m_HWData_list.Count.ToString()+ " "+ str_tmp;
+        }
+
+        private void show_chart(object list_data)
+        {
+            while (true)
+            {
+                Thread.Sleep(1000);
+                List<SENSOR_DATA> list = (List<SENSOR_DATA>)list_data;
+
+                if (list == null || list.Count == 0)
+                {
+                    return;
+                }
+
+                DataTable table1 = new DataTable();
+                table1.Columns.Add("编号", typeof(int));
+                table1.Columns.Add("数据", typeof(float));
+
+                int LEN = 1500;  //显示1500个数据
+                List<SENSOR_DATA> show_list = new List<SENSOR_DATA>();
+
+
+                int index = 0;
+                index = (list.Count < LEN) ? 0 : list.Count - LEN;
+
+                int i = 0;
+                for (; index < list.Count; index++)
+                {
+                    double data = (float)(list[index].DATA_0 * 10 + list[i].DATA_1) / 10f;
+                    table1.Rows.Add(i++, data);
+                }
+
+                Series series = new Series("S1");
+                ChartArea chartArea = new ChartArea("C1");
+                series.ChartArea = "C1";
+
+                this.chart1.Series.Clear();
+                this.chart1.ChartAreas.Clear();
+                this.chart1.Titles.Clear();
+
+                this.chart1.Titles.Add("Pressure(mmHg)");
+
+                this.chart1.BorderlineColor = Color.Gray;
+                this.chart1.BorderlineWidth = 1;
+                this.chart1.BorderlineDashStyle = ChartDashStyle.Solid;
+
+                //chartarea中设置是否显示虚线
+                chartArea.AxisX.MajorGrid.LineDashStyle = ChartDashStyle.NotSet;
+                chartArea.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+                //series中设置x,y轴坐标类型
+                series.XValueType = ChartValueType.Int32;  //设置X,Y轴的坐标类型
+                series.YValueType = ChartValueType.Int32;
+
+                //设置图标类型，折线图
+                series.ChartType = SeriesChartType.Line;
+                series.MarkerSize = 1;
+
+                ////chartArea_honeywellData.AxisX.LabelStyle.Format = "HH:mm\nMM-dd";
+                //chartArea.AxisX.LabelStyle.Format = "%d";
+                chartArea.AxisX.Minimum = 0;
+                chartArea.AxisX.Maximum = 1500;
+                chartArea.AxisX.Interval = 1;
+                ////chartArea_honeywellData.AxisX.Interval = 0.125 / 3 * duration; //调整x轴坐标，特别注意这个！
+
+                //chartarea中设置y轴显示范围，以及步长
+                chartArea.AxisY.Maximum = 50;
+                chartArea.AxisY.Minimum = -5;
+                chartArea.AxisY.Interval = 5;
+
+                this.chart1.Legends.Clear(); //清除chart_workData的legend
+                this.chart1.ChartAreas.Add(chartArea);
+                this.chart1.Series.Add(series);
+                this.chart1.Series[0].Points.DataBind(table1.AsEnumerable(), "编号", "数据", "");
+
+                table1 = null;
+            }
+            
+            
         }
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -3313,7 +3475,7 @@ namespace EAR
             lock (m_buffer)
             {
                 m_buffer.AddRange(tmp);
-                #region
+#region
                 while (m_buffer.Count >= 4)
                 {
                     if (m_buffer[HEAD] == 0xFF) //帧头
@@ -3348,7 +3510,7 @@ namespace EAR
                         m_buffer.RemoveAt(0); //清除帧头
                     }
                 }
-                #endregion
+#endregion
             }
         }
 
@@ -3394,7 +3556,7 @@ namespace EAR
                 {
                     switch(i)
                     {
-                        #region
+#region
                         case 0:
                             sw.WriteLine(" ");
                             sw.WriteLine(" " + "," + "MODE1" + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," + " " + "," +
@@ -3418,10 +3580,10 @@ namespace EAR
                             break;
                         default:
                             break;
-                        #endregion
+#endregion
                     }
                     //准备链表存储数据
-                    #region
+#region
                     List<byte> list_enable = new List<byte>();
                     List<byte> list_freq = new List<byte>();
                     List<byte> list_dutyCycle = new List<byte>();
@@ -3429,10 +3591,10 @@ namespace EAR
                     List<byte> list_numOfCycles = new List<byte>();
                     List<byte> list_waitBetween = new List<byte>();
                     List<byte> list_waitAfter = new List<byte>();
-                    #endregion
+#endregion
                     foreach (var para in list)
                     {
-                        #region
+#region
                         list_enable.Add(para.ENABLE);
                         list_freq.Add(para.FREQUENCE);
                         list_dutyCycle.Add(para.DUTY_CYCLE);
@@ -3440,7 +3602,7 @@ namespace EAR
                         list_numOfCycles.Add(para.NUM_OF_CYCLES);
                         list_waitBetween.Add(para.WAIT_BETWEEN);
                         list_waitAfter.Add(para.WAIT_AFTER);
-                        #endregion
+#endregion
                     }
 
                     //写入模式1的参数数据
@@ -3450,9 +3612,9 @@ namespace EAR
                                     "S1" + "," + "S2" + "," + "S3" + "," + "S4" + "," + "S5" + "," + "S6" + "," + " " + "," +
                                     "S1" + "," + "S2" + "," + "S3" + "," + "S4" + "," + "S5" + "," + "S6");
                     //分别写入
-                    #region
+#region
                     //写enable
-                    #region
+#region
                     string tmpStr = "";
                     int nIndex = 0;
                     for (int j = -1; j <= 19;j++ )
@@ -3470,10 +3632,10 @@ namespace EAR
                         tmpStr += Convert.ToString(list_enable[nIndex++]) + ",";
                     }
                     sw.WriteLine(tmpStr);
-                    #endregion
+#endregion
 
                     //写freq
-                    #region
+#region
                     tmpStr = "";
                     nIndex = 0;
                     for (int j = -1; j <= 19; j++)
@@ -3491,10 +3653,10 @@ namespace EAR
                         tmpStr += Convert.ToString(list_freq[nIndex++]) + ",";
                     }
                     sw.WriteLine(tmpStr);
-                    #endregion
+#endregion
 
                     //写duty cycle
-                    #region
+#region
                     tmpStr = "";
                     nIndex = 0;
                     for (int j = -1; j <= 19; j++)
@@ -3512,10 +3674,10 @@ namespace EAR
                         tmpStr += Convert.ToString(list_dutyCycle[nIndex++]) + ",";
                     }
                     sw.WriteLine(tmpStr);
-                    #endregion
+#endregion
 
                     //写period
-                    #region
+#region
                     tmpStr = "";
                     nIndex = 0;
                     for (int j = -1; j <= 19; j++)
@@ -3533,10 +3695,10 @@ namespace EAR
                         tmpStr += Convert.ToString(list_period[nIndex++]) + ",";
                     }
                     sw.WriteLine(tmpStr);
-                    #endregion
+#endregion
 
                     //写Number of cycles
-                    #region
+#region
                     tmpStr = "";
                     nIndex = 0;
                     for (int j = -1; j <= 19; j++)
@@ -3554,10 +3716,10 @@ namespace EAR
                         tmpStr += Convert.ToString(list_numOfCycles[nIndex++]) + ",";
                     }
                     sw.WriteLine(tmpStr);
-                    #endregion
+#endregion
 
                     //写wait between
-                    #region
+#region
                     tmpStr = "";
                     nIndex = 0;
                     for (int j = -1; j <= 19; j++)
@@ -3575,10 +3737,10 @@ namespace EAR
                         tmpStr += Convert.ToString(list_waitBetween[nIndex++]) + ",";
                     }
                     sw.WriteLine(tmpStr);
-                    #endregion
+#endregion
 
                     //写wait after
-                    #region
+#region
                     tmpStr = "";
                     nIndex = 0;
                     for (int j = -1; j <= 19; j++)
@@ -3596,8 +3758,8 @@ namespace EAR
                         tmpStr += Convert.ToString(list_waitAfter[nIndex++]) + ",";
                     }
                     sw.WriteLine(tmpStr);
-                    #endregion
-                    #endregion
+#endregion
+#endregion
                 }
 
                 sw.Close();
@@ -6702,7 +6864,7 @@ namespace EAR
         {
             if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                #region
+#region
                 this.textBox_paraCfgFilePath.Text = this.saveFileDialog1.FileName;
                 FileStream fs = new FileStream(this.saveFileDialog1.FileName, FileMode.Create);
                 BinaryWriter bw = new BinaryWriter(fs, Encoding.ASCII);
@@ -6752,7 +6914,7 @@ namespace EAR
 
                 bw.Close();
                 fs.Close();
-                #endregion
+#endregion
             }
            
         }
@@ -6789,7 +6951,7 @@ namespace EAR
         {
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                #region
+#region
                 this.textBox_paraCfgFilePath.Text = this.openFileDialog1.FileName;
                 FileStream fs = new FileStream(this.openFileDialog1.FileName, FileMode.Open);
                 BinaryReader br = new BinaryReader(fs, Encoding.ASCII);
@@ -6814,7 +6976,7 @@ namespace EAR
                     m_mode1_list.Clear();
                     m_mode2_list.Clear();
                     m_mode3_list.Clear();
-                    #region
+#region
                     int j = 0;
                     for (int i = 0; i < 18*3; i++)
                     {
@@ -6844,14 +7006,14 @@ namespace EAR
                             m_mode3_list.Add(parameter);
                         }
                     }
-                    #endregion
+#endregion
 
                     SetPWMParameterFromList(this.comboBox_modeSelect.SelectedIndex+1);
                 }
 
                 br.Close();
                 fs.Close();
-                #endregion
+#endregion
             }
            
         }
@@ -7204,7 +7366,7 @@ namespace EAR
 
         private String code2HEX(byte code)
         {
-            #region
+#region
             String tmp = "";
             switch (code)
             {
@@ -7260,12 +7422,12 @@ namespace EAR
                     break;
             }
             return tmp;
-            #endregion
+#endregion
         }
 
         private String code2str(byte code)
         {
-            #region
+#region
             String tmp = "";
             switch (code)
             {
@@ -7321,7 +7483,7 @@ namespace EAR
                     break;
             }
             return tmp;
-            #endregion
+#endregion
         }
 
         private bool export_rtc_info_to_file()
@@ -7452,7 +7614,7 @@ namespace EAR
 
         private void save_rtc_data()
         {
-            #region
+#region
             if (m_rtc_data_list.Count > 0)
             {
                 //没有接收完,不允许操作
@@ -7490,7 +7652,7 @@ namespace EAR
             {
                 MessageBox.Show("Please get rtc data first!");
             }
-            #endregion
+#endregion
         }
 
         private void init_rtc_releated_var()
@@ -7515,6 +7677,194 @@ namespace EAR
         private void timer2_Tick(object sender, EventArgs e)
         {
             GetSystemDateTime();
+
+            ////显示chart
+            //show_chart(m_HWData_list);
+           
+        }
+
+        private void sensorDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //if (!this.serialPort1.IsOpen)
+            //{
+            //    MessageBox.Show("Please open serial port!");
+            //    return;
+            //}
+
+            //m_Fm_sensor = new Form_Sensor();
+            //m_Fm_sensor.GetHoneywellData += send_query;   //注册调用的函数
+            ////m_Fm_sensor.GetHoneywellData += new Form_Sensor.GetHoneyWellDataHandler(send_query);
+            ////m_Fm_sensor.ShowDialog();    //模态对话框
+            //m_Fm_sensor.Show();        //非模态对话框
+        }
+
+        private void send_query(byte[] buffer)
+        {
+            this.serialPort1.Write(buffer, 0, Convert.ToInt32(buffer[1]) + 2);
+        }
+
+        private void button_start_Click(object sender, EventArgs e)
+        {
+
+            if (!this.serialPort1.IsOpen)
+            {
+                MessageBox.Show("Please connect serial port!");
+                return;
+            }
+
+            b_start_HW_data = !b_start_HW_data;
+
+            if (b_start_HW_data)   //开始发送数据
+            {
+                this.button_start.Text = "Stop";
+
+                //disable 读下位机参数按键
+                button_Read.Enabled = false;
+
+                //disable "connect"按键
+                button_openSerialPort.Enabled = false;
+
+                //发送,停止获取honeywell data 数据
+                send_stop_getting_HW_data();
+                Thread.Sleep(500);
+
+                //清空m_buffer
+                m_buffer.Clear();
+
+                //清空m_HWData_list
+                m_HWData_list.Clear();
+
+                //初始化lable_HW
+                this.label_HW.Text = "0";
+
+                //初始化b_stop_geting_HW_data
+                b_stop_geting_HW_data = false;
+
+                send_query_for_HW_data();
+
+                //if (m_thread_show_chart != null)
+                //{
+                //    m_thread_show_chart.Start(m_HWData_list);
+                //}
+
+            }
+            else   //停止发送数据
+            {
+                button_openSerialPort.Enabled = true;
+                button_Read.Enabled = true;
+
+                this.button_start.Text = "Start";
+                b_stop_geting_HW_data = true;
+                send_stop_getting_HW_data();
+                Thread.Sleep(500);
+            }
+        }
+
+        private void send_query_for_HW_data()
+        {
+            byte[] buffer = new byte[6];
+            buffer[0] = 0xFF;  //head
+            buffer[1] = 0x04;  //len
+            buffer[2] = 0x01;  //cmdtype
+            buffer[3] = 0x76; //FRAMID          #define GET_HONEYWELL_DATA	0x76	//上位机发送的请求获取honeywell数据命令
+
+            int sum = 0;
+            for (int i = 1; i < Convert.ToInt32(buffer[1]); i++)
+            {
+                sum += buffer[i];
+            }
+            buffer[Convert.ToInt32(buffer[1])] = Convert.ToByte(sum / 256);   //checksum1
+            buffer[Convert.ToInt32(buffer[1]) + 1] = Convert.ToByte(sum % 256); //checksum2
+            this.serialPort1.Write(buffer, 0, Convert.ToInt32(buffer[1]) + 2);
+        }
+
+        private void send_stop_getting_HW_data()
+        {
+            byte[] buffer = new byte[6];
+            buffer[0] = 0xFF;  //head
+            buffer[1] = 0x04;  //len
+            buffer[2] = 0x01;  //cmdtype
+            buffer[3] = 0x78; //FRAMID          #define SOP_GET_HONEYWELL_DATA		0x78	//停止发送数据
+
+            int sum = 0;
+            for (int i = 1; i < Convert.ToInt32(buffer[1]); i++)
+            {
+                sum += buffer[i];
+            }
+            buffer[Convert.ToInt32(buffer[1])] = Convert.ToByte(sum / 256);   //checksum1
+            buffer[Convert.ToInt32(buffer[1]) + 1] = Convert.ToByte(sum % 256); //checksum2
+            this.serialPort1.Write(buffer, 0, Convert.ToInt32(buffer[1]) + 2);
+        }
+
+        private void button_save_Click_1(object sender, EventArgs e)
+        {
+            if (b_start_HW_data)
+            {
+                MessageBox.Show("Please stop receiving data...");
+                return;
+            }
+
+            b_stop_geting_HW_data = true;
+            //this.button_start.Enabled = true;
+            //this.button_save.Enabled = false;
+            send_stop_getting_HW_data();
+            //MessageBox.Show(m_HWData_list.Count.ToString());
+            save_HW_data_2_file();
+            this.label_HW.Text = "0";
+        }
+
+        private void save_HW_data_2_file()
+        {
+            if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                var path = this.folderBrowserDialog1.SelectedPath;
+
+                FileStream fs = null;
+                StreamWriter sw = null;
+                try
+                {
+                    fs = new FileStream(path + @"\" + "Pressure_Data.csv", FileMode.Create);
+                }
+                catch (IOException ex)
+                {
+                    if (fs != null)
+                    {
+                        fs.Close();
+                    }
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+                try
+                {
+                    sw = new StreamWriter(fs, Encoding.Default);
+                }
+                catch (IOException ex)
+                {
+                    if (sw != null)
+                    {
+                        sw.Close();
+                    }
+                    MessageBox.Show(ex.Message);
+                }
+                
+
+                sw.WriteLine("Index"+","+"Value(mmHg)");
+                for (int i = 0; i < m_HWData_list.Count; i++)
+                {
+                    string str = "";
+                    str +=i.ToString()+","+ string.Format("{0:N2}", (m_HWData_list[i].DATA_0 * 10 + m_HWData_list[i].DATA_1) / 10f);
+                    sw.WriteLine(str);
+                }
+
+                sw.Close();
+                fs.Close();
+                m_HWData_list.Clear();
+                MessageBox.Show("Export \"Pressure_Data.csv\" sucessfully!");
+            }
+            else
+            {
+
+            }
         }
     }
 }
