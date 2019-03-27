@@ -53,9 +53,14 @@ namespace EAR
         //public event ShowChartHandler ShowChart;
 
         private List<SENSOR_DATA> m_HWData_list = new List<SENSOR_DATA>();
+        private List<SENSOR_DATA> m_HW_buffer = new List<SENSOR_DATA>();  //解决线程问题
+        private int m_recv_cnt = 0;
         private bool b_stop_geting_HW_data = false;
         private bool b_start_HW_data = false;
-        private Thread m_thread_show_chart;
+        //private Thread m_thread_show_chart;
+        //private DataTable table1;
+        private int HONEYWELL_STRC_DATA_SIZE = 15; //#define HONEYWELL_STRC_DATA_SIZE 15  根据下位机而来的
+
 
         public struct RTC_INFO
         {
@@ -126,13 +131,13 @@ namespace EAR
 
             InitApp();
 
-            //m_thread_show_chart = new Thread(new ParameterizedThreadStart(show_chart));
-            ////ShowChartHandler showChart = new ShowChartHandler(show_chart);
+            //if (m_thread_show_chart != null)
+            //{
+            //    m_thread_show_chart = new Thread(new ParameterizedThreadStart(show_chart));
+            //    m_thread_show_chart.Start(m_HW_buffer);
+            //}
+            ////m_thread_show_chart = new Thread(new ParameterizedThreadStart(show_chart));
 
-
-            ////showChart.BeginInvoke(m_HWData_list,null,null);
-
-            ////this.chart1.BeginInvoke(new ShowChartHandler(show_chart), m_HWData_list);
         }
 
         private void SetPWMDefaultParameter()
@@ -3354,7 +3359,27 @@ namespace EAR
                     //Show_honeywell_data_2_chart(m_buffer);
                     if (!b_stop_geting_HW_data)
                     {
-                        get_HW_data_2_list();
+                        //m_recv_cnt解决线程问题
+                        lock(m_HW_buffer)
+                        {
+                            if (m_recv_cnt == 1)
+                            {
+                                m_recv_cnt = 0;
+                                m_HW_buffer.Clear();
+                                for (int i = 0; i < m_HWData_list.Count; i++)
+                                {
+                                    SENSOR_DATA data = new SENSOR_DATA();
+                                    data.DATA_0 = m_HWData_list[i].DATA_0;
+                                    data.DATA_1 = m_HWData_list[i].DATA_1;
+                                    m_HW_buffer.Add(data);
+                                }
+                            }
+                            else
+                            {
+                                m_recv_cnt++;
+                                get_HW_data_2_list();
+                            }
+                        }
                     }
                     break;
                 default:
@@ -3364,7 +3389,7 @@ namespace EAR
 
         private void get_HW_data_2_list()
         {
-            int SIZE = 30;
+            int SIZE = HONEYWELL_STRC_DATA_SIZE;
             int strc_len = 2;
 
             string str_tmp = "";
@@ -3382,87 +3407,100 @@ namespace EAR
                 m_HWData_list.Add(strct_data);
             }
 
-            //this.label_HW.Text = m_HWData_list.Count.ToString();
-            this.label_HW.Text = m_HWData_list.Count.ToString()+ " "+ str_tmp;
+            this.label_HW.Text = m_HWData_list.Count.ToString();
+            //this.label_HW.Text = m_HWData_list.Count.ToString()+ " "+ str_tmp;
         }
 
         private void show_chart(object list_data)
         {
-            while (true)
+            lock (m_HW_buffer)
             {
-                Thread.Sleep(1000);
-                List<SENSOR_DATA> list = (List<SENSOR_DATA>)list_data;
-
-                if (list == null || list.Count == 0)
+              //  while (true)
                 {
-                    return;
+                   // Thread.Sleep(500);
+                    List<SENSOR_DATA> list = (List<SENSOR_DATA>)list_data;
+
+                    if (list == null || list.Count == 0)
+                    {
+                        //continue;
+                        return;
+                    }
+
+                    DataTable table1 = new DataTable();
+                    table1 = new DataTable();
+                    table1.Columns.Add("编号", typeof(int));
+                    table1.Columns.Add("数据", typeof(float));
+
+                    int LEN = 500;  //显示500个数据
+                    float Y_MAX = 24;
+                    List<SENSOR_DATA> show_list = new List<SENSOR_DATA>();
+
+                    int index = 0;
+                    index = (list.Count < LEN) ? 0 : list.Count - LEN;
+
+                    int i = 0;
+                    
+                    for (; index < list.Count; index++)
+                    {
+                        if (m_HW_buffer == null || m_HW_buffer.Count == 0)
+                        {
+                            return;
+                        }
+                        double data = (float)(m_HW_buffer[index].DATA_0 * 10 + m_HW_buffer[index].DATA_1) / 10f;
+                        data = data > Y_MAX ? Y_MAX : data;
+                        table1.Rows.Add(i++, data);
+                    }
+
+                    Series series = new Series("S1");
+                    ChartArea chartArea = new ChartArea("C1");
+                    series.ChartArea = "C1";
+
+                    this.chart1.Series.Clear();
+                    this.chart1.ChartAreas.Clear();
+                    this.chart1.Titles.Clear();
+
+                    this.chart1.Titles.Add("Pressure(mmHg)");
+
+                    this.chart1.BorderlineColor = Color.Gray;
+                    this.chart1.BorderlineWidth = 1;
+                    this.chart1.BorderlineDashStyle = ChartDashStyle.Solid;
+                    series.BorderWidth = 2;
+
+                    //chartarea中设置是否显示虚线
+                    chartArea.AxisX.MajorGrid.LineDashStyle = ChartDashStyle.NotSet;
+                    chartArea.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+
+                    //series中设置x,y轴坐标类型
+                    series.XValueType = ChartValueType.Int32;  //设置X,Y轴的坐标类型
+                    series.YValueType = ChartValueType.Int32;
+
+                    //设置图标类型，折线图
+                    series.ChartType = SeriesChartType.Line;
+                    series.MarkerSize = 1;
+
+                    ////chartArea_honeywellData.AxisX.LabelStyle.Format = "HH:mm\nMM-dd";
+                    //chartArea.AxisX.LabelStyle.Format = "%d";
+                    chartArea.AxisX.Minimum = 0;
+                    chartArea.AxisX.Maximum = LEN;
+                    chartArea.AxisX.Interval = 1;
+                    ////chartArea_honeywellData.AxisX.Interval = 0.125 / 3 * duration; //调整x轴坐标，特别注意这个！
+
+                    //chartarea中设置y轴显示范围，以及步长
+                    chartArea.AxisY.Maximum = 24;
+                    chartArea.AxisY.Minimum = -2;
+                    chartArea.AxisY.Interval = 2;
+
+                    this.chart1.Legends.Clear(); //清除chart_workData的legend
+                    this.chart1.ChartAreas.Add(chartArea);
+                    this.chart1.Series.Add(series);
+                    this.chart1.Series[0].Points.DataBind(table1.AsEnumerable(), "编号", "数据", "");
+
+                    table1 = null;
+
+                    //this.chart1.Invalidate();
                 }
-
-                DataTable table1 = new DataTable();
-                table1.Columns.Add("编号", typeof(int));
-                table1.Columns.Add("数据", typeof(float));
-
-                int LEN = 1500;  //显示1500个数据
-                List<SENSOR_DATA> show_list = new List<SENSOR_DATA>();
-
-
-                int index = 0;
-                index = (list.Count < LEN) ? 0 : list.Count - LEN;
-
-                int i = 0;
-                for (; index < list.Count; index++)
-                {
-                    double data = (float)(list[index].DATA_0 * 10 + list[i].DATA_1) / 10f;
-                    table1.Rows.Add(i++, data);
-                }
-
-                Series series = new Series("S1");
-                ChartArea chartArea = new ChartArea("C1");
-                series.ChartArea = "C1";
-
-                this.chart1.Series.Clear();
-                this.chart1.ChartAreas.Clear();
-                this.chart1.Titles.Clear();
-
-                this.chart1.Titles.Add("Pressure(mmHg)");
-
-                this.chart1.BorderlineColor = Color.Gray;
-                this.chart1.BorderlineWidth = 1;
-                this.chart1.BorderlineDashStyle = ChartDashStyle.Solid;
-
-                //chartarea中设置是否显示虚线
-                chartArea.AxisX.MajorGrid.LineDashStyle = ChartDashStyle.NotSet;
-                chartArea.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
-
-                //series中设置x,y轴坐标类型
-                series.XValueType = ChartValueType.Int32;  //设置X,Y轴的坐标类型
-                series.YValueType = ChartValueType.Int32;
-
-                //设置图标类型，折线图
-                series.ChartType = SeriesChartType.Line;
-                series.MarkerSize = 1;
-
-                ////chartArea_honeywellData.AxisX.LabelStyle.Format = "HH:mm\nMM-dd";
-                //chartArea.AxisX.LabelStyle.Format = "%d";
-                chartArea.AxisX.Minimum = 0;
-                chartArea.AxisX.Maximum = 1500;
-                chartArea.AxisX.Interval = 1;
-                ////chartArea_honeywellData.AxisX.Interval = 0.125 / 3 * duration; //调整x轴坐标，特别注意这个！
-
-                //chartarea中设置y轴显示范围，以及步长
-                chartArea.AxisY.Maximum = 50;
-                chartArea.AxisY.Minimum = -5;
-                chartArea.AxisY.Interval = 5;
-
-                this.chart1.Legends.Clear(); //清除chart_workData的legend
-                this.chart1.ChartAreas.Add(chartArea);
-                this.chart1.Series.Add(series);
-                this.chart1.Series[0].Points.DataBind(table1.AsEnumerable(), "编号", "数据", "");
-
-                table1 = null;
             }
-            
-            
+
         }
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -7674,13 +7712,54 @@ namespace EAR
             }
         }
 
+        private int m_no_recv_cnt = 0;
+        private int m_prev_recv_cnt = 0;
+
+        private bool Is_no_reply_from_device()
+        {
+            bool res = false;
+            if (m_no_recv_cnt == 30)
+            {
+                m_recv_cnt = 0;
+                m_prev_recv_cnt = 0;
+
+                m_no_recv_cnt = 0;
+                res = true;
+            }
+            else
+            {
+                if (m_recv_cnt == m_prev_recv_cnt)
+                {
+                    m_no_recv_cnt++;
+                }
+                else
+                {
+                    m_prev_recv_cnt = m_no_recv_cnt;
+                }
+            }
+            return res;
+        }
+
         private void timer2_Tick(object sender, EventArgs e)
         {
             GetSystemDateTime();
 
-            ////显示chart
-            //show_chart(m_HWData_list);
-           
+
+            if (b_start_HW_data && Is_no_reply_from_device())
+            {
+                b_start_HW_data = false;
+                button_start.Text = "Start";
+                button_Read.Enabled = true;
+                button_openSerialPort.Enabled = true;
+                MessageBox.Show("No response from device!");
+            }
+
+            if (m_HW_buffer != null&&m_HW_buffer.Count>0)
+            {
+                show_chart(m_HW_buffer);
+            }
+            
+
         }
 
         private void sensorDataToolStripMenuItem_Click(object sender, EventArgs e)
@@ -7716,6 +7795,9 @@ namespace EAR
 
             if (b_start_HW_data)   //开始发送数据
             {
+                //选择chart页
+                tabControl1.SelectedIndex = 1;
+
                 this.button_start.Text = "Stop";
 
                 //disable 读下位机参数按键
@@ -7741,12 +7823,7 @@ namespace EAR
                 b_stop_geting_HW_data = false;
 
                 send_query_for_HW_data();
-
-                //if (m_thread_show_chart != null)
-                //{
-                //    m_thread_show_chart.Start(m_HWData_list);
-                //}
-
+ 
             }
             else   //停止发送数据
             {
@@ -7865,6 +7942,16 @@ namespace EAR
             {
 
             }
+        }
+
+        private void chart1_SelectionRangeChanged(object sender, CursorEventArgs e)
+        {
+            MessageBox.Show("wa");
+        }
+
+        private void chart1_AxisScrollBarClicked(object sender, ScrollBarEventArgs e)
+        {
+            MessageBox.Show("dfdfdf");
         }
     }
 }
