@@ -3432,7 +3432,7 @@ namespace EAR
                     table1.Columns.Add("数据", typeof(float));
 
                     int LEN = 500;  //显示500个数据
-                    float Y_MAX = 24;
+                    float Y_MAX = 100;
                     List<SENSOR_DATA> show_list = new List<SENSOR_DATA>();
 
                     int index = 0;
@@ -3486,9 +3486,9 @@ namespace EAR
                     ////chartArea_honeywellData.AxisX.Interval = 0.125 / 3 * duration; //调整x轴坐标，特别注意这个！
 
                     //chartarea中设置y轴显示范围，以及步长
-                    chartArea.AxisY.Maximum = 24;
-                    chartArea.AxisY.Minimum = -2;
-                    chartArea.AxisY.Interval = 2;
+                    chartArea.AxisY.Maximum = Y_MAX;
+                    chartArea.AxisY.Minimum = -10;
+                    chartArea.AxisY.Interval = 10;
 
                     this.chart1.Legends.Clear(); //清除chart_workData的legend
                     this.chart1.ChartAreas.Add(chartArea);
