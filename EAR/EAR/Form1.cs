@@ -45,6 +45,8 @@ namespace EAR
         private int m_requestNo = 1;
         private List<RTC_INFO> m_rtc_data_list = new List<RTC_INFO>();
         private bool m_b_saveRtcFile = true;
+        private TimeSpan m_duration ;
+        private float m_sampling_rate ;
 
         //private Form_Sensor m_Fm_sensor;
         //private List<SENSOR_DATA> m_honeywellData_list = new List<SENSOR_DATA>();
@@ -59,8 +61,10 @@ namespace EAR
         private bool b_start_HW_data = false;
         //private Thread m_thread_show_chart;
         //private DataTable table1;
-        private int HONEYWELL_STRC_DATA_SIZE = 15; //#define HONEYWELL_STRC_DATA_SIZE 15  根据下位机而来的
+        private int HONEYWELL_STRC_DATA_SIZE = 30; //#define HONEYWELL_STRC_DATA_SIZE 15  根据下位机而来的
 
+        private DateTime m_tm_start;
+        //private DateTime m_tm_end;
 
         public struct RTC_INFO
         {
@@ -3409,6 +3413,12 @@ namespace EAR
 
             this.label_HW.Text = m_HWData_list.Count.ToString();
             //this.label_HW.Text = m_HWData_list.Count.ToString()+ " "+ str_tmp;
+            //m_str_duration = (DateTime.Now - m_tm_start).ToString("HH:mm:ss");
+            m_duration = (DateTime.Now - m_tm_start);
+            //m_str_sampling_rate = (m_HWData_list.Count / (DateTime.Now - m_tm_start).TotalSeconds).ToString();
+            m_sampling_rate =  ((float)(m_HWData_list.Count)) / (float)(DateTime.Now - m_tm_start).TotalSeconds;
+            this.label_HW.Text = m_HWData_list.Count.ToString() + "     Duration: " + m_duration.ToString(@"hh\:mm\:ss")
+                + "    Sample rate:"+" "+ String.Format("{0:N2}", m_sampling_rate);
         }
 
         private void show_chart(object list_data)
@@ -3431,7 +3441,7 @@ namespace EAR
                     table1.Columns.Add("编号", typeof(int));
                     table1.Columns.Add("数据", typeof(float));
 
-                    int LEN = 500;  //显示500个数据
+                    int LEN = 300;  //显示500个数据
                     float Y_MAX = 100;
                     List<SENSOR_DATA> show_list = new List<SENSOR_DATA>();
 
@@ -7784,7 +7794,6 @@ namespace EAR
 
         private void button_start_Click(object sender, EventArgs e)
         {
-
             if (!this.serialPort1.IsOpen)
             {
                 MessageBox.Show("Please connect serial port!");
@@ -7823,7 +7832,10 @@ namespace EAR
                 b_stop_geting_HW_data = false;
 
                 send_query_for_HW_data();
- 
+
+                //获取开始时间
+                m_tm_start = DateTime.Now;
+                m_duration = new TimeSpan(0, 0, 0);
             }
             else   //停止发送数据
             {
@@ -7833,7 +7845,10 @@ namespace EAR
                 this.button_start.Text = "Start";
                 b_stop_geting_HW_data = true;
                 send_stop_getting_HW_data();
+
+
                 Thread.Sleep(500);
+                
             }
         }
 
@@ -7886,11 +7901,13 @@ namespace EAR
             //this.button_save.Enabled = false;
             send_stop_getting_HW_data();
             //MessageBox.Show(m_HWData_list.Count.ToString());
-            save_HW_data_2_file();
-            this.label_HW.Text = "0";
+            if (save_HW_data_2_file())
+            {
+                this.label_HW.Text = "0";
+            }
         }
 
-        private void save_HW_data_2_file()
+        private bool save_HW_data_2_file()
         {
             if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -7909,7 +7926,7 @@ namespace EAR
                         fs.Close();
                     }
                     MessageBox.Show(ex.Message);
-                    return;
+                    return false;
                 }
                 try
                 {
@@ -7922,14 +7939,22 @@ namespace EAR
                         sw.Close();
                     }
                     MessageBox.Show(ex.Message);
+                    return false;
                 }
-                
 
-                sw.WriteLine("Index"+","+"Value(mmHg)");
+                sw.WriteLine("Quntity of Recv Datas:" + "," + m_HWData_list.Count.ToString());
+                //sw.WriteLine("Duraton:" + ","+m_duration.ToString(@"hh\:mm\:ss")); 
+                sw.WriteLine("Duraton:" + "," + m_duration.ToString());
+                sw.WriteLine("Sampling Rate:" + "," + String.Format("{0:N2}",m_sampling_rate));
+                sw.WriteLine(" ");
+                sw.WriteLine("Index"+","+"Sec,"+"Value(mmHg)");
+
+                float f_sec_step = (float)m_duration.TotalSeconds/(float)m_HWData_list.Count();
                 for (int i = 0; i < m_HWData_list.Count; i++)
                 {
                     string str = "";
-                    str +=i.ToString()+","+ string.Format("{0:N2}", (m_HWData_list[i].DATA_0 * 10 + m_HWData_list[i].DATA_1) / 10f);
+                    str +=i.ToString()+","+ ((i+1) * f_sec_step).ToString() + ","+
+                        string.Format("{0:N2}", (m_HWData_list[i].DATA_0 * 10 + m_HWData_list[i].DATA_1) / 10f);
                     sw.WriteLine(str);
                 }
 
@@ -7937,10 +7962,11 @@ namespace EAR
                 fs.Close();
                 m_HWData_list.Clear();
                 MessageBox.Show("Export \"Pressure_Data.csv\" sucessfully!");
+                return true;
             }
             else
             {
-
+                return false;
             }
         }
 

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -2536,14 +2536,14 @@
             // 
             // chart1
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
-            series4.ChartArea = "ChartArea1";
-            series4.Name = "Series1";
-            this.chart1.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(1583, 616);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -2566,22 +2566,20 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(402, 31);
+            this.label25.Location = new System.Drawing.Point(368, 31);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(127, 15);
+            this.label25.Size = new System.Drawing.Size(175, 15);
             this.label25.TabIndex = 3;
-            this.label25.Text = "Receiving Data:";
-            this.label25.Visible = false;
+            this.label25.Text = "Qty of Received Data:";
             // 
             // label_HW
             // 
             this.label_HW.AutoSize = true;
-            this.label_HW.Location = new System.Drawing.Point(549, 31);
+            this.label_HW.Location = new System.Drawing.Point(554, 31);
             this.label_HW.Name = "label_HW";
             this.label_HW.Size = new System.Drawing.Size(15, 15);
             this.label_HW.TabIndex = 2;
             this.label_HW.Text = "0";
-            this.label_HW.Visible = false;
             // 
             // button_save
             // 
@@ -2703,7 +2701,7 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Size = new System.Drawing.Size(10074, 102);
+            this.groupBox4.Size = new System.Drawing.Size(11096, 102);
             this.groupBox4.TabIndex = 56;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Files";
