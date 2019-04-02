@@ -6972,28 +6972,28 @@ namespace EAR
             
         }
 
-        private void button_save_Click(object sender, EventArgs e)
-        {
-            if (CheckTextBox() == 0)
-            {
-                GetCurrentPWMParameter2List();
-                //SaveAllParameter2Files();
-                SaveAllParameter2ConfigFile();
-                //MessageBox.Show("save all parameters to files ok");
-            }
-            if (CheckTextBox() == 1)
-            {
-                MessageBox.Show("Not allow empty data!");
-                //e.Cancel = true;
-                return;
-            }
-            if (CheckTextBox() == 2)
-            {
-                MessageBox.Show("\"duty cycle\" are not allow below 5%");
-                //e.Cancel = true;
-                return;
-            }
-        }
+        //private void button_save_Click(object sender, EventArgs e)
+        //{
+        //    //if (CheckTextBox() == 0)
+        //    //{
+        //    //    GetCurrentPWMParameter2List();
+        //    //    //SaveAllParameter2Files();
+        //    //    SaveAllParameter2ConfigFile();
+        //    //    //MessageBox.Show("save all parameters to files ok");
+        //    //}
+        //    //if (CheckTextBox() == 1)
+        //    //{
+        //    //    MessageBox.Show("Not allow empty data!");
+        //    //    //e.Cancel = true;
+        //    //    return;
+        //    //}
+        //    //if (CheckTextBox() == 2)
+        //    //{
+        //    //    MessageBox.Show("\"duty cycle\" are not allow below 5%");
+        //    //    //e.Cancel = true;
+        //    //    return;
+        //    //}
+        //}
 
         private void button_load_Click(object sender, EventArgs e)
         {
@@ -7978,6 +7978,29 @@ namespace EAR
         private void chart1_AxisScrollBarClicked(object sender, ScrollBarEventArgs e)
         {
             MessageBox.Show("dfdfdf");
+        }
+
+        private void button_saveFile_Click(object sender, EventArgs e)
+        {
+            if (CheckTextBox() == 0)
+            {
+                GetCurrentPWMParameter2List();
+                //SaveAllParameter2Files();
+                SaveAllParameter2ConfigFile();
+                //MessageBox.Show("save all parameters to files ok");
+            }
+            if (CheckTextBox() == 1)
+            {
+                MessageBox.Show("Not allow empty data!");
+                //e.Cancel = true;
+                return;
+            }
+            if (CheckTextBox() == 2)
+            {
+                MessageBox.Show("\"duty cycle\" are not allow below 5%");
+                //e.Cancel = true;
+                return;
+            }
         }
     }
 }

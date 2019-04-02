@@ -17,3 +17,4 @@ D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.csproj.Generat
 D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.csproj.CoreCompileInputs.cache
 D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.exe
 D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.pdb
+D:\Users\LENOVO\Documents\GitHub\EAR_MASTER\EAR\EAR\obj\Debug\EAR.csprojAssemblyReference.cache

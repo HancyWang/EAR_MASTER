@@ -261,6 +261,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.button_saveFile = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -2695,13 +2696,14 @@
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.button_saveFile);
             this.groupBox4.Controls.Add(this.button_load);
             this.groupBox4.Controls.Add(this.textBox_paraCfgFilePath);
-            this.groupBox4.Location = new System.Drawing.Point(586, 69);
+            this.groupBox4.Location = new System.Drawing.Point(586, 66);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Size = new System.Drawing.Size(11096, 102);
+            this.groupBox4.Size = new System.Drawing.Size(11607, 102);
             this.groupBox4.TabIndex = 56;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Files";
@@ -2893,6 +2895,16 @@
             this.timer2.Enabled = true;
             this.timer2.Interval = 30;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // button_saveFile
+            // 
+            this.button_saveFile.Location = new System.Drawing.Point(7, 57);
+            this.button_saveFile.Name = "button_saveFile";
+            this.button_saveFile.Size = new System.Drawing.Size(100, 29);
+            this.button_saveFile.TabIndex = 3;
+            this.button_saveFile.Text = "Save";
+            this.button_saveFile.UseVisualStyleBackColor = true;
+            this.button_saveFile.Click += new System.EventHandler(this.button_saveFile_Click);
             // 
             // Form1
             // 
@@ -3183,6 +3195,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button button_saveFile;
     }
 }
 
